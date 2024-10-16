@@ -1,0 +1,26 @@
+body {
+    display : flex; 
+    font-family : "Helvetica";
+    }
+    
+banner{
+    width: auto;
+    height : 70px; 
+    background-color: black;
+    color: White;
+    /* Text-align:
+    line-height:
+    position:
+    top:
+    left: */
+    z-index: 1000; /*to make it on top*/
+    }
+    
+/* Banner subclass wrap image{ /* used to wrap logo in white rectangle
+    background-color: white
+    border-radius: 0px; adjust to make round
+    padding : inside rectangle
+    Margin-right:  
+    Display: flex
+    Align-items: center
+} */
