@@ -1,0 +1,16 @@
+body{
+    color: black;
+    background-color: white;
+    font-family: Helvetica, sans-serif;
+}
+.dark-mode{
+    background-color: rgb(36, 44, 50);
+    color: rgba(255, 255, 255, 0.788);
+    font-family: Helvetica, sans-serif;
+}
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+}

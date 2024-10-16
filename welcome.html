@@ -7,36 +7,42 @@
         <title>Welcome To Inferno</title>
         <meta name="description" content="welcome page">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-        <style>
-            body{
-                color: black;
-                background-color: white;
+        <link rel="stylesheet" href="WelcomeStyles.css">
+       
+        
+        <script>
+        var clickCount = 0;
+        function darkMode(){
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+
+            var img = document.getElementById("image");
+            var clickMe = document.getElementById("clickMe");
+            clickCount++;
+            if(clickCount %2 === 1){
+                img.src = "Dark Mode Inferno Full Logo.png";
+                clickMe.innerText = "Dark Mode";
             }
-            .dark-mode{
-                background-color: black;
-                color: white;
+            else {
+                img.src = "Inferno wildfire full logo.png";
+                clickMe.innerText = "Light Mode";
             }
-            
-        </style>
+
+        }
+        </script>
+
     </head>
     <body>
-        <h1><strong>Welcome to Inferno</strong></h1>
+        <img id = "image" src="Inferno wildfire full logo.png" class="center" alt = "logo">
+        <h1 style="text-align: center;"><strong><U>Welcome to Inferno</U></strong></h1>
         <h2>Please login or create an account</h2>
         <h3>Login</h3>
         <h3>Create Account</h3>
         <h3>Continue as Guest</h3>
         
         <div>
-            <button onclick="darkMode()">Dark mode</button>
-    
-            
+            <button id= "clickMe" onclick="darkMode()">Dark mode</button>
         </div>
-        <script>
-            function darkMode(){
-                var element = document.body;
-                element.classList.toggle("dark-mode");
-            }
-        </script>
+    
     </body>
 </html>
