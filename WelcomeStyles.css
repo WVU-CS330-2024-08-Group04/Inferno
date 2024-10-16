@@ -1,6 +1,7 @@
 body{
     color: black;
     background-color: white;
+    font-family: Helvetica, sans-serif;
 }
 .dark-mode{
     background-color: rgb(36, 44, 50);
