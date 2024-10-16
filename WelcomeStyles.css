@@ -3,6 +3,7 @@ body{
     background-color: whitesmoke;
     font-family: Helvetica, sans-serif;
     text-align: center;
+    transition: background-color 0.5s, color 0.5s;
 }
 img{
     margin-top: 70px;
