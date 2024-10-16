@@ -1,72 +1,72 @@
 <!DOCTYPE html>
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Welcome To Inferno</title>
-        <meta name="description" content="welcome page">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="WelcomeStyles.css">
-       
-        
-        <script>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome To Inferno</title>
+    <meta name="description" content="welcome page">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="WelcomeStyles.css">
+    <link rel="dark-mode" href="darkMode.html">
+
+</head>
+
+<body>
+    <img id="image" src="Inferno wildfire full logo cropped.png" class="center" alt="logo">
+    <h1 style="text-align: center;"><strong><U>Welcome to Inferno</U></strong></h1>
+    <h2>Please Login or Create an Account</h2>
+
+    <div class="links-container">
+        <div>
+            <h3>Have an Account?</h3>
+            <p><a href="">Login</a></p>
+        </div>
+        <div>
+            <h3>First Time User?</h3>
+            <p><a href="AccCreate.html">Create an Account</a></p>
+        </div>
+    </div>
+
+    <p><a href="" class="guest-link">Continue as Guest</a></p>
+    <p><a href="about.html" class="about-link">About</a></p>
+
+
+    <button id="clickMe" onclick="darkMode()">
+        <span id="clickMeText">Dark Mode</span>
+        <span class="button_icon">
+            <ion-icon name="moon"></ion-icon>
+        </span>
+    </button>
+    
+    <script>
         var clickCount = 0;
-    function darkMode() {
-        var element = document.body;
-        element.classList.toggle("dark-mode");
+        function darkMode() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
 
-         var img = document.getElementById("image");
+            var img = document.getElementById("image");
             var clickMeText = document.getElementById("clickMeText");
-         var buttonIcon = document.querySelector(".button_icon ion-icon");
+            var buttonIcon = document.querySelector(".button_icon ion-icon");
 
-         clickCount++;
-
-     if (clickCount % 2 === 1) {
-        
-        img.src = "Dark Mode Inferno Full Logo cropped.png";
-        clickMeText.textContent = "Light Mode";
-        buttonIcon.setAttribute("name", "sunny");
-    } else {
-        
-        img.src = "Inferno wildfire full logo cropped.png";
-        clickMeText.textContent = "Dark Mode";
-        buttonIcon.setAttribute("name", "moon");
-    }
-}
-            </script>
             
 
-    </head>
-    <body>
-        <img id = "image" src="Inferno wildfire full logo cropped.png" class="center" alt = "logo">
-        <h1 style="text-align: center;"><strong><U>Welcome to Inferno</U></strong></h1>
-        <h2>Please Login or Create an Account</h2>
+            if (element.classList.contains("dark-mode")) {
+                img.src = "Dark Mode Inferno Full Logo cropped.png";
+                clickMeText.textContent = "Light Mode";
+                buttonIcon.setAttribute("name", "sunny");
+            } else {
 
-        <div class="links-container">
-            <div>
-                <h3>Have an Account?</h3>
-                <p><a href="">Login</a></p>
-            </div>
-            <div>
-                <h3>First Time User?</h3>
-                <p><a href="AccCreate.html">Create an Account</a></p>
-            </div>
-        </div>
-        
-        <p><a href="" class="guest-link">Continue as Guest</a></p>
-        <p><a href="about.html" class="about-link">About</a></p>
-        
-        
-            <button id= "clickMe" onclick="darkMode()">
-                <span id="clickMeText">Dark Mode</span>
-                <span class="button_icon">
-                    <ion-icon name="moon"></ion-icon>
-                </span>
-         
-        </button>
-     
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    </body>
+                img.src = "Inferno wildfire full logo cropped.png";
+                clickMeText.textContent = "Dark Mode";
+                buttonIcon.setAttribute("name", "moon");
+            }
+        }
+    </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
 </html>

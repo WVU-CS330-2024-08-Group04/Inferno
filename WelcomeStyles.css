@@ -15,11 +15,7 @@ h1 {
 h2 { 
     margin-bottom: 0px;
 }
-.dark-mode{
-    background-color: rgb(36, 44, 50);
-    color: whitesmoke;
-    font-family: Helvetica, sans-serif;
-}
+
 .center {
 display: block;
 margin-left: auto;
@@ -60,6 +56,30 @@ button{
     position: fixed;
     top: 20px;
     right: 20px;
+    cursor: pointer;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
 }
-
+button:hover {
+    background-color: #ddd;
+}
+.button_icon {
+    margin-left: 10px;
+}
+.dark-mode{
+    background-color: rgb(36, 44, 50);
+    color: whitesmoke;
+    font-family: Helvetica, sans-serif;
+    transition: background-color 0.5s, color 0.5s;
+}
+.dark-mode h1, .dark-mode h2, .dark-mode p {
+    color: whitesmoke; 
+}
+.dark-mode a {
+    color: lightblue; 
+}
+.dark-mode button {
+    background-color: #333;
+    color: white;
+}
 
