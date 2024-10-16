@@ -15,6 +15,8 @@
         function darkMode(){
             var element = document.body;
             element.classList.toggle("dark-mode");
+            
+                
 
             var img = document.getElementById("image");
             var clickMe = document.getElementById("clickMe");
@@ -22,14 +24,21 @@
             if(clickCount %2 === 1){
                 img.src = "Dark Mode Inferno Full Logo.png";
                 clickMe.innerText = "Light Mode";
+                
             }
             else {
                 img.src = "Inferno wildfire full logo.png";
                 clickMe.innerText = "Dark Mode";
+                
+               
+                
+                
             }
-
+       
         }
-        </script>
+
+            </script>
+            
 
     </head>
     <body>
@@ -51,8 +60,17 @@
         <p><a href="" class="guest-link">Continue as Guest</a></p>
         
         <div>
-            <button id= "clickMe" onclick="darkMode()">Dark mode</button>
+            <button id= "clickMe" onclick="darkMode()">Dark Mode
+            <span class="button_icon">
+                <ion-icon name="moon-outline"></ion-icon>
+                
+            </span>
+           
+        </button>
+        
         </div>
-    
+        
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
 </html>
