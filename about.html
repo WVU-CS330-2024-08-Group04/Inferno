@@ -6,28 +6,69 @@
     <title>What is Inferno about?</title>
     <style>
         body{
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
             font-family: Helvetica, sans-serif;
-            font-size: 14px;
+            background-color: rgb(255, 255, 255);
             color: black;
-            margin-left: 5%;
-            line-height: 1.6;
-            background: white;
-
+            font-size: 16px;
         }
+        div{
+            text-indent: 20px;
+        }
+        h1{
+            font-size: 22px;
+            text-decoration: underline;
+            text-align: center;
+        }
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+            align-items: left;
+        }
+
+        .flex-item {
+            padding: 5px;
+            margin: 10px;
+            text-align: left;
+            flex: 1;
+        }
+
+        .button-link{
+            display: inline-block;
+            padding: 10px 10px;
+            text-align:center;
+            vertical-align:middle;
+            text-decoration:none;
+            border-radius: 5px;
+            color: black;
+            background-color:#CCCCCC;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover{
+            background-color: #999999
+        }
+        
     </style>
 </head>
 <body>
-    <h1>About?</h1>
-    <p> 
-        <div>Inferno: Wildfire Control & Tracking is an application that uses data from National Oceanic and Atmospheric Administration(NOAA) to display active fires as
-            well as predict areas that could have wildfires. </div>
-        <div>The data used in the applicaton from NOAA consists of the Global Forecast System(GFS) and the Joint Polar Satellite System(JPSS).  For more info about them, click the links below: </div>
-    <div>
-        <a href="https://www.nesdis.noaa.gov/our-satellites/currently-flying/joint-polar-satellite-system"> Vist NOAA JPSS</a>
-        <a href="https://www.emc.ncep.noaa.gov/emc/pages/numerical_forecast_systems/gfs.php?form=MG0AV3"> Visit NOAA GFS</a>
+    <h1>About</h1>
+    <div class="flex-container">
+        <div class="flex-item">Inferno: Wildfire Control & Tracking is an application that uses data from National Oceanic and Atmospheric Administration(NOAA) to display active fires as
+            well as predict areas that could have wildfires.The data used in the applicaton from NOAA consists of the Global Forecast System(GFS) and the Joint Polar Satellite System(JPSS). 
+            <br>For more info about them, click the buttons below: </div>
+        <div class="flex-item">
+            <a href="https://www.nesdis.noaa.gov/our-satellites/currently-flying/joint-polar-satellite-system" class="button-link"> Vist NOAA JPSS</a>
+            <a href="https://www.emc.ncep.noaa.gov/emc/pages/numerical_forecast_systems/gfs.php?form=MG0AV3" class="button-link"> Visit NOAA GFS</a>
+        </div>
     </div>
 </p>
     <h1>Contributors</h1>
-    <p>contributors</p>
+    <div class="flex-container">
+
+    </div>contributors</p>
 </body>
 </html>
