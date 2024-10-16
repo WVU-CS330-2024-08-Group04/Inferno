@@ -4,6 +4,11 @@ body{
     font-family: Helvetica, sans-serif;
     text-align: center;
 }
+img{
+    margin-top: 70px;
+    margin-bottom: 65px;
+       
+}
 h1 { 
     margin-bottom: 0px;
 }
