@@ -12,31 +12,28 @@
         
         <script>
         var clickCount = 0;
-        function darkMode(){
-            var element = document.body;
-            element.classList.toggle("dark-mode");
-            
-                
+    function darkMode() {
+        var element = document.body;
+        element.classList.toggle("dark-mode");
 
-            var img = document.getElementById("image");
-            var clickMe = document.getElementById("clickMe");
-            clickCount++;
-            if(clickCount %2 === 1){
-                img.src = "Dark Mode Inferno Full Logo cropped.png";
-                clickMe.innerText = "Light Mode";
-                
-            }
-            else {
-                img.src = "Inferno wildfire full logo cropped.png";
-                clickMe.innerText = "Dark Mode";
-                
-               
-                
-                
-            }
-       
-        }
+         var img = document.getElementById("image");
+            var clickMeText = document.getElementById("clickMeText");
+         var buttonIcon = document.querySelector(".button_icon ion-icon");
 
+         clickCount++;
+
+     if (clickCount % 2 === 1) {
+        
+        img.src = "Dark Mode Inferno Full Logo cropped.png";
+        clickMeText.textContent = "Light Mode";
+        buttonIcon.setAttribute("name", "sunny");
+    } else {
+        
+        img.src = "Inferno wildfire full logo cropped.png";
+        clickMeText.textContent = "Dark Mode";
+        buttonIcon.setAttribute("name", "moon");
+    }
+}
             </script>
             
 
@@ -60,17 +57,15 @@
         <p><a href="" class="guest-link">Continue as Guest</a></p>
         <p><a href="about.html" class="about-link">About</a></p>
         
-        <div>
-            <button id= "clickMe" onclick="darkMode()">Dark Mode
-            <span class="button_icon">
-                <ion-icon name="moon-outline"></ion-icon>
-                
-            </span>
-           
+        
+            <button id= "clickMe" onclick="darkMode()">
+                <span id="clickMeText">Dark Mode</span>
+                <span class="button_icon">
+                    <ion-icon name="moon"></ion-icon>
+                </span>
+         
         </button>
-        
-        </div>
-        
+     
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
