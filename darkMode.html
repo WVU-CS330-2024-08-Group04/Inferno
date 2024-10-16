@@ -16,7 +16,10 @@
 </head>
 <body>
     <div>
-        <button onclick="darkMode()">Dark mode</button>
+        <ion-button onclick="darkMode()">
+            <ion-icon name="moon-outline"></ion-icon>
+        </ion-button>
+        
 
         
     </div>
@@ -25,5 +28,11 @@
             var element = document.body;
             element.classList.toggle("dark-mode");
         }
-    </script>
-</body>
+       
+
+   
+
+   </script>
+   <script type="module" src="https://unpkg.com/ionicona@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    </body>
