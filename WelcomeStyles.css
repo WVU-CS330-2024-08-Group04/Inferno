@@ -57,6 +57,11 @@ width: 50%;
     color: #cc5f00;
     font-size: smaller;
 }
+.about-link {
+    font-weight: bold;
+    color: #cc5f00;
+    font-size: smaller;
+}
 button{
     position: fixed;
     top: 20px;
