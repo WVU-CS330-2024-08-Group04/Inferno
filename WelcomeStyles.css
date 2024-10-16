@@ -1,6 +1,6 @@
 body{
     color: black;
-    background-color: rgba(42, 26, 26, 0.212);
+    background-color: whitesmoke;
     font-family: Helvetica, sans-serif;
     text-align: center;
 }
@@ -12,8 +12,14 @@ h2 {
 }
 .dark-mode{
     background-color: rgb(36, 44, 50);
-    color: rgba(255, 255, 255, 0.788);
+    color: whitesmoke;
     font-family: Helvetica, sans-serif;
+}
+.dark-mode img{
+    margin-top: 70px;
+    margin-bottom: 90px;
+    width: 525px;
+    
 }
 .center {
 display: block;
