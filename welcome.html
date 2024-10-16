@@ -25,9 +25,33 @@
             }
             
         </style>
+
+        <script>
+
+            var clickCount = 0;
+
+        function darkMode(){
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+
+            var img = document.getElementById("image");
+            var clickMe = document.getElementById("clickMe");
+            clickCount++;
+            if(clickCount %2 === 1){
+                img.src = "Dark Mode Inferno Full Logo.png";
+                clickMe.innerText = "Dark Mode";
+            }
+            else {
+                img.src = "Inferno wildfire full logo.png";
+                clickMe.innerText = "Light Mode";
+            }
+
+        }
+        </script>
+
     </head>
     <body>
-        <img src="Inferno wildfire full logo.png" class="center">
+        <img id = "image" src="Inferno wildfire full logo.png" class="center" alt = "logo">
         <h1 style="text-align: center;"><strong><U>Welcome to Inferno</U></strong></h1>
         <h2>Please login or create an account</h2>
         <h3>Login</h3>
@@ -35,15 +59,8 @@
         <h3>Continue as Guest</h3>
         
         <div>
-            <button onclick="darkMode()">Dark mode</button>
-    
-            
+            <button id= "clickMe" onclick="darkMode()">Dark mode</button>
         </div>
-        <script>
-            function darkMode(){
-                var element = document.body;
-                element.classList.toggle("dark-mode");
-            }
-        </script>
+    
     </body>
 </html>
