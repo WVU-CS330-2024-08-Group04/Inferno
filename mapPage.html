@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="C:\Users\seile\OneDrive\Documents\GitHub\Inferno\styles.css">
+</head>
+    
+    
+<body>
+    
+    <!-- Start of banner (flex to width)
+    Application logo at top left -->
+    <img src="..." style="float: left;" />
+    <input type="button" onclick="location.href='..about page..'"  value="About" />
+    <input type="text" position = top-right value="Hello, "/> <!--display getName()-->
+    <input type="image" onclick="location.href='..account page..'" value="About" />
+    <input type="button" onclick="location.href='.. page..'"  position = top-right value:  />
+    <ion-button name="person-circle-outline" position = top-right ></ion-button>
+    <!--End of banner-->
+    
+    <!-- Start of Body formatting ( flex to width)
+    History button below banner in top left corner**button 
+    Search Bar below history button with left aligned to button**text input
+    Description centered to page with height same as space taken by history and search bar 
+    Settings button in top left mirroring history button**button
+    Filters below settings button mirroring search bar (text / drop down for selection)
+    Map centered to page
+    Legend overlays map in bottom left corner
+    Reset location button overlays map in bottom right corner
+    End of Body formatting
+    
+    //Selections from page
+    if(DarkMode activated){ /* retrieved from account settings */
+    Background color: black
+    Font color: white
+    banner switches colors and alternate logo used
+    }
+    
+    If (userAccountLogo selected){
+    Link to account settings
+    }
+    
+    If (“About” selected){
+    Link to about page
+    }
+    
+    if(History expanded){
+    If (History is empty){
+        Displays “No saved locations”
+    }
+    Else{
+    Displays locations saved
+    }
+    }
+    
+    if (Settings selected){
+        Zoom icons displayed
+        if ( “+” selected){
+            Increases map magnification
+        }
+        Else if( “-” selected){
+            if( base zoom){
+                Does nothing
+            }
+            Else{
+                Decreases map magnification
+            }
+        }
+    }
+    
+    function filters(){
+        list of filters displayed{
+            if(“Smoke” is on){
+                Turn on display showing smoke from NOAA JPSS
+                Display will be gray overlay
+            }
+            Else if(“Smoke” is off){
+                Turn off display showing smoke
+            }
+            if(“Active fires” is on){
+            Display active fires from NOAA JPSS data as fire icons
+            }
+            Else if(“Active fires” is off){
+            Turn off display showing active fires
+            }
+            if(“Predicted Wildfires” is on){
+            Turn on color display of wildfire predictions
+            }
+            Else if(“Predicted Wildfires” is off){
+            Turn off display showing predictions
+            }
+        }
+    
+    }
+    
+    if ( Reset Location selected){
+    Map resets to full image 
+    }
+    
+    Legend{ /*unordered list, color hues need to be decided */
+    “Chances of fire in Area”
+    fire/high risk == red
+    Moderate risk == orange
+    Slight risk == yellow 
+    Little/No risk == green
+    }
+    
+    if(search on click){
+    Text input -> bar
+        if (input valid){
+            Location appears and user can select it
+            Map reflects location shown
+            Wildfire_Prediction receives location
+            Possible starring feature to save locations to history
+        }
+        Else{
+            Display “location not found” below the search bar where options are displayed
+    }
+    }
+    
+    if(time selected){
+        if(input valid){
+            Display time selected
+            Wildfire_Prediction receives time
+        }
+        Else{
+            Display “Time invalid”
+        }
+    }
+            
+        
+    
+    
+    
+</body>
+</html> -->

@@ -3,24 +3,45 @@ body {
     font-family : "Helvetica";
     }
     
-banner{
-    width: auto;
+.banner{
+    width: 100%;
     height : 70px; 
     background-color: black;
     color: White;
-    /* Text-align:
-    line-height:
-    position:
-    top:
-    left: */
-    z-index: 1000; /*to make it on top*/
+    text-align: center;
+    z-index: 1000; 
     }
+
+.helloName{
+    position: absolute; 
+    top: 30px; 
+    right: 80px; 
+    font-size: 20px; 
+    color: white;
+
+}
     
-/* Banner subclass wrap image{ /* used to wrap logo in white rectangle
-    background-color: white
-    border-radius: 0px; adjust to make round
-    padding : inside rectangle
-    Margin-right:  
-    Display: flex
-    Align-items: center
-} */
+.banner img {
+    float: left;
+    width: 400px; 
+    height: 60px;
+    padding: 5px;
+}
+
+.user-icon {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 50px; 
+    height: 50px;
+}
+
+.about-button {
+    float: right;
+    margin-right: 170px;
+    margin-top: 25px;
+    background-color: white;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+}
