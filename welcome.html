@@ -14,6 +14,28 @@
 </head>
 
 <body>
+    <style>
+        body{
+            color: black;
+            background-color: white;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .dark-mode{
+            background-color: black;
+            color: white;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .center {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button{
+            cursor: pointer;
+            color: black; 
+            transition: background-color 0.5s, color 0.5s;
+        }
+    </style>
+
     <img id="image" src="Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo">
     <h1 style="text-align: center;"><strong><U>Welcome to Inferno</U></strong></h1>
     <h2>Please Login or Create an Account</h2>
@@ -62,6 +84,7 @@
                 clickMeText.textContent = "Dark Mode";
                 buttonIcon.setAttribute("name", "moon");
             }
+            
         }
     </script>
 
