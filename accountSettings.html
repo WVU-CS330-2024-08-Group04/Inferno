@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Page</title>
+    
+    <link rel="stylesheet" href="accountSettings.css">
+</head>
+<body>
+
+    <div class="banner">
+        <div class="picture-placeholder"></div>
+        <div class="username">Hi, username</div>
+    </div>
+
+    <div class="content">
+        <div class="side-buttons">
+            <button onclick="openUp('usernamePopUp')">Change Username</button>
+            <button onclick="openUp('passwordPopUp')">Change Password</button>
+            <button onclick="openUp('deleteAccountPopUp')">Delete Account</button>
+            <button>Time Zone</button>
+        </div>
+
+        <div class="account-info" id="accountInfo">
+            <p>Current Account Information</p>
+        </div>
+
+        <div class="side-buttons">
+            <button>Sign Out</button>
+            <button>Dark Mode</button>
+            <button>Color Blind Mode</button>
+            <button>Accessibility</button>
+        </div>
+    </div>
+
+    <div id="usernamePopUp" class="popUp">
+        <div class="popUp-content">
+            <h2>Change Username</h2>
+            <input type="text" id="oldUsername" placeholder="Enter old username">
+            <input type="text" id="newUsername" placeholder="Enter new username">
+            <input type="text" id="confirmUsername" placeholder="Confirm new username">
+            <button onclick="submitUsernameChange()">Submit</button>
+            <button onclick="closeUp('usernamePopUp')">Cancel</button>
+        </div>
+    </div>
+
+    <div id="passwordPopUp" class="popUp">
+        <div class="popUp-content">
+            <h2>Change Password</h2>
+            <input type="password" id="oldPassword" placeholder="Enter old password">
+            <input type="password" id="newPassword" placeholder="Enter new password">
+            <input type="password" id="confirmPassword" placeholder="Confirm new password">
+            <button onclick="submitPasswordChange()">Submit</button>
+            <button onclick="closeUp('passwordPopUp')">Cancel</button>
+        </div>
+    </div>
+
+    <div id="deleteAccountPopUp" class="popUp">
+        <div class="popUp-content">
+            <h2>Delete Account</h2>
+            <p class="warning">Warning: This action is irreversible!</p>
+            <p>Are you sure you want to delete your account?</p>
+            <button onclick="confirmDeleteAccount()">Yes, Delete</button>
+            <button onclick="closeUp('deleteAccountPopUp')">Cancel</button>
+        </div>
+    </div>
+
+    <script src="accountSettings.js"></script>
+</body>
+</html>
