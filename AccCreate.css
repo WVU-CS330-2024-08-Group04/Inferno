@@ -1,35 +1,38 @@
 
 body{
     font-size: 30px;
-    font-family: 'Times New Roman', Times, serif
+    background-color: whitesmoke;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 img{
+    margin-top: 100px;
     width: 500px;
 }
 
 .userpass{
     
-    position:absolute;
+    
     text-align: center;
-    margin-top: 150px;
-    margin-left: 35%;
-    margin-right: 35%;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width:30%;
     border: solid, black;
     border-radius: 25px;
-    padding-top:40px;
-    padding-bottom: 40px;
-    padding-left: 40px;
-    padding-right: 40px;
-   background-color: white;
+    padding:40px;
+    background-color: whitesmoke;
+    transition: background-color 0.5s, color 0.5s;
    
 }
 .createAccount{
+    text-align: center;
+    margin-top: 10px;
+}
 
 input[type = "submit"]{
-    text-align: center;
-    position:fixed;
-    
     border:black;
     border-style: inset;
     border-radius: 25px;
@@ -38,9 +41,45 @@ input[type = "submit"]{
     padding: 5px;
     width: 150px;
     cursor:pointer;
-    
 }
+
+button{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
 }
+
+button:hover {
+    background-color: #ddd;
+}
+
+.button_icon {
+    margin-left: 10px;
+}
+
+.dark-mode{
+    background-color: rgb(36, 44, 50);
+    color: whitesmoke;
+    font-family: Helvetica, sans-serif;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.dark-mode .userpass{
+    background-color: rgb(36, 44, 50);
+    border: solid, whitesmoke;
+}
+
+.dark-mode button {
+    background-color: #333;
+    color: white;
+}
+.dark-mode button:hover {
+    background-color: #444444; 
+}
+
 
 
 
