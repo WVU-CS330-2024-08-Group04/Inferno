@@ -1,0 +1,41 @@
+
+body{
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif
+}
+
+img{
+    width: 500px;
+}
+
+.userpass{
+   text-align: center;
+    margin-top: 150px;
+    margin-left: 35%;
+    margin-right: 35%;
+    border: solid, black;
+    border-radius: 25px;
+   background-color: white;
+   
+}
+.createAccount{
+text-align: center;
+    
+input[type = "submit"]{
+    
+    border:black;
+    border-style: inset;
+    border-radius: 25px;
+    background-color: lightblue;
+    margin-top: 10px;
+    padding: 5px;
+    width: 150px;
+    cursor:pointer;
+    
+}
+}
+
+
+
+
+

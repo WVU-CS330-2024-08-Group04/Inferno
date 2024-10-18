@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Creation Page</title>
+    <link rel="stylesheet" href="AccCreate.css">
 </head>
 <body>
+    <img src="Inferno_wildfire_full_logo_cropped_upscaled.png" alt="img">
     <form method = "post" action="create_account.php">
+        <div class = "userpass">
         <p>
-            <label for="username">Username:</label>
+            <label for="username" class = "username">Username:</label>
             <input type="text" name="username" id="username" autofocus>
         </p>
         <p>
-            <label for="password">Password:</label>
+            <label for="password" class = "password">Password:</label>
             <input type="password" name="password" id="password">
         </p>
+        </div>
+    <div class = "createAccount">
         <input type="submit" value="Create Account">
+    </div>
     </form>
+   
+    <div>
+
+    </div>
 </body>
 </html>
