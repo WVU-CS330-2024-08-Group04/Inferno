@@ -37,20 +37,14 @@
             function darkMode() {
                 var element = document.body;
                 element.classList.toggle("dark-mode");
-    
                 var img = document.getElementById("image");
                 var clickMeText = document.getElementById("clickMeText");
-                var buttonIcon = document.querySelector(".button_icon ion-icon");
-    
-                
-    
+                var buttonIcon = document.querySelector("#clickMe_icon ion-icon");
+
                 if (element.classList.contains("dark-mode")) {
-                    img.src = "Dark_Mode_Inferno_Full_Logo_cropped_upscaled.png";
                     clickMeText.textContent = "Light Mode";
                     buttonIcon.setAttribute("name", "sunny");
                 } else {
-    
-                    img.src = "Inferno_wildfire_full_logo_cropped_upscaled.png";
                     clickMeText.textContent = "Dark Mode";
                     buttonIcon.setAttribute("name", "moon");
                 }
