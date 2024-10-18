@@ -10,6 +10,7 @@ body{
 .google-map {
     padding-bottom: 57%;
     position: relative;
+    border-radius: 8px;
 }
 
 .google-map iframe {
@@ -18,6 +19,7 @@ body{
     left: 0;
     top: 0;
     position: absolute;
+    border-radius: 5px;
 }
 
 .banner {
