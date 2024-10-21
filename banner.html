@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+    
+    
+<body>
+    
+    <!-- Start of banner -->
+    <div class="banner">
+        <div class="banner-back">
+            <img src="Inferno wildfire full logo.png" alt="logo" /> 
+        </div>
+        <input type="image" src="Profile Icon.png" onclick="location.href='.. users page..'" class="user-icon"/>
+        <a href="..about page.." class="about-link">About</a>
+        <button id="clickMe" onclick="darkMode()" class="dark-button">
+            <span id="clickMeText">Dark Mode</span>
+            <span class="button_icon">
+                <ion-icon name="moon"></ion-icon>
+            </span>
+        </button>
+        <div class="helloName" id="helloName"></div>
+    </div>
+    <!--End of banner-->
+
+     <script>
+
+            function getName(){
+                return "Shannon";
+            }
+
+            const name = document.getElementById("helloName");
+            name.textContent = "Hello, " + getName();
+
+    </script>   
+    
+    
+</body>
+</html> 
