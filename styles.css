@@ -1,24 +1,79 @@
 body {
     display : fixed; 
     font-family : "Helvetica";
+    color: black;
+    background-color: white;
+    transition: background-color 0.5s, color 0.5s;
+    }
+
+    .dark-mode{
+        background-color: rgb(36, 44, 50);
+        color: whitesmoke;
+        font-family: Helvetica, sans-serif;
+        transition: background-color 0.5s, color 0.5s;
+    }
+    .dark-mode body, dark-mode descriptionText {
+        color: whitesmoke; 
+    }
+    .dark-mode a {
+        color: lightblue; 
+    }
+    .dark-mode button {
+        background-color: #333;
+        color: white;
+    }
+    .dark-mode button:hover {
+        background-color: #444444;
+        
+    }
+
+    .center {
+        text-align: center;
+        margin-top: 50px;
+    }
+    .dark-button{
+        float:right;
+        margin-right: 20px;
+        margin-top: 35px;
+        cursor: pointer;
+        color: white; 
+        transition: background-color 0.5s, color 0.5s;
+        font-weight: bold;
+        border-radius: 5px;
+        font-size: 12px;
+        width:fit-content;
+        color: black;
     }
     
 .banner{
     width: 100%;
-    height : 70px; 
+    height : 90px; 
     background-color: black;
     color: White;
     text-align: center;
-    z-index: 1000; 
+    z-index: 0; 
+    position: relative;
     }
 
 .helloName{
     position: absolute; 
-    top: 30px; 
+    margin-top: 35px; 
     right: 80px; 
     font-size: 20px; 
     color: white;
 
+}
+
+.banner-back{
+    background-color: white;
+    z-index: 1;
+    position: absolute;
+    float: left; 
+    width: 28%;
+    height : 70px; 
+    margin-top: 10px;
+    margin-left: 15px;
+    border-radius: 5px;
 }
     
 .banner img {
@@ -26,11 +81,12 @@ body {
     width: 400px; 
     height: 60px;
     padding: 5px;
+    z-index: 2;
 }
 
 .user-icon {
     float: right;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-right: 10px;
     width: 50px; 
     height: 50px;
@@ -39,11 +95,17 @@ body {
 .about-button {
     float: right;
     margin-right: 170px;
-    margin-top: 25px;
-    background-color: white;
+    margin-top: 35px;
+    color: white;
     border: none;
     font-weight: bold;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+    font-size: 12px;
+    width:fit-content;
+    color: black;
+
 }
 
 
@@ -107,8 +169,6 @@ body {
     padding-top: 5px;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid black;
-    background-color: #f9f9f9;
     border-radius: 5px; 
     flex-direction: column;
 }
