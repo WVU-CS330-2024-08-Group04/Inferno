@@ -12,10 +12,8 @@ img{
     width: 500px;
 }
 
-.userpass{
+.userpass {
     
-    
-    text-align: left;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
@@ -27,10 +25,24 @@ img{
     transition: background-color 0.5s, color 0.1s;
    
 }
+.userpass label{
+    font-size: smaller;
+    text-align: center;
+}
+
+.userpass input{
+    text-align: center;
+    width: 75%;
+    height: 25px;
+    clear:both;
+
+}
+
 .createAccount{
     text-align: center;
     margin-top: 10px;
 }
+
 
 input[type = "submit"]{
     border:black;
@@ -79,6 +91,12 @@ button:hover {
 .dark-mode button:hover {
     background-color: #444444; 
 }
+
+.homeLink{
+    font-size: 15px;
+}
+
+
 
 
 
