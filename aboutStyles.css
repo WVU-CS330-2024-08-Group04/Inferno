@@ -128,13 +128,13 @@
         .dark-mode .sidebar button{
             background-color: #333;
             color: white;
-            box-shadow:rgb(229, 231, 231);
+            box-shadow:0 0 5px rgb(229, 231, 231);
         }
 
         .dark-mode .main-content button {
-            background-color: #333;
+            background-color: rgba(58, 74, 121, 0.831);
             color: white;
-            box-shadow:rgb(229, 231, 231);
+            box-shadow:0 0 5px rgb(229, 231, 231);
         }
         .dark-mode .sidebar{
             background-color: #0f0f0f;
