@@ -4,155 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="dark-mode" href="darkMode.html">
+    <link rel="stylesheet" href="aboutStyles.css">
     <title>What is Inferno about?</title>
-    <style>
-        
-body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            position: relative;
-            font-family: "Helvetica", sans-serif;
-            font-size:14px;
-            transition: background-color 0.5s, color 0.5s;
-        }
 
-        .banner-placeholder {
-            height: 90px; /* Adjust as needed for your banner height */
-            background-color: #e0e0e0; /* Just to visualize the space */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 24px;
-            color: #555;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: row;
-            height: calc(100% - 100px); /* Subtract banner height from total height */
-            width: 100%;
-        }
-        .darkmode{
-            justify-items: right;
-            justify-content:center;
-            width: fit-content;
-        }
-
-        .sidebar {
-            background-color: #f0f0f0;
-            padding: .5%;
-            width: 20%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            min-height: 100%;
-        }
-
-        .sidebar button {
-            padding: 10%;
-            border: none;
-            background-color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgb(26, 24, 24);
-            width: 100%;
-            height: 15%;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .sidebar button:hover {
-            background-color: #e0e0e0;
-        }
-
-        .content-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 10px;
-            overflow-y: auto; /* Ensure content is scrollable */
-        }
-
-        .main-content,
-        .contributors {
-            flex: 1;
-            display: flex;
-            justify-content: left;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            margin-top: 10px;
-            position: relative;
-            min-height: fit-content;
-            flex-direction: column;
-        }
-
-        .main-content::before {
-            bottom: 10px;
-            left: 10px;
-        }
-
-        .main-content::after {
-            bottom: 10px;
-            right: 10px;
-        }
-
-        .content-area h2
-        {
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-decoration: underline;
-        }
-
-        .main-content button {
-            width:fit-content;
-            margin: 5px;
-            border: none;
-            background-color: rgba(111, 140, 228, 0.831);
-            cursor: pointer;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgb(26, 24, 24);
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .main-content button:hover {
-            background-color: #e0e0e0;
-        }
-
-        .dark-mode{
-            background-color: rgb(36, 44, 50);
-            color: whitesmoke;
-            transition: background-color 0.5s, color 0.5s;
-        }
-        .dark-mode h1 {
-            color: whitesmoke; 
-        }
-        .dark-mode a {
-            color: lightblue; 
-        }
-
-        .dark-mode .sidebar button{
-            background-color: #333;
-            color: white;
-            box-shadow:rgb(229, 231, 231);
-        }
-
-        .dark-mode .main-content button {
-            background-color: #333;
-            color: white;
-            box-shadow:rgb(229, 231, 231);
-        }
-        .dark-mode .sidebar{
-            background-color: #0f0f0f;
-        }
-        .dark-mode button {
-            background-color: #333;
-            color: white;
-        }
-    </style>
 </head>
 <body>
     <div class="banner-placeholder">
@@ -175,9 +29,10 @@ body, html {
                 </span>
             </button>
             <div class="main-content">
-                <p>&nbsp;&nbsp;Inferno: Wildfire Control & Tracking is an application that predicts the possibility of 
-                    wildfires in the user selected area. The data utilized in this application is from National Oceanic and 
-                    Atmospheric Administration(NOAA.)
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;Inferno: Wildfire Control & Tracking is an application that predicts the possibility of 
+                    wildfires in the user selected area. It uses a location's temperature, wind speeds, relative humidity, and soil 
+                    moisture and then tests it against medium and high risk thresholds. The results are then displayed back to the 
+                    user as a color overlay. The data utilized in this applicationis from National Oceanic and Atmospheric Administration(NOAA.)
                 </p>
                 <p>
                     The specific NOAA content utilized was the Global Forecast System and the Joint Polar Satellite System.
