@@ -59,7 +59,7 @@ input[type = "submit"]{
 }
 
 button{
-    position: fixed;
+    position: center;
     top: 20px;
     right: 20px;
     cursor: pointer;
