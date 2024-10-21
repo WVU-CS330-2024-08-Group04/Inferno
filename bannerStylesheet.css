@@ -76,12 +76,13 @@ body {
     border-radius: 5px;
 }
     
-.banner img {
+.banner-back img {
     float: left;
     width: 400px; 
     height: 60px;
     padding: 5px;
     z-index: 2;
+    max-width: 98%;
 }
 
 .user-icon {
