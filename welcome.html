@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Welcome To Inferno</title>
+    <title>Welcome To Inferno </title>
     <meta name="description" content="welcome page">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="WelcomeStyles.css">
@@ -14,10 +14,33 @@
 </head>
 
 <body>
+    <style>
+        body{
+            color: black;
+            background-color: white;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .dark-mode{
+            background-color: black;
+            color: white;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .center {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button{
+            cursor: pointer;
+            color: black; 
+            transition: background-color 0.5s, color 0.5s;
+        }
+    </style>
 
     <img id="image" src="Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo">
     <h1 style="text-align: center;"><strong><U>Welcome to Inferno</U></strong></h1>
+    
     <h2>Please Login or Create an Account</h2>
+    
 
     <div class="links-container">
         <div>
@@ -30,7 +53,7 @@
         </div>
     </div>
 
-    <p><a href="map.html" class="guest-link">Continue as Guest</a></p>
+    <p><a href="" class="guest-link">Continue as Guest</a></p>
     <p><a href="about.html" class="about-link">About</a></p>
 
 
