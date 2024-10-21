@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+    
+    
+<body>
+    
+    <!-- Start of banner -->
+    <div class="banner">
+        <div class="banner-back">
+            <img src="Inferno wildfire full logo.png" alt="logo" /> 
+        </div>
+        <input type="image" src="Profile Icon.png" onclick="location.href='.. users page..'" class="user-icon"/>
+        <a href="..about page.." class="about-link">About</a>
+        <button id="clickMe" onclick="darkMode()" class="dark-button">
+            <span id="clickMeText">Dark Mode</span>
+            <span class="button_icon">
+                <ion-icon name="moon"></ion-icon>
+            </span>
+        </button>
+        <div class="helloName" id="helloName"></div>
+    </div>
+    <!--End of banner-->
+
+    <!--dark mode button-->
+    
+
+    
+    
+    <!-- Start of Body formatting ( flex to width)-->
+    <!-- <div class="description">
+        <div class="topbuttons-container">
+            <input type="button" onclick="location.href='..history page..'"  value="History" class="history-button"/>
+            <input type="button" onclick="location.href='..settings page..'"  value="Settings" class="settings-button"/>
+        </div>
+        <div id="descriptionText" class="descriptionText"></div>
+        <div class="dropdown-content">
+            <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
+            <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
+            <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
+            <button>Apply Filters</button>
+        </div>
+        
+        <div class="searchAndDropdown-container">
+            <input type="text" class="search-bar" placeholder="Search a location..." />
+            <button class="search-button" onclick="performSearch(); description()">Search</button>
+            <button class="dropdown-trigger">Filters</button>
+
+        </div>
+        <div id="selected-filters"></div>
+        
+    </div> -->
+
+
+     <script>
+
+            function getName(){
+                return "Shannon";
+            }
+
+            const name = document.getElementById("helloName");
+            name.textContent = "Hello, " + getName();
+
+            function performSearch() {
+                const query = document.querySelector('.search-bar').value;
+                //perform search
+            }
+
+            function description() {
+                const description = document.getElementById("descriptionText");
+                description.textContent = "this is the description blah blah blah";
+            }
+
+            //for dropdown filters:
+        
+            // const dropdown = document.querySelector('.dropdown');
+            // const dropdownTrigger = document.querySelector('.dropdown-trigger');
+            // const dropdownContent = document.querySelector('.dropdown-content');
+
+            // dropdownTrigger.addEventListener('click', function() {
+            //     if (dropdownContent.style.display === 'block') {
+            //         dropdownContent.style.display = 'none';
+            //     } else {
+            //         dropdownContent.style.display = 'block';
+            //     }
+            // });
+
+            // // Close dropdown if clicked outside
+            // document.addEventListener('click', function(event) {
+            //     if (!dropdownTrigger.contains(event.target) && !dropdownContent.contains(event.target)) {
+            //         dropdownContent.style.display = 'none';
+            //     }
+            // });
+
+            // // Get selected filters
+            // function getFilters() {
+            //     const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+            //     const selectedFilters = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            //     console.log(selectedFilters);
+            // }
+
+            // // Apply filters button
+            // const applyButton = dropdownContent.querySelector('button');
+            // applyButton.addEventListener('click', function() {
+            //     getFilters();
+            //     dropdownContent.style.display = 'none'; // Close dropdown after applying filters
+            //     //implement filter on map logic
+            // });
+
+
+            //dark mode button implementation
+            function darkMode(){
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+
+            var img = document.getElementById("image");
+            var clickMeText = document.getElementById("clickMeText");
+            var buttonIcon = document.querySelector(".button_icon ion-icon");
+
+
+            if (element.classList.contains("dark-mode")) {
+                img.src = "Dark_Mode_Inferno_Full_Logo_cropped_upscaled.png";
+                clickMeText.textContent = "Light Mode";
+                buttonIcon.setAttribute("name", "sunny");
+            } else {
+
+                img.src = "Inferno_wildfire_full_logo_cropped_upscaled.png";
+                clickMeText.textContent = "Dark Mode";
+                buttonIcon.setAttribute("name", "moon");
+            }
+        }
+        
+
+
+
+    </script>   
+    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html> 
