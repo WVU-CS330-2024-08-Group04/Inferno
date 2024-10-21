@@ -3,39 +3,41 @@ body{
     font-size: 30px;
     background-color: whitesmoke;
     font-family: Helvetica, sans-serif;
-    text-align: center;
     transition: background-color 0.5s, color 0.5s;
 }
 
 img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 100px;
     width: 500px;
 }
 
 .userpass {
     
-    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     width:30%;
     border: solid, black;
     border-radius: 25px;
-    padding:40px;
+    padding:10px;
     background-color: whitesmoke;
     transition: background-color 0.5s, color 0.1s;
    
 }
+
 .userpass label{
-    font-size: smaller;
-    text-align: center;
+    font-size: 25px;
+    margin-left: 10%;   
 }
 
 .userpass input{
-    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     width: 75%;
     height: 25px;
-    clear:both;
-
 }
 
 .createAccount{
@@ -94,6 +96,7 @@ button:hover {
 
 .homeLink{
     font-size: 15px;
+    text-align: center;
 }
 
 
