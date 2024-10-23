@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     var username = "username"; 
     var version = "1.0.0"; 
+    var accountCreationDate = "Added at a later Date"
 
     var currentDate = new Date();
     var formattedDate = currentDate.toLocaleDateString('en-US', {
@@ -13,10 +14,10 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("accountInfo").innerHTML = `
         <p><strong>Username:</strong> ${username}</p>
         <p><strong>Website Version:</strong> ${version}</p>
+        <p><strong>Account Creation Date:</strong> ${accountCreationDate}</p>
         <p><strong>Today's Date:</strong> ${formattedDate}</p>
     `;
 });
-
 
 function openUp(popUpId) {
     document.getElementById(popUpId).style.display = "block";

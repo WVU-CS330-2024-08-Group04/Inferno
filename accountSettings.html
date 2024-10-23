@@ -30,7 +30,7 @@
             <button onclick="openUp('signOutPopUp')">Sign Out</button>
             <button onclick = "darkmode()">Dark Mode</button>
             <button>Color Blind Mode</button>
-            <button>Accessibility</button>
+            <button onclick="history.back()">Back</button>
         </div>
     </div>
 
@@ -78,13 +78,7 @@
         function darkmode(){
             var element = document.body;
             element.classList.toggle("dark-mode");
-            
-            
-
-        
         }
-
-
     </script>
     <script src="accountSettings.js"></script>
 </body>
