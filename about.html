@@ -8,27 +8,46 @@
     <link rel="stylesheet" href="aboutStyles.css">
     
 </head>
-    <body>
-        <div class="banner-placeholder">
-            Banner Placeholder
-            <button class="darkmode" id="clickMe" onclick="darkMode()">
-                <span id="clickMeText">Dark Mode</span>
-                <span class="button_icon">
-                    <ion-icon name="moon"></ion-icon>
-                </span>
-            </button>
+<body>
+
+    <!-- Start of banner -->
+    <div class="banner">
+        <div class="banner-back">
+            <img src="Inferno wildfire full logo cropped.png" alt="logo" /> 
         </div>
-     
+        <input type="image" src="Profile Icon.png" onclick="location.href='.. users page..'" class="user-icon"/>
+        <a href="..about page.." class="about-link">About</a>
+        <button id="clickMe" onclick="darkMode()" class="dark-button">
+            <span id="clickMeText">Dark Mode</span>
+            <span class="button_icon">
+                <ion-icon name="moon"></ion-icon>
+            </span>
+        </button>
+        <div class="helloName" id="helloName"></div>
+    </div>
+    <!--End of banner-->
+
+     <script>
+
+            function getName(){
+                return "Shannon";
+            }
+
+            const name = document.getElementById("helloName");
+            name.textContent = "Hello, " + getName();
+
+    </script>   
     <div class="container">
+        
         <div class="sidebar">
             <button onclick="location.href='welcome.html';">Home</button>
-            <button onclick="location.href='about.html';">Wildfire Afflicted Area</button>
-            <button onclick="location.href='accountSettings.html';">Settings</button>
-            
+            <button onclick="location.href='...Wildfire...';">Wildfire Afflicted Area</button>
+            <button onclick="location.href='...Settings...';">Settings</button>
+            <button onclick="location.href='...donation...';">Donation Tab</button>
         </div>
         <div class="content-area">
             <h2>ABOUT</h2>
-            
+           
             <div class="main-content">
                 <p>&nbsp;&nbsp;&nbsp;&nbsp;Inferno: Wildfire Control & Tracking is an application that predicts the possibility of 
                     wildfires in the user selected area. It uses a location's temperature, wind speeds, relative humidity, and soil 
@@ -69,6 +88,8 @@
                 buttonIcon.setAttribute("name", "moon");
             }
         }
+
+    
     </script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
