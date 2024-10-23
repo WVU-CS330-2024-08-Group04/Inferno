@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    transition: background-color 0.5s, color 0.5s;
 }
         
 .banner {
@@ -90,4 +91,22 @@ body {
 .popUp-content .warning {
     color: red;
     font-weight: bold;
+}
+
+.dark-mode{
+    background-color: rgb(36, 44, 50);
+    color: whitesmoke;
+}
+
+.dark-mode .banner{
+    background-color: whitesmoke;
+    color:  rgb(36, 44, 50);
+}
+
+.dark-mode .body{
+    background-color:  rgb(36, 44, 50);
+}
+
+.dark-mode .popUp-content{
+    background-color:  rgb(36, 44, 50);
 }
