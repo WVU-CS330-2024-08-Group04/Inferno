@@ -63,3 +63,10 @@ function confirmDeleteAccount() {
         closeUp('deleteAccountPopUp');
     }
 }
+
+function signOut(){
+    window.location.href = 'AccLogin.html'
+    
+}
+
+document.getElementById('signOutButton').addEventListener('click',signOut)

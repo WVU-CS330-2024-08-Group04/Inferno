@@ -3,34 +3,49 @@ body{
     font-size: 30px;
     background-color: whitesmoke;
     font-family: Helvetica, sans-serif;
-    text-align: center;
     transition: background-color 0.5s, color 0.5s;
 }
 
 img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 100px;
+    margin-bottom: 20px;
     width: 500px;
 }
 
-.userpass{
+.userpass {
     
-    
-    text-align: left;
-    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     width:30%;
     border: solid, black;
     border-radius: 25px;
-    padding:40px;
+    padding:10px;
     background-color: whitesmoke;
     transition: background-color 0.5s, color 0.1s;
    
 }
+
+.userpass label{
+    font-size: 25px;
+    margin-left: 10%;   
+}
+
+.userpass input{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    height: 25px;
+}
+
 .createAccount{
     text-align: center;
     margin-top: 10px;
 }
+
 
 input[type = "submit"]{
     border:black;
@@ -41,6 +56,10 @@ input[type = "submit"]{
     padding: 5px;
     width: 150px;
     cursor:pointer;
+}
+
+.login{
+    text-align: center;
 }
 
 button{
@@ -79,6 +98,13 @@ button:hover {
 .dark-mode button:hover {
     background-color: #444444; 
 }
+
+.homeLink{
+    font-size: 15px;
+    text-align: center;
+}
+
+
 
 
 

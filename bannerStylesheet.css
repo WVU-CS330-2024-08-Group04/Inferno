@@ -77,7 +77,7 @@ body {
     display: flex;
 }
     
-.banner img {
+.banner-back img {
     float: left;
     width: 400px; 
     height: 60px;

@@ -27,8 +27,8 @@
         </div>
 
         <div class="side-buttons">
-            <button>Sign Out</button>
-            <button>Dark Mode</button>
+            <button onclick="openUp('signOutPopUp')">Sign Out</button>
+            <button onclick = "darkmode()">Dark Mode</button>
             <button>Color Blind Mode</button>
             <button>Accessibility</button>
         </div>
@@ -66,6 +66,26 @@
         </div>
     </div>
 
+    <div id = "signOutPopUp" class="popUp">
+        <div class = "popUp-content">
+            <h2>Sign Out</h2>
+            <h3>Are You Sure you want to Sign Out?</h3>
+            <button onclick="closeUp('signOutPopUp')">Cancel</button>
+            <button id ="signOutButton">Sign Out</button>
+        </div>
+    </div>
+    <script>
+        function darkmode(){
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+            
+            
+
+        
+        }
+
+
+    </script>
     <script src="accountSettings.js"></script>
 </body>
 </html>
