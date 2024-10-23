@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     var username = "username"; 
     var version = "1.0.0"; 
+    var accountCreationDate = "Added at a later Date"
 
     var currentDate = new Date();
     var formattedDate = currentDate.toLocaleDateString('en-US', {
