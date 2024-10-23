@@ -49,39 +49,35 @@ body{
     padding: 20px;
 }
 
-#clickMe{
-    position: fixed;
-    bottom: 20px;
-    right: 60px;
-    cursor: pointer;
-    color: black;
-    transition: background-color 0.3s, color 0.3s;
-}
-#clickMe:hover {
-    background-color: #ddd;
-}
-#clickMe_icon {
-    margin-left: 10px;
-}
 .dark-mode{
     background-color: rgb(36, 44, 50);
     color: whitesmoke;
-    font-family: Helvetica, sans-serif;
     transition: background-color 0.5s, color 0.5s;
 }
-.dark-mode h1, .dark-mode h2, .dark-mode p {
+.dark-mode h1 {
     color: whitesmoke; 
 }
 .dark-mode a {
     color: lightblue; 
 }
-.dark-mode button, .dark-mode #clickMe {
+
+.dark-mode .sidebar button{
     background-color: #333;
     color: white;
+    box-shadow:0 0 5px rgb(229, 231, 231);
 }
-.dark-mode #clickMe:hover, .dark-mode button:hover {
-    background-color: #444444;
-    
+
+.dark-mode .main-content button {
+    background-color: rgba(58, 74, 121, 0.831);
+    color: white;
+    box-shadow:0 0 5px rgb(229, 231, 231);
+}
+.dark-mode .sidebar{
+    background-color: #0f0f0f;
+}
+.dark-mode button {
+    background-color: #333;
+    color: white;
 }
 
 .center {
@@ -140,6 +136,7 @@ width: 400px;
 height: 60px;
 padding: 5px;
 z-index: 3;
+max-width: 95%;
 }
 
 .user-icon {

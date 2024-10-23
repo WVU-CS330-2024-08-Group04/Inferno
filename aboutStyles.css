@@ -203,6 +203,7 @@
         height: 60px;
         padding: 5px;
         z-index: 3;
+        max-width: 95%;
     }
     
     .user-icon {
