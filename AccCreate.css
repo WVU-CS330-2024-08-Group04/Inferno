@@ -99,8 +99,26 @@ button:hover {
     background-color: #444444; 
 }
 
-.homeLink{
+.homeLink a{
     font-size: 15px;
+    text-align: center;
+    color: darkorange;
+}
+
+.homeLink a:hover {
+    color: #cc5f00;
+    text-decoration: underline; 
+}
+
+.dark-mode .homeLink a {
+    color: lightblue; 
+}
+
+.dark-mode .homeLink a:hover {
+    color: lightskyblue;
+}
+
+#backtohome{
     text-align: center;
 }
 
