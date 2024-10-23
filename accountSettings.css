@@ -5,7 +5,7 @@ body {
     padding: 0;
     transition: background-color 0.5s, color 0.5s;
 }
-        
+
 .banner {
     background-color: black;
     color: white;
@@ -20,7 +20,7 @@ body {
     height: 50px;
     background-color: gray;
     border-radius: 50%;
-        }
+}
 
 .banner .username {
     font-size: 20px;

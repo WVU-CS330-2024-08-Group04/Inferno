@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
 });
 
-
 function openUp(popUpId) {
     document.getElementById(popUpId).style.display = "block";
 }
