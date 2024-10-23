@@ -9,10 +9,23 @@
         <link rel="stylesheet" href="mapStyles.css">
     </head>
     <body>
-        <div class="banner">
-            <div class="picture-placeholder"></div>
-            <div class="username">Hi, username</div>
+       <!-- Start of banner -->
+    <div class="banner">
+        <div class="banner-back">
+            <img src="Inferno wildfire full logo cropped.png" alt="logo" /> 
         </div>
+        <input type="image" src="Profile Icon.png" onclick="location.href='.. users page..'" class="user-icon"/>
+        <a href="..about page.." class="about-link">About</a>
+        <button id="clickMe" onclick="darkMode()" class="dark-button">
+            <span id="clickMeText">Dark Mode</span>
+            <span class="button_icon">
+                <ion-icon name="moon"></ion-icon>
+            </span>
+        </button>
+        <div class="helloName" id="helloName"></div>
+    </div>
+    <!--End of banner-->
+   
         
         <div class="google-map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49162.40005652496!2d-79.98466499086203!3d39.635083723141804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88357b684185333d%3A0x78bee909ab8d43e4!2sMorgantown%2C%20WV!5e0!3m2!1sen!2sus!4v1729269708013!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -36,7 +49,16 @@
         </button>
     
         <script>
+
+            //banner script
+            function getName(){
+                return "Shannon";
+            }
+            const name = document.getElementById("helloName");
+            name.textContent = "Hello, " + getName();
             var clickCount = 0;
+            //end banner script
+
             function darkMode() {
                 var element = document.body;
                 element.classList.toggle("dark-mode");
