@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("accountInfo").innerHTML = `
         <p><strong>Username:</strong> ${username}</p>
         <p><strong>Website Version:</strong> ${version}</p>
+        <p><strong>Account Creation Date:</strong> ${accountCreationDate}</p>
         <p><strong>Today's Date:</strong> ${formattedDate}</p>
     `;
 });
