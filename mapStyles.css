@@ -6,13 +6,10 @@ body{
     transition: background-color 0.5s, color 0.5s;
 }
 
-
-
-
 .side-buttons {
-    position: fixed; 
+    position: absolute; 
     right: 8px;        
-    top: 88px; 
+    top: 98.5px; 
     display: flex;
     flex-direction: column;
     height: 700px;
