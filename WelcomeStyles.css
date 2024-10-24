@@ -1,8 +1,9 @@
 body{
     color: black;
     background-color: whitesmoke;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Helvetica', sans-serif;
     text-align: center;
+    font-size:14px;
     transition: background-color 0.5s, color 0.5s;
 }
 img{
@@ -36,7 +37,7 @@ width: 50%;
 .links-container a {
     
     font-weight: bold;
-    color: #cc5f00;
+    color: rgba(244, 144, 12, 1);
     font-size: smaller;
 }
 .links-container p {
@@ -45,12 +46,12 @@ width: 50%;
 }
 .guest-link {
     font-weight: bold;
-    color: #cc5f00;
+    color: rgba(244, 144, 12, 1);
     font-size: smaller;
 }
 .about-link {
     font-weight: bold;
-    color: #cc5f00;
+    color: rgba(244, 144, 12, 1);
     font-size: smaller;
 }
 button{
@@ -77,7 +78,7 @@ button:hover {
     color: whitesmoke; 
 }
 .dark-mode a {
-    color: lightblue; 
+    color: rgb(204, 121, 12);
 }
 .dark-mode button {
     background-color: #333;

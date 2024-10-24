@@ -1,6 +1,6 @@
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica', sans-serif;
     margin: 0;
     padding: 0;
     transition: background-color 0.5s, color 0.5s;
@@ -91,23 +91,29 @@ font-size: 16px;
 .content {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
 }
 
 .side-buttons {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items:center;
+    width:20%;
     height: 700px;
 }
 
 .side-buttons button {
     height: 200px;
-    width: 220px;
+    width: 95%;  
     padding: 10px;
     margin-bottom: 10px;
     font-size: 16px;
+    font-weight:bold;
     cursor: pointer;
+    background-color:rgba(244, 144, 12, 1);
+    border-radius: 5px;
+    border:none;
 }
 
 .account-info {
@@ -115,7 +121,9 @@ font-size: 16px;
     padding: 20px;
     font-size: 18px;
     text-align: center;
-    border: 1px solid #ccc;
+    justify-items: center;
+    border: 1px solid whitesmoke;
+    border-radius:5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -160,28 +168,26 @@ font-size: 16px;
     color: whitesmoke;
     transition: background-color 0.5s, color 0.5s;
 }
+
+.dark-mode .popUp-content {
+    background-color: rgb(36, 44, 50);;
+    margin: 15% auto;
+    padding: 20px;
+    width: 400px;
+    border-radius: 5px;
+}
 .dark-mode h1 {
     color: whitesmoke; 
 }
-.dark-mode a {
-    color: lightblue; 
+
+
+.dark-mode .side-buttons button{
+    background-color: rgb(204, 121, 12);
+    color: white;
+    box-shadow:0 0 5px rgb(138, 138, 138);
+    transition: background-color 0.5s, color 0.5s;
 }
 
-.dark-mode .sidebar button{
-    background-color: #333;
-    color: white;
-    box-shadow:0 0 5px rgb(229, 231, 231);
-}
-
-.dark-mode .main-content button {
-    background-color: rgba(58, 74, 121, 0.831);
-    color: white;
-    box-shadow:0 0 5px rgb(229, 231, 231);
-}
 .dark-mode .sidebar{
     background-color: #0f0f0f;
-}
-.dark-mode button {
-    background-color: #333;
-    color: white;
 }

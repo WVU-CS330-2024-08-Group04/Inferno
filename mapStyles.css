@@ -3,34 +3,42 @@ body{
     background-color: whitesmoke;
     font-family: Helvetica, sans-serif;
     text-align: center;
+    width:100%;
+    font-size:14px;
     transition: background-color 0.5s, color 0.5s;
 }
 
 .side-buttons {
-    position: absolute; 
-    right: 8px;        
-    top: 98.5px; 
+    height:100%-90px;
+    width:18%;
+    position: absolute;
+    right: 8px;
+    top: 100px;
     display: flex;
     flex-direction: column;
-    height: 700px;
     transition: background-color 0.5s, color 0.5s;
+    
 }
 
 .side-buttons button {
+    flex: 1;
     height: 150px;
-    width: 220px;
+    width: 100%; /* Adjusts for padding, assuming 10px padding on both sides */
     padding: 10px;
+    align-items:center;
     margin-bottom: 9px;
     font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
+    background-color: rgba(244, 144, 12, 1);
+    border: none;
     transition: background-color 0.5s, color 0.5s;
 }
-
-.content {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+.side-buttons button:hover {
+    background-color: rgb(204, 121, 12);
 }
+
+
 
 .dark-mode{
     background-color: rgb(36, 44, 50);
@@ -40,25 +48,21 @@ body{
 .dark-mode h1 {
     color: whitesmoke; 
 }
-.dark-mode a {
-    color: lightblue; 
+
+.dark-mode .side-buttons button{
+    background-color: rgb(204, 121, 12);
+    color: white;
+    box-shadow:0 0 5px rgb(138, 138, 138);
 }
 
-.dark-mode .sidebar button{
-    background-color: #333;
-    color: white;
-    box-shadow:0 0 5px rgb(229, 231, 231);
+.dark-mode .side-buttons button:hover {
+    background-color: rgba(244, 144, 12, 1);
 }
 
-.dark-mode .main-content button {
-    background-color: rgba(58, 74, 121, 0.831);
-    color: white;
-    box-shadow:0 0 5px rgb(229, 231, 231);
-}
 .dark-mode .sidebar{
     background-color: #0f0f0f;
 }
-.dark-mode button {
+.dark-mode .dark-button {
     background-color: #333;
     color: white;
 }

@@ -8,22 +8,11 @@
             transition: background-color 0.5s, color 0.5s;
         }
 
-        .banner-placeholder {
-            height: 90px; /* Adjust as needed for your banner height */
-            background-color: #e0e0e0; /* Just to visualize the space */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 24px;
-            color: #555;
-            z-index: 0;
-        }
 
         .container {
             display: flex;
             flex-direction: row;
-            height: calc(100% - 100px); /* Subtract banner height from total height */
+            height: calc(100% - 90px); /* Subtract banner height from total height */
             width: 100%;
         }
         .darkmode{
@@ -35,7 +24,7 @@
         .sidebar {
             background-color: #f0f0f0;
             padding: .5%;
-            width: 20%;
+            width: 15%;
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
@@ -46,7 +35,7 @@
         .sidebar button {
             padding: 10%;
             border: none;
-            background-color: white;
+            background-color: rgba(244, 144, 12, 1);
             cursor: pointer;
             border-radius: 5px;
             box-shadow: 0 0 5px rgb(26, 24, 24);
@@ -57,30 +46,29 @@
         }
 
         .sidebar button:hover {
-            background-color: #e0e0e0;
+            background-color: rgb(204, 121, 12);
         }
 
         .content-area {
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 10px;
-           
+            padding-left: 10px;
             overflow-y: auto; /* Ensure content is scrollable */
         }
 
         .main-content,
         .contributors {
+            padding-left:10px;
+            padding-top: 5px;
             flex: 1;
             display: flex;
-            justify-content: left;
             border: 1px solid #ccc;
-            border-radius: 10px;
-            margin-top: 10px;
+            border-radius: 5px;
             position: relative;
             min-height: fit-content;
             flex-direction: column;
-            border: none;
+            width:80%;
         }
 
         .main-content::before {
@@ -96,7 +84,7 @@
         .content-area h2
         {
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             text-decoration: underline;
         }
 
@@ -104,7 +92,7 @@
             width:fit-content;
             margin: 5px;
             border: none;
-            background-color: rgba(111, 140, 228, 0.831);
+            background-color: rgba(244, 144, 12, 1);
             cursor: pointer;
             border-radius: 5px;
             box-shadow: 0 0 5px rgb(26, 24, 24);
@@ -113,8 +101,9 @@
         }
 
         .main-content button:hover {
-            background-color: #e0e0e0;
+            background-color: rgb(204, 121, 12);
         }
+        
 
         .dark-mode{
             background-color: rgb(36, 44, 50);
@@ -124,27 +113,31 @@
         .dark-mode h1 {
             color: whitesmoke; 
         }
-        .dark-mode a {
-            color: lightblue; 
-        }
 
         .dark-mode .sidebar button{
             background-color: #333;
             color: white;
-            box-shadow:0 0 5px rgb(229, 231, 231);
+            box-shadow:0 0 5px rgb(99, 99, 99);
         }
 
         .dark-mode .main-content button {
             background-color: rgba(58, 74, 121, 0.831);
             color: white;
-            box-shadow:0 0 5px rgb(229, 231, 231);
+            box-shadow:0 0 5px rgb(99, 99, 99);
         }
         .dark-mode .sidebar{
-            background-color: #0f0f0f;
+            background-color: rgba(32, 32, 32, 0.87);
         }
-        .dark-mode button {
-            background-color: #333;
+        .dark-mode .container button {
+            background-color: rgb(204, 121, 12);
             color: white;
+        }
+        .dark-mode .main-content button:hover {
+            background-color: rgba(244, 144, 12, 1);
+        }
+
+        .dark-mode .sidebar button:hover {
+            background-color: rgba(244, 144, 12, 1);
         }
 
         .center {
