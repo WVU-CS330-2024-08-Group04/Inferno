@@ -180,6 +180,17 @@ font-size: 16px;
     color: whitesmoke; 
 }
 
+.dark-button:hover {
+    background-color: #ddd;
+}
+.dark-mode .dark-button {
+    background-color: #333;
+    color: white;
+}
+
+.dark-mode .dark-button:hover {
+    background-color: #444444;
+}
 
 .dark-mode .side-buttons button{
     background-color: rgb(204, 121, 12);

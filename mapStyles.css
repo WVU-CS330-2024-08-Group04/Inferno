@@ -12,6 +12,7 @@ body{
     height:100%-90px;
     width:18%;
     position: absolute;
+    align-items:center;
     right: 8px;
     top: 100px;
     display: flex;
@@ -20,25 +21,75 @@ body{
     
 }
 
-.side-buttons button {
+.side-buttons a{
+    width:100%;
+    flex:1;
+}
+
+.side-buttons button ,
+.side-buttons button .dropdown-trigger{
     flex: 1;
-    height: 150px;
-    width: 100%; /* Adjusts for padding, assuming 10px padding on both sides */
+    height:100px;;
+    width: 100%;
     padding: 10px;
     align-items:center;
     margin-bottom: 9px;
     font-size: 16px;
+    font-weight:bold;
     border-radius: 5px;
     cursor: pointer;
     background-color: rgba(244, 144, 12, 1);
     border: none;
     transition: background-color 0.5s, color 0.5s;
 }
+
+.side-buttons .search-container .search-bar{
+    width:70%;
+    justify-items: left;
+} 
+
+.side-buttons .search-button,
+.side-buttons .apply-filters{
+    width:fit-content;
+    height:fit-content;
+    padding:5px;
+}
 .side-buttons button:hover {
     background-color: rgb(204, 121, 12);
 }
 
+.description{
+    clear:both;
+    padding-top: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px; 
+    flex-direction: column;
+}
 
+.descriptionText{
+    margin-top: 20px; 
+    margin-right: 250px;
+    margin-left: 250px;
+    font-size: 16px;
+    color:black; 
+    display: block;
+    text-align:center;
+}
+
+.dropdown-content{
+    display:none;
+    float: left;
+    margin-right: 15px;
+}
+
+.time-container {
+    margin: 20px;
+}
+#selected-time {
+    margin-top: 20px;
+    font-weight: bold;
+}
 
 .dark-mode{
     background-color: rgb(36, 44, 50);
@@ -65,6 +116,27 @@ body{
 .dark-mode .dark-button {
     background-color: #333;
     color: white;
+}
+
+.dark-mode .dark-button:hover {
+    background-color: #444444;
+}
+.dark-button{
+    float:right;
+    margin-right: 10px;
+    margin-top: 37px;
+    cursor: pointer;
+    color: white; 
+    transition: background-color 0.5s, color 0.5s;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 12px;
+    width:fit-content;
+    color: black;
+}
+
+.dark-button:hover {
+    background-color: #ddd;
 }
 
 .center {

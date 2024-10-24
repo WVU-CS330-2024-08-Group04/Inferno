@@ -144,6 +144,15 @@
             text-align: center;
             margin-top: 50px;
         }
+
+        .dark-mode .dark-button {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode .dark-button:hover {
+            background-color: #444444;
+        }
         .dark-button{
             float:right;
             margin-right: 10px;
@@ -157,6 +166,11 @@
             width:fit-content;
             color: black;
         }
+
+        .dark-button:hover {
+            background-color: #ddd;
+        }
+        
         
     .banner{
         width: 100%;

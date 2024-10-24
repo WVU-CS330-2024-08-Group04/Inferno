@@ -40,8 +40,36 @@
             <div class="side-buttons">
                 <a href="welcome.html"><button>Home</button></a>
                 <a href="accountSettings.html"><button>Account</button></a>
-            </div>
+            
+            
+                
+                <button class="dropdown-trigger">Filters</button>
+                <div class="dropdown-content">
+                    <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
+                    <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
+                    <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
+                    <button class="apply-filters">Apply Filters</button>
+                </div>
 
+                
+                    <div id="descriptionText" class="descriptionText"></div>
+                    <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Search a location..." />
+                    <button class="search-button" onclick="performSearch(); description()">Search</button>
+                    </div>
+                
+                <div id="selected-filters"></div>
+
+                <div class="date-container">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate"><br>
+                    
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate">
+                    
+                    <div id="selected-dates"></div>
+                </div>
+            </div>
 
     
         <script>
@@ -53,6 +81,35 @@
             const name = document.getElementById("helloName");
             name.textContent = "Hello, " + getName();
             //end banner script
+
+            function performSearch() {
+                const query = document.querySelector('.search-bar').value;
+                //perform search
+            }
+
+            function description() {
+                const description = document.getElementById("descriptionText");
+                description.textContent = "this is the description blah blah blah";
+            }
+
+            //script for dates
+            document.getElementById('startDate').addEventListener('change', updateDateRange);
+        document.getElementById('endDate').addEventListener('change', updateDateRange);
+
+        function updateDateRange() {
+            var startDate = document.getElementById('startDate').value;
+            var endDate = document.getElementById('endDate').value;
+
+            if (startDate && endDate) {
+                document.getElementById('selected-dates').textContent = 'Selected dates: ' + startDate + ' to ' + endDate;
+            } else if (startDate) {
+                document.getElementById('selected-dates').textContent = 'Start Date: ' + startDate;
+            } else if (endDate) {
+                document.getElementById('selected-dates').textContent = 'End Date: ' + endDate;
+            } else {
+                document.getElementById('selected-dates').textContent = '';
+            }
+        }
 
             var clickCount = 0;
             function darkMode() {
@@ -72,6 +129,43 @@
                 }
                 
             }
+            
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownTrigger = document.querySelector('.dropdown-trigger');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.style.display = 'none';
+
+            dropdownTrigger.addEventListener('click', function() {
+                if (dropdownContent.style.display === 'block') {
+                    dropdownContent.style.display = 'none';
+                } else {
+                    dropdownContent.style.display = 'block';
+                    dropdownContent.style.textAlign = "left";
+                }
+            });
+
+            // Close dropdown if clicked outside
+            document.addEventListener('click', function(event) {
+                if (!dropdownTrigger.contains(event.target) && !dropdownContent.contains(event.target)) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        
+            // Get selected filters
+            function getFilters() {
+                const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+                const selectedFilters = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+                console.log(selectedFilters);
+            }
+
+            // Apply filters button
+            const applyButton = dropdownContent.querySelector('button');
+            applyButton.addEventListener('click', function() {
+                getFilters();
+                dropdownContent.style.display = 'none'; // Close dropdown after applying filters
+                //implement filter on map logic
+            });
+
             var map = L.map('map').setView([39.8283, -98.5795], 4);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                  maxZoom: 19,
