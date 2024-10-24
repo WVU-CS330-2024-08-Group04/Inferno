@@ -9,11 +9,22 @@
 </head>
 <body>
 
-    <div class="banner">
-        <img src="Dark Mode Inferno Full Logo cropped.png" alt="logo" /> 
-        <div class="picture-placeholder"></div>
-        <div class="username">Hi, username</div>
+       <!-- Start of banner -->
+       <div class="banner">
+        <div class="banner-back">
+            <img src="Inferno wildfire full logo cropped.png" alt="logo" /> 
+        </div>
+        <input type="image" src="Profile Icon.png" onclick="location.href='.. users page..'" class="user-icon"/>
+        <a href="about.html" class="about-link">About</a>
+        <button id="clickMe" onclick="darkMode()" class="dark-button">
+            <span id="clickMeText">Dark Mode</span>
+            <span class="button_icon">
+                <ion-icon name="moon"></ion-icon>
+            </span>
+        </button>
+        <div class="helloName" id="helloName"></div>
     </div>
+    <!--End of banner-->
 
     <div class="content">
         <div class="side-buttons">
@@ -76,10 +87,32 @@
         </div>
     </div>
     <script>
-        function darkmode(){
-            var element = document.body;
-            element.classList.toggle("dark-mode");
-        }
+        //banner script
+            function getName(){
+                return "Shannon";
+            }
+            const name = document.getElementById("helloName");
+            name.textContent = "Hello, " + getName();
+        //end banner script
+
+        var clickCount = 0;
+            function darkMode() {
+                var element = document.body;
+                element.classList.toggle("dark-mode");
+                var clickMeText = document.getElementById("clickMeText");
+                var buttonIcon = document.querySelector(".button_icon ion-icon");
+
+                
+
+                if (element.classList.contains("dark-mode")) {
+                    clickMeText.textContent = "Light Mode";
+                    buttonIcon.setAttribute("name", "sunny");
+                } else {
+                    clickMeText.textContent = "Dark Mode";
+                    buttonIcon.setAttribute("name", "moon");
+                }
+                
+            }
     </script>
     <script src="accountSettings.js"></script>
 </body>
