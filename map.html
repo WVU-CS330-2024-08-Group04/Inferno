@@ -8,117 +8,189 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="mapStyles.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <!-- Esri Leaflet JavaScript -->
-    <script src="https://unpkg.com/esri-leaflet@3.0.5/dist/esri-leaflet.js"></script>
+        <!-- Leaflet JavaScript -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <!-- Esri Leaflet JavaScript -->
+        <script src="https://unpkg.com/esri-leaflet@3.0.5/dist/esri-leaflet.js"></script>
     </head>
     <body>
-       <!-- Start of banner -->
-    <div class="banner">
-        <div class="banner-back">
-            <a href="welcome.html">
-            <img src="Inferno wildfire full logo cropped.png" alt="logo" /> 
-        </a>
+        <!-- Start of banner -->
+        <div class="banner">
+            <div class="banner-back">
+                <a href="welcome.html">
+                    <img src="Inferno wildfire full logo cropped.png" alt="logo" /> 
+                </a>
+            </div>
+            <input type="image" src="Profile Icon.png" onclick="location.href='accountSettings.html'" class="user-icon"/>
+            <a href="about.html" class="about-link">About</a>
+            <button id="clickMe" onclick="darkMode()" class="dark-button">
+                <span id="clickMeText">Dark Mode</span>
+                <span class="button_icon">
+                    <ion-icon name="moon"></ion-icon>
+                </span>
+            </button>
+            <div class="helloName" id="helloName"></div>
         </div>
-        <input type="image" src="Profile Icon.png" onclick="location.href='accountSettings.html'" class="user-icon"/>
-        <a href="about.html" class="about-link">About</a>
-        <button id="clickMe" onclick="darkMode()" class="dark-button">
-            <span id="clickMeText">Dark Mode</span>
-            <span class="button_icon">
-                <ion-icon name="moon"></ion-icon>
-            </span>
-        </button>
-        <div class="helloName" id="helloName"></div>
-    </div>
-    <!--End of banner-->
+        <!-- End of banner -->
    
-        
+        <div class="search-container">
+            <input type="text" class="search-bar" id="locationInput" placeholder="Search a location..." />
+            <button class="search-button" onclick="searchLocation()">Search</button>
+            <button id="saveLocationBtn" style="display: none;" onclick="saveLocation()">Save Location</button>
+
+            <!-- Dropdown for Saved Locations -->
+            <label for="savedLocations">Saved Locations:</label>
+            <select id="savedLocations" onchange="jumpToSavedLocation()">
+                <option value="">--Select a saved location--</option>
+            </select>
+        </div>
+        <!-- Map section -->
         <div id="map" style="width:80%; height: 600px;"></div>
 
+        <!-- Search, Save, and Dropdown for Saved Locations -->
         
-            <div class="side-buttons">
-                <a href="welcome.html"><button>Home</button></a>
-                <a href="accountSettings.html"><button>Account</button></a>
-            
-            
-                
-                <button class="dropdown-trigger">Filters</button>
-                <div class="dropdown-content">
-                    <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
-                    <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
-                    <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
-                    <button class="apply-filters">Apply Filters</button>
-                </div>
 
-                
-                    <div id="descriptionText" class="descriptionText"></div>
-                    <div class="search-container">
-                    <input type="text" class="search-bar" placeholder="Search a location..." />
-                    <button class="search-button" onclick="performSearch(); description()">Search</button>
-                    </div>
-                
-                <div id="selected-filters"></div>
-
-                <div class="date-container">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" id="startDate"><br>
-                    
-                    <label for="endDate">End Date:</label>
-                    <input type="date" id="endDate">
-                    
-                    <div id="selected-dates"></div>
-                </div>
+        <!-- Side buttons -->
+        <div class="side-buttons">
+            <a href="welcome.html"><button>Home</button></a>
+            <a href="accountSettings.html"><button>Account</button></a>
+            <button class="dropdown-trigger">Filters</button>
+            <div class="dropdown-content">
+                <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
+                <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
+                <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
+                <button class="apply-filters">Apply Filters</button>
             </div>
+            <div id="selected-filters"></div>
 
-    
+            <!-- Date range selection -->
+            <div class="date-container">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate"><br>
+                
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate">
+                
+                <div id="selected-dates"></div>
+            </div>
+        </div>
+
         <script>
+            // Initialize map
+            var map = L.map('map').setView([39.8283, -98.5795], 4);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
 
-            //banner script
-            function getName(){
-                return "Shannon";
+            var currentMarker; // To store the current marker
+            var savedLocations = []; // Array to store saved locations
+            var lastSearchedLocation; // To store the last searched location temporarily
+
+            // Function to search for a location
+            function searchLocation() {
+                var location = document.getElementById('locationInput').value;
+
+                // Use Nominatim API to geocode the location
+                var geocodeURL = 'https://nominatim.openstreetmap.org/search?format=json&q=' + location;
+
+                fetch(geocodeURL)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            var lat = data[0].lat;
+                            var lon = data[0].lon;
+                            var displayName = data[0].display_name;
+
+                            // Zoom the map to the searched location
+                            map.setView([lat, lon], 13);
+
+                            // Clear the previous marker if it exists
+                            if (currentMarker) {
+                                map.removeLayer(currentMarker);
+                            }
+
+                            // Add a new marker at the searched location
+                            currentMarker = L.marker([lat, lon]).addTo(map)
+                                .bindPopup(displayName)
+                                .openPopup();
+
+                            // Store the searched location temporarily
+                            lastSearchedLocation = {
+                                name: displayName,
+                                lat: lat,
+                                lon: lon
+                            };
+
+                            // Show the "Save Location" button
+                            document.getElementById('saveLocationBtn').style.display = 'inline';
+                        } else {
+                            alert("Location not found. Please try again.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching location data:", error);
+                    });
             }
-            const name = document.getElementById("helloName");
-            name.textContent = "Hello, " + getName();
-            //end banner script
 
-            function performSearch() {
-                const query = document.querySelector('.search-bar').value;
-                //perform search
+            // Function to save the searched location to the dropdown
+            function saveLocation() {
+                if (lastSearchedLocation) {
+                    var name = lastSearchedLocation.name;
+                    var lat = lastSearchedLocation.lat;
+                    var lon = lastSearchedLocation.lon;
+
+                    // Check if the location is already saved (to avoid duplicates)
+                    if (!savedLocations.some(loc => loc.name === name)) {
+                        // Save location to array
+                        savedLocations.push({ name: name, lat: lat, lon: lon });
+
+                        // Add the location to the dropdown
+                        var dropdown = document.getElementById('savedLocations');
+                        var option = document.createElement('option');
+                        option.text = name;
+                        option.value = JSON.stringify({ lat: lat, lon: lon }); // Store lat and lon in value
+                        dropdown.add(option);
+
+                        // Hide the "Save Location" button after saving
+                        document.getElementById('saveLocationBtn').style.display = 'none';
+                    } else {
+                        alert("Location is already saved.");
+                    }
+                }
             }
 
-            function description() {
-                const description = document.getElementById("descriptionText");
-                description.textContent = "this is the description blah blah blah";
+            // Function to jump to a previously saved location from the dropdown
+            function jumpToSavedLocation() {
+                var dropdown = document.getElementById('savedLocations');
+                var selectedValue = dropdown.value;
+
+                if (selectedValue) {
+                    var location = JSON.parse(selectedValue);
+                    var lat = location.lat;
+                    var lon = location.lon;
+
+                    // Zoom the map to the selected location
+                    map.setView([lat, lon], 13);
+
+                    // Clear the previous marker if it exists
+                    if (currentMarker) {
+                        map.removeLayer(currentMarker);
+                    }
+
+                    // Add a marker at the selected location
+                    currentMarker = L.marker([lat, lon]).addTo(map)
+                        .bindPopup(dropdown.options[dropdown.selectedIndex].text)
+                        .openPopup();
+                }
             }
 
-            //script for dates
-            document.getElementById('startDate').addEventListener('change', updateDateRange);
-        document.getElementById('endDate').addEventListener('change', updateDateRange);
-
-        function updateDateRange() {
-            var startDate = document.getElementById('startDate').value;
-            var endDate = document.getElementById('endDate').value;
-
-            if (startDate && endDate) {
-                document.getElementById('selected-dates').textContent = 'Selected dates: ' + startDate + ' to ' + endDate;
-            } else if (startDate) {
-                document.getElementById('selected-dates').textContent = 'Start Date: ' + startDate;
-            } else if (endDate) {
-                document.getElementById('selected-dates').textContent = 'End Date: ' + endDate;
-            } else {
-                document.getElementById('selected-dates').textContent = '';
-            }
-        }
-
-            var clickCount = 0;
+            // Dark mode toggle
             function darkMode() {
                 var element = document.body;
                 element.classList.toggle("dark-mode");
                 var clickMeText = document.getElementById("clickMeText");
                 var buttonIcon = document.querySelector(".button_icon ion-icon");
-
-                
 
                 if (element.classList.contains("dark-mode")) {
                     clickMeText.textContent = "Light Mode";
@@ -127,54 +199,10 @@
                     clickMeText.textContent = "Dark Mode";
                     buttonIcon.setAttribute("name", "moon");
                 }
-                
             }
-            
-            const dropdown = document.querySelector('.dropdown');
-            const dropdownTrigger = document.querySelector('.dropdown-trigger');
-            const dropdownContent = document.querySelector('.dropdown-content');
-            dropdownContent.style.display = 'none';
-
-            dropdownTrigger.addEventListener('click', function() {
-                if (dropdownContent.style.display === 'block') {
-                    dropdownContent.style.display = 'none';
-                } else {
-                    dropdownContent.style.display = 'block';
-                    dropdownContent.style.textAlign = "left";
-                }
-            });
-
-            // Close dropdown if clicked outside
-            document.addEventListener('click', function(event) {
-                if (!dropdownTrigger.contains(event.target) && !dropdownContent.contains(event.target)) {
-                    dropdownContent.style.display = 'none';
-                }
-            });
-        
-            // Get selected filters
-            function getFilters() {
-                const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
-                const selectedFilters = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-                console.log(selectedFilters);
-            }
-
-            // Apply filters button
-            const applyButton = dropdownContent.querySelector('button');
-            applyButton.addEventListener('click', function() {
-                getFilters();
-                dropdownContent.style.display = 'none'; // Close dropdown after applying filters
-                //implement filter on map logic
-            });
-
-            var map = L.map('map').setView([39.8283, -98.5795], 4);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                 maxZoom: 19,
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
         </script>
     
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
     </body>
 </html>
