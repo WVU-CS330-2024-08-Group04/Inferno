@@ -220,3 +220,19 @@ font-size: 12px;
 width: fit-content;
 font-size: 16px; 
 }
+
+.search-container{
+    float: left;
+    font-size: 16px;
+    height: 10px;
+    z-index: 1000;
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 50px;
+}
+
+.date-container button{
+    height: 40px;
+    margin-top: 10px;
+}
+

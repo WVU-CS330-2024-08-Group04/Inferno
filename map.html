@@ -8,31 +8,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="mapStyles.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <!-- Leaflet JavaScript -->
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <!-- Esri Leaflet JavaScript -->
-        <script src="https://unpkg.com/esri-leaflet@3.0.5/dist/esri-leaflet.js"></script>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Esri Leaflet JavaScript -->
+    <script src="https://unpkg.com/esri-leaflet@3.0.5/dist/esri-leaflet.js"></script>
     </head>
     <body>
-        <!-- Start of banner -->
-        <div class="banner">
-            <div class="banner-back">
-                <a href="welcome.html">
-                    <img src="Inferno wildfire full logo cropped.png" alt="logo" /> 
-                </a>
-            </div>
-            <input type="image" src="Profile Icon.png" onclick="location.href='accountSettings.html'" class="user-icon"/>
-            <a href="about.html" class="about-link">About</a>
-            <button id="clickMe" onclick="darkMode()" class="dark-button">
-                <span id="clickMeText">Dark Mode</span>
-                <span class="button_icon">
-                    <ion-icon name="moon"></ion-icon>
-                </span>
-            </button>
-            <div class="helloName" id="helloName"></div>
+       <!-- Start of banner -->
+    <div class="banner">
+        <div class="banner-back">
+            <a href="welcome.html">
+            <img src="Inferno wildfire full logo cropped.png" alt="logo" /> 
+        </a>
         </div>
+        <input type="image" src="Profile Icon.png" onclick="location.href='accountSettings.html'" class="user-icon"/>
+        <a href="about.html" class="about-link">About</a>
+        <button id="clickMe" onclick="darkMode()" class="dark-button">
+            <span id="clickMeText">Dark Mode</span>
+            <span class="button_icon">
+                <ion-icon name="moon"></ion-icon>
+            </span>
+        </button>
+        <div class="helloName" id="helloName"></div>
+    </div>
         <!-- End of banner -->
-   
+            
         <div class="search-container">
             <input type="text" class="search-bar" id="locationInput" placeholder="Search a location..." />
             <button class="search-button" onclick="searchLocation()">Search</button>
@@ -46,36 +46,74 @@
         </div>
         <!-- Map section -->
         <div id="map" style="width:80%; height: 600px;"></div>
-
         <!-- Search, Save, and Dropdown for Saved Locations -->
 
-
+        
         <!-- Side buttons -->
-        <div class="side-buttons">
-            <a href="welcome.html"><button>Home</button></a>
-            <a href="accountSettings.html"><button>Account</button></a>
-            <button class="dropdown-trigger">Filters</button>
-            <div class="dropdown-content">
-                <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
-                <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
-                <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
-                <button class="apply-filters">Apply Filters</button>
-            </div>
-            <div id="selected-filters"></div>
-
+            <div class="side-buttons">
+                <a href="welcome.html"><button>Home</button></a>
+                <a href="accountSettings.html"><button>Account</button></a>
+               
             <!-- Date range selection -->
-            <div class="date-container">
-                <label for="startDate">Start Date:</label>
-                <input type="date" id="startDate"><br>
-                
-                <label for="endDate">End Date:</label>
-                <input type="date" id="endDate">
-                
-                <div id="selected-dates"></div>
-            </div>
-        </div>
+                <div class="date-container">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate"><br>
+                    
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate">
+                    <button onclick="getDates()">Select Time Range</button>
+                    
+                    <div id="selected-dates"></div>
+                </div>
+                <button class="dropdown-trigger">Filters</button>
+                <div class="dropdown-content">
+                    <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
+                    <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
+                    <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
+                    <button class="apply-filters">Apply Filters</button>
+                </div>
+                <div id="selected-filters"></div>
 
-        <script>
+            </div>
+
+        <script> 
+        //filters logic
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownTrigger = document.querySelector('.dropdown-trigger');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.style.display = 'none';
+
+            dropdownTrigger.addEventListener('click', function() {
+                if (dropdownContent.style.display === 'block') {
+                    dropdownContent.style.display = 'none';
+                } else {
+                    dropdownContent.style.display = 'block';
+                    dropdownContent.style.textAlign = "left";
+                }
+            });
+
+            // Close dropdown if clicked outside
+            document.addEventListener('click', function(event) {
+                if (!dropdownTrigger.contains(event.target) && !dropdownContent.contains(event.target)) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        
+            // Get selected filters
+            function getFilters() {
+                const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+                const selectedFilters = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+                console.log(selectedFilters);
+            }
+
+            // Apply filters button
+            const applyButton = dropdownContent.querySelector('button');
+            applyButton.addEventListener('click', function() {
+                getFilters();
+                dropdownContent.style.display = 'none'; // Close dropdown after applying filters
+                //implement filter on map logic
+            });
+
             // Initialize map
             var map = L.map('map').setView([39.8283, -98.5795], 4);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -182,7 +220,41 @@
                     currentMarker = L.marker([lat, lon]).addTo(map)
                         .bindPopup(dropdown.options[dropdown.selectedIndex].text)
                         .openPopup();
+            }
+        }
+
+            //function for gathering date data
+            function getDates(){
+                const startDate = document.getElementById('startDate').value;
+                const endDate = document.getElementById('endDate').value;
+
+                return {
+                    start: startDate,
+                    end: endDate
+                };
+            }
+            //this sends back an object with the date data, this can be modified into start date and end date function if needed
+
+            //function to return searched data
+            function locationData(){
+                if(lastSearchedLocation != null){
+                    return lastSearchedLocation;
                 }
+                else{
+                    console.log("ERROR in finding searched location");
+                }
+              
+            }
+
+            //function to return selected date
+            function dateData(){
+                if(selectedDate != null){
+                    return selectedTime;
+                }
+                else{
+                    console.log("ERROR in finding selected date");
+                }
+              
             }
 
             // Dark mode toggle
