@@ -36,9 +36,24 @@
         
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
+            if (darkModeEnabled) {
+                document.body.classList.add("dark-mode");
+                setDarkModeUI(true);
+            }
+        });
         function darkMode(){
             var element = document.body;
             element.classList.toggle("dark-mode");
+
+            const darkModeEnabled = element.classList.contains("dark-mode");
+            setDarkModeUI(darkModeEnabled);
+
+            localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
+        }
+
+            function setDarkModeUI(isDarkMode){
 
             var img = document.getElementById("image");
             var clickMeText = document.getElementById("clickMeText");
