@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -9,32 +8,35 @@
     <meta name="description" content="welcome page">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="WelcomeStyles.css">
-    
-
 </head>
 
+
 <body>
-
     <img id="image" src="Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo">
-    <h1 style="text-align: center;"><strong><U>Welcome to Inferno</U></strong></h1>
-    
-    <h2>Please Login or Create an Account</h2>
-    
-
-    <div class="links-container">
-        <div>
-            <h3>Have an Account?</h3>
-            <p><a href="AccLogin.html">Login</a></p>
-        </div>
-        <div>
-            <h3>First Time User?</h3>
-            <p><a href="AccCreate.html">Create an Account</a></p>
+    <div class="content-container">
+    <div class="container">
+        <h1>Welcome to <strong class="orange-text">Inferno</strong></h1>
+        <h2>Please Login or Create an Account</h2>
+   
+        <div class="account-options">
+            <div>
+                <h3>Have an Account?</h3>
+                <p><a href="AccLogin.html" class="button-link">Login</a></p>
+            </div>
+            <div>
+                <h3>First Time User?</h3>
+                <p><a href="AccCreate.html" class="button-link">Create an Account</a></p>
+            </div>
         </div>
     </div>
 
-    <p><a href="map.html" class="guest-link">Continue as Guest</a></p>
-    <p><a href="about.html" class="about-link">About</a></p>
 
+    <div class="video">
+    <video width="320" height="240" autoplay muted loop>
+        <source src="" type="video/mp4">
+      </video>
+    </div>
+    </div>
 
     <button id="clickMe" onclick="darkMode()">
         <span id="clickMeText">Dark Mode</span>
@@ -42,6 +44,15 @@
             <ion-icon name="moon"></ion-icon>
         </span>
     </button>
+
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="map.html" class="guest-link">Continue to Map</a></li>
+            <li><a href="about.html" class="about-link">About</a></li>
+        </ul>
+    </nav>
+
 
     <script>
         var clickCount = 0;
@@ -53,24 +64,21 @@
             var clickMeText = document.getElementById("clickMeText");
             var buttonIcon = document.querySelector(".button_icon ion-icon");
 
-            
-
             if (element.classList.contains("dark-mode")) {
                 img.src = "Dark_Mode_Inferno_Full_Logo_cropped_upscaled.png";
                 clickMeText.textContent = "Light Mode";
                 buttonIcon.setAttribute("name", "sunny");
             } else {
 
+
                 img.src = "Inferno_wildfire_full_logo_cropped_upscaled.png";
                 clickMeText.textContent = "Dark Mode";
                 buttonIcon.setAttribute("name", "moon");
             }
-            
+           
         }
     </script>
-
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
-
 </html>
