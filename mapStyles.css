@@ -6,6 +6,10 @@ body{
     width:100%;
     font-size:14px;
     transition: background-color 0.5s, color 0.5s;
+    overflow-x: hidden; 
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .side-buttons {
@@ -224,15 +228,17 @@ font-size: 16px;
 .search-container{
     float: left;
     font-size: 16px;
-    height: 10px;
+    height: max-content;
     z-index: 1000;
     position: absolute;
     margin-top: 5px;
     margin-left: 50px;
+    color: black;
 }
 
 .date-container button{
     height: 40px;
     margin-top: 10px;
 }
+
 

@@ -34,15 +34,15 @@
         <!-- End of banner -->
             
         <div class="search-container">
-            <input type="text" class="search-bar" id="locationInput" placeholder="Search a location..." />
-            <button class="search-button" onclick="searchLocation()">Search</button>
-            <button id="saveLocationBtn" style="display: none;" onclick="saveLocation()">Save Location</button>
+                <input type="text" class="search-bar" id="locationInput" placeholder="Search a location..." />
+                <button class="search-button" onclick="searchLocation()">Search</button>
+                <button id="saveLocationBtn" style="display: none;" onclick="saveLocation()">Save Location</button>
 
-            <!-- Dropdown for Saved Locations -->
-            <label for="savedLocations">Saved Locations:</label>
-            <select id="savedLocations" onchange="jumpToSavedLocation()">
-                <option value="">--Select a saved location--</option>
-            </select>
+                <!-- Dropdown for Saved Locations -->
+                <label for="savedLocations">Saved Locations:</label>
+                <select id="savedLocations" onchange="jumpToSavedLocation()">
+                    <option value="">--Select a saved location--</option>
+                </select>
         </div>
         <!-- Map section -->
         <div id="map" style="width:80%; height: 600px;"></div>
@@ -170,6 +170,11 @@
                         console.error("Error fetching location data:", error);
                     });
             }
+            document.getElementById('locationInput').addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    searchLocation(); // Call the search function
+                }
+            });
 
             // Function to save the searched location to the dropdown
             function saveLocation() {
