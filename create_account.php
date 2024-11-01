@@ -1,25 +1,20 @@
 <?php
-    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
-        $conn = mysqli_connect('localhost','root','','accounts') or die("Connection Failed:" .mysqli_connect_error());
-        if(isset($_POST['username']) && isset($_POST['password'])){
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+    
+            
+            $username = $_POST["username"];
+            $password = $_POST["password"];
             // $Upper = "/[A-Z]/";
 
-            // if(strlen($password) < 8 && preg_match($Upper, $password)){
-                
-            // }
+            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-            $sql = "INSERT INTO `accounts` (`username`, `password`) VALUES ('$username', '$password')";
+            $mysqli = new mysqli("cs3304.database.windows.net", "cs330admin", "cs330Pass!", "CS_330_4");
+            $sql = "INSERT INTO Accounts VALUES ('$username', '$password')";
 
             $query = mysqli_query($conn, $sql);
-            if($query){
-                echo 'Entry Successful';
-            }
-            else{
-                echo 'Error Occurred';
-            }
+
         }
-    }
-?>    
+    
+
+
 
