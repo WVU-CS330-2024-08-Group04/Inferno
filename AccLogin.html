@@ -40,46 +40,9 @@
             <ion-icon name="moon"></ion-icon>
         </span>
     </button>
-    <script>
-          document.addEventListener("DOMContentLoaded", function () {
-            const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
-            if (darkModeEnabled) {
-                document.body.classList.add("dark-mode");
-                setDarkModeUI(true);
-            }
-        });
-        function darkMode(){
-            var element = document.body;
-            element.classList.toggle("dark-mode");
-
-            const darkModeEnabled = element.classList.contains("dark-mode");
-            setDarkModeUI(darkModeEnabled);
-
-            localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
-        }
-
-            function setDarkModeUI(isDarkMode){
-
-            var img = document.getElementById("image");
-            var clickMeText = document.getElementById("clickMeText");
-            var buttonIcon = document.querySelector(".button_icon ion-icon");
-
-
-            if(element.classList.contains("dark-mode")){
-                img.src = "Dark Mode Inferno Full Logo cropped.png";
-                clickMeText.textContent = "Light Mode";
-                buttonIcon.setAttribute("name", "sunny");
-            }else {
-                img.src = "Inferno wildfire full logo cropped.png";
-                clickMeText.textContent = "Dark Mode";
-                buttonIcon.setAttribute("name", "moon");
-            }
-        }
-       
-      
 
     
-    </script>
+    <script src="dark_mode.js"></script> 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
