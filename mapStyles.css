@@ -241,4 +241,16 @@ font-size: 16px;
     margin-top: 10px;
 }
 
-
+.legend {
+    line-height: 18px;
+    color: black;
+    background-color: white;
+}
+.legend i {
+    width: 25px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    margin-left: 8px;
+    opacity: 0.7;
+}
