@@ -133,13 +133,37 @@
         }
 
         // Toggle the DEM layer on checkbox change
-        document.getElementById('toggleDEM').addEventListener('change', function() {
+        document.getElementById('toggleDEM').addEventListener('change', function () {
             if (this.checked) {
                 demLayer.addTo(map); // Add layer if checkbox is checked
             } else {
                 map.removeLayer(demLayer); // Remove layer if checkbox is unchecked
             }
         });
+        const colors = ["#006633", "#E5FFCC", "#662A00", "#D8D8D8", "#F5F5F5"];
+        const vmin = 0;
+        const vmax = 4000;
+        const legend = L.control({ position: 'bottomleft' });
+
+        legend.onAdd = function (map) {
+            const div = L.DomUtil.create('div', 'info legend');
+            div.innerHTML = `
+        <div style="
+            background: linear-gradient(to right, ${colors.join(", ")});
+            width: 200px;
+            height: 10px;
+            margin-bottom: 5px;
+        "></div>
+        <div style="display: flex; justify-content: space-between;">
+            <span>${vmin}</span>
+            <span>${vmax}</span>
+        </div>
+    `;
+            return div;
+        };
+
+
+        legend.addTo(map);
 
         // Other functionalities: Search location, save location, etc.
         var currentMarker;
@@ -243,4 +267,5 @@
         }
     </script>
 </body>
+
 </html>
