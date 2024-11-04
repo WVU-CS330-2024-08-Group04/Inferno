@@ -48,10 +48,11 @@
     </div>
     <!-- Map section -->
     <div id="map" style="width:80%; height: 600px;"></div>
-    <!-- Search, Save, and Dropdown for Saved Locations -->
-
-
-
+    <!-- Toggle for DEM Layer -->
+    <div>
+        <input type="checkbox" id="toggleDEM" checked>
+        <label for="toggleDEM">Legend Layer</label>
+    </div>
 
     <!-- Side buttons -->
     <div class="side-buttons">
@@ -77,23 +78,17 @@
             <button class="apply-filters">Apply Filters</button>
         </div>
         <div id="selected-filters"></div>
-
     </div>
 
     <script>
-        //filters logic
-        const dropdown = document.querySelector('.dropdown');
+        // Dropdown filter logic
         const dropdownTrigger = document.querySelector('.dropdown-trigger');
         const dropdownContent = document.querySelector('.dropdown-content');
         dropdownContent.style.display = 'none';
 
         dropdownTrigger.addEventListener('click', function () {
-            if (dropdownContent.style.display === 'block') {
-                dropdownContent.style.display = 'none';
-            } else {
-                dropdownContent.style.display = 'block';
-                dropdownContent.style.textAlign = "left";
-            }
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+            dropdownContent.style.textAlign = "left";
         });
 
         // Close dropdown if clicked outside
@@ -115,25 +110,44 @@
         applyButton.addEventListener('click', function () {
             getFilters();
             dropdownContent.style.display = 'none'; // Close dropdown after applying filters
-            //implement filter on map logic
         });
 
-        // Initialize map
+        // Initialize map (only one instance)
         var map = L.map('map').setView([39.8283, -98.5795], 4);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
-        var currentMarker; // To store the current marker
-        var savedLocations = []; // Array to store saved locations
-        var lastSearchedLocation; // To store the last searched location temporarily
+        // Add the DEM layer
+        const demLayer = L.tileLayer.wms("https://elevation.nationalmap.gov/arcgis/services/3DEPElevation/ImageServer/WMSServer?", {
+            layers: "3DEPElevation:Hillshade Elevation Tinted",
+            format: "image/png",
+            transparent: true,
+            opacity: 0.7
+        });
 
-        // Function to search for a location
+        // Add the DEM layer to the map initially if checked
+        if (document.getElementById('toggleDEM').checked) {
+            demLayer.addTo(map);
+        }
+
+        // Toggle the DEM layer on checkbox change
+        document.getElementById('toggleDEM').addEventListener('change', function() {
+            if (this.checked) {
+                demLayer.addTo(map); // Add layer if checkbox is checked
+            } else {
+                map.removeLayer(demLayer); // Remove layer if checkbox is unchecked
+            }
+        });
+
+        // Other functionalities: Search location, save location, etc.
+        var currentMarker;
+        var savedLocations = [];
+        var lastSearchedLocation;
+
         function searchLocation() {
             var location = document.getElementById('locationInput').value;
-
-            // Use Nominatim API to geocode the location
             var geocodeURL = 'https://nominatim.openstreetmap.org/search?format=json&q=' + location;
 
             fetch(geocodeURL)
@@ -144,27 +158,22 @@
                         var lon = data[0].lon;
                         var displayName = data[0].display_name;
 
-                        // Zoom the map to the searched location
                         map.setView([lat, lon], 13);
 
-                        // Clear the previous marker if it exists
                         if (currentMarker) {
                             map.removeLayer(currentMarker);
                         }
 
-                        // Add a new marker at the searched location
                         currentMarker = L.marker([lat, lon]).addTo(map)
                             .bindPopup(displayName)
                             .openPopup();
 
-                        // Store the searched location temporarily
                         lastSearchedLocation = {
                             name: displayName,
                             lat: lat,
                             lon: lon
                         };
 
-                        // Show the "Save Location" button
                         document.getElementById('saveLocationBtn').style.display = 'inline';
                     } else {
                         alert("Location not found. Please try again.");
@@ -174,32 +183,28 @@
                     console.error("Error fetching location data:", error);
                 });
         }
+
         document.getElementById('locationInput').addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
-                searchLocation(); // Call the search function
+                searchLocation();
             }
         });
 
-        // Function to save the searched location to the dropdown
         function saveLocation() {
             if (lastSearchedLocation) {
                 var name = lastSearchedLocation.name;
                 var lat = lastSearchedLocation.lat;
                 var lon = lastSearchedLocation.lon;
 
-                // Check if the location is already saved (to avoid duplicates)
                 if (!savedLocations.some(loc => loc.name === name)) {
-                    // Save location to array
                     savedLocations.push({ name: name, lat: lat, lon: lon });
 
-                    // Add the location to the dropdown
                     var dropdown = document.getElementById('savedLocations');
                     var option = document.createElement('option');
                     option.text = name;
-                    option.value = JSON.stringify({ lat: lat, lon: lon }); // Store lat and lon in value
+                    option.value = JSON.stringify({ lat: lat, lon: lon });
                     dropdown.add(option);
 
-                    // Hide the "Save Location" button after saving
                     document.getElementById('saveLocationBtn').style.display = 'none';
                 } else {
                     alert("Location is already saved.");
@@ -207,7 +212,6 @@
             }
         }
 
-        // Function to jump to a previously saved location from the dropdown
         function jumpToSavedLocation() {
             var dropdown = document.getElementById('savedLocations');
             var selectedValue = dropdown.value;
@@ -217,113 +221,26 @@
                 var lat = location.lat;
                 var lon = location.lon;
 
-                // Zoom the map to the selected location
                 map.setView([lat, lon], 13);
 
-                // Clear the previous marker if it exists
                 if (currentMarker) {
                     map.removeLayer(currentMarker);
                 }
 
-                // Add a marker at the selected location
                 currentMarker = L.marker([lat, lon]).addTo(map)
                     .bindPopup(dropdown.options[dropdown.selectedIndex].text)
                     .openPopup();
             }
         }
 
-        //function for gathering date data
         function getDates() {
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
 
-            return {
-                start: startDate,
-                end: endDate
-            };
+            if (startDate && endDate) {
+                document.getElementById('selected-dates').innerText = `Selected Dates: ${startDate} to ${endDate}`;
+            }
         }
-        //this sends back an object with the date data, this can be modified into start date and end date function if needed
-
-        //function to return searched data
-        function locationData() {
-            if (lastSearchedLocation != null) {
-                return lastSearchedLocation;
-            }
-            else {
-                console.log("ERROR in finding searched location");
-            }
-
-        }
-
-        //function to return selected date
-        function dateData() {
-            if (selectedDate != null) {
-                return selectedTime;
-            }
-            else {
-                console.log("ERROR in finding selected date");
-            }
-
-        }
-
-    </script>
-
-    <script src="dark_mode.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
-
-    <script>
-        const colors = ["#006633", "#E5FFCC", "#662A00", "#D8D8D8", "#F5F5F5"];
-        const vmin = 0;
-        const vmax = 4000;
-        const colorScale = chroma.scale(colors).domain([vmin, vmax]);
-
-        // Add the DEM layer (this example assumes you're using a WMS source)
-        const demLayer = L.tileLayer.wms("https://example.com/wms", {
-            layers: "dem_layer_name", // Replace with your DEM layer name
-            format: "image/png",
-            transparent: true,
-            opacity: 0.7
-        }).addTo(map);
-
-        // Create the color bar legend
-        const legend = L.control({ position: 'bottomleft' });
-
-        legend.onAdd = function (map) {
-            const div = L.DomUtil.create('div', 'info legend');
-            div.innerHTML = `
-        <div style="
-            background: linear-gradient(to right, ${colors.join(", ")});
-            width: 200px;
-            height: 10px;
-            margin-bottom: 5px;
-        "></div>
-        <div style="display: flex; justify-content: space-between;">
-            <span>${vmin}</span>
-            <span>${vmax}</span>
-        </div>
-    `;
-            const demLayer = L.tileLayer.wms("https://elevation.nationalmap.gov/arcgis/services/3DEPElevation/ImageServer/WMSServer?", {
-                layers: "3DEPElevation:Hillshade Elevation Tinted",
-                format: "image/png",
-                transparent: true,
-                opacity: 0.7
-            }).addTo(map);
-
-            return div;
-        };
-
-        legend.addTo(map);
-        const nlcdLayer = L.tileLayer.wms("https://example.com/wms", {
-            layers: "nlcd_layer_name", // Replace with the NLCD layer name
-            format: "image/png",
-            transparent: true,
-            opacity: 0.5
-        }).addTo(map);
-
-
     </script>
 </body>
-
 </html>
