@@ -48,6 +48,8 @@
         <div id="map" style="width:80%; height: 600px;"></div>
         <!-- Search, Save, and Dropdown for Saved Locations -->
 
+
+
         
         <!-- Side buttons -->
             <div class="side-buttons">
@@ -267,5 +269,58 @@
         <script src="dark_mode.js"></script> 
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
+
+        <script>
+            const colors = ["#006633", "#E5FFCC", "#662A00", "#D8D8D8", "#F5F5F5"];
+const vmin = 0;
+const vmax = 4000;
+const colorScale = chroma.scale(colors).domain([vmin, vmax]);
+
+// Add the DEM layer (this example assumes you're using a WMS source)
+const demLayer = L.tileLayer.wms("https://example.com/wms", {
+    layers: "dem_layer_name", // Replace with your DEM layer name
+    format: "image/png",
+    transparent: true,
+    opacity: 0.7
+}).addTo(map);
+
+// Create the color bar legend
+const legend = L.control({ position: 'bottomleft' });
+
+legend.onAdd = function (map) {
+    const div = L.DomUtil.create('div', 'info legend');
+    div.innerHTML = `
+        <div style="
+            background: linear-gradient(to right, ${colors.join(", ")});
+            width: 200px;
+            height: 10px;
+            margin-bottom: 5px;
+        "></div>
+        <div style="display: flex; justify-content: space-between;">
+            <span>${vmin}</span>
+            <span>${vmax}</span>
+        </div>
+    `;
+    const demLayer = L.tileLayer.wms("https://elevation.nationalmap.gov/arcgis/services/3DEPElevation/ImageServer/WMSServer?", {
+    layers: "3DEPElevation:Hillshade Elevation Tinted",
+    format: "image/png",
+    transparent: true,
+    opacity: 0.7
+}).addTo(map);
+
+    return div;
+};
+
+legend.addTo(map);
+const nlcdLayer = L.tileLayer.wms("https://example.com/wms", {
+    layers: "nlcd_layer_name", // Replace with the NLCD layer name
+    format: "image/png",
+    transparent: true,
+    opacity: 0.5
+}).addTo(map);
+      
+
+        </script>
     </body>
 </html>
