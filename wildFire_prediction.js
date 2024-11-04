@@ -8,18 +8,30 @@ function predictRisk() {
     const activeFires = document.getElementById('activeFires').checked;
     let count = 0;
     
-    if (temperature > highRisk.temperature) count += 2;
-    else if (temperature > medianRisk.temperature) count++;
-
-    if (relativeHumidity > highRisk.relativeHumidity) count += 2;
-    else if (relativeHumidity > medianRisk.relativeHumidity) count++;
-
-    if (windSpeed > highRisk.windSpeed) count += 2;
-    else if (windSpeed > medianRisk.windSpeed) count++;
-
-    if (soilMoisture > highRisk.soilMoisture) count += 2;
-    else if (soilMoisture > medianRisk.soilMoisture) count++;
-
+    if (temperature > highRisk.temperature) {
+        count += 2;
+    } else if (temperature > medianRisk.temperature) {
+        count++;
+    }
+        
+    if (relativeHumidity > highRisk.relativeHumidity) {
+        count += 2;
+    } else if (relativeHumidity > medianRisk.relativeHumidity) {
+        count++;
+    }
+        
+    if (windSpeed > highRisk.windSpeed) {
+        count += 2;
+    } else if (windSpeed > medianRisk.windSpeed) {
+        count++;
+    }
+    
+    if (soilMoisture > highRisk.soilMoisture) {
+        count += 2;
+    } else if (soilMoisture > medianRisk.soilMoisture) {
+        count++;
+    }
+        
     const outputDiv = document.getElementById('predictionOutput');
     outputDiv.className = 'risk-level';
 
