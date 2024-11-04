@@ -9,6 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="mapStyles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            color: black;
+            background-color: white;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .dark-mode {
+            background-color: black;
+            color: white;
+            transition: background-color 0.5s, color 0.5s;
+        }
+    </style>
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <!-- Esri Leaflet JavaScript -->
@@ -111,6 +123,39 @@
             getFilters();
             dropdownContent.style.display = 'none'; // Close dropdown after applying filters
         });
+        document.addEventListener("DOMContentLoaded", function () {
+            const darkModeEnabled = localStorage.getItem("darkMode") === "enabled";
+            if (darkModeEnabled) {
+                document.body.classList.add("dark-mode");
+                setDarkModeUI(true);
+            }
+        });
+
+        function darkMode() {
+            var element = document.body;
+            element.classList.toggle("dark-mode");
+
+            const darkModeEnabled = element.classList.contains("dark-mode");
+            setDarkModeUI(darkModeEnabled);
+
+            localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
+        }
+
+        function setDarkModeUI(isDarkMode) {
+            var img = document.getElementById("image");
+            var clickMeText = document.getElementById("clickMeText");
+            var buttonIcon = document.querySelector(".button_icon ion-icon");
+
+            if (isDarkMode) {
+                img.src = "Dark Mode Inferno Full Logo cropped.png";
+                clickMeText.textContent = "Light Mode";
+                buttonIcon.setAttribute("name", "sunny");
+            } else {
+                img.src = "Inferno wildfire full logo cropped.png";
+                clickMeText.textContent = "Dark Mode";
+                buttonIcon.setAttribute("name", "moon");
+            }
+        }
 
         // Initialize map (only one instance)
         var map = L.map('map').setView([39.8283, -98.5795], 4);
@@ -213,6 +258,8 @@
                 searchLocation();
             }
         });
+        
+       
 
         function saveLocation() {
             if (lastSearchedLocation) {
@@ -265,6 +312,8 @@
                 document.getElementById('selected-dates').innerText = `Selected Dates: ${startDate} to ${endDate}`;
             }
         }
+        
+
     </script>
 </body>
 
