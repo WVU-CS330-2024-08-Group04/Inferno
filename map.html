@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Map Page</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="mapStyles.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Map Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="mapStyles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <!-- Esri Leaflet JavaScript -->
     <script src="https://unpkg.com/esri-leaflet@3.0.5/dist/esri-leaflet.js"></script>
-    </head>
-    <body>
-       <!-- Start of banner -->
+</head>
+
+<body>
+    <!-- Start of banner -->
     <div class="banner">
         <div class="banner-back">
             <a href="welcome.html">
-            <img src="Inferno wildfire full logo cropped.png" alt="logo" /> 
-        </a>
+                <img src="Inferno wildfire full logo cropped.png" alt="logo" />
+            </a>
         </div>
-        <input type="image" src="Profile Icon.png" onclick="location.href='accountSettings.html'" class="user-icon"/>
+        <input type="image" src="Profile Icon.png" onclick="location.href='accountSettings.html'" class="user-icon" />
         <a href="about.html" class="about-link">About</a>
         <button id="clickMe" onclick="darkMode()" class="dark-button">
             <span id="clickMeText">Dark Mode</span>
@@ -31,266 +33,266 @@
         </button>
         <div class="helloName" id="helloName"></div>
     </div>
-        <!-- End of banner -->
-            
-        <div class="search-container">
-                <input type="text" class="search-bar" id="locationInput" placeholder="Search a location..." />
-                <button class="search-button" onclick="searchLocation()">Search</button>
-                <button id="saveLocationBtn" style="display: none;" onclick="saveLocation()">Save Location</button>
+    <!-- End of banner -->
 
-                <!-- Dropdown for Saved Locations -->
-                <label for="savedLocations">Saved Locations:</label>
-                <select id="savedLocations" onchange="jumpToSavedLocation()">
-                    <option value="">--Select a saved location--</option>
-                </select>
+    <div class="search-container">
+        <input type="text" class="search-bar" id="locationInput" placeholder="Search a location..." />
+        <button class="search-button" onclick="searchLocation()">Search</button>
+        <button id="saveLocationBtn" style="display: none;" onclick="saveLocation()">Save Location</button>
+
+        <!-- Dropdown for Saved Locations -->
+        <label for="savedLocations">Saved Locations:</label>
+        <select id="savedLocations" onchange="jumpToSavedLocation()">
+            <option value="">--Select a saved location--</option>
+        </select>
+    </div>
+    <!-- Map section -->
+    <div id="map" style="width:80%; height: 600px;"></div>
+    <!-- Search, Save, and Dropdown for Saved Locations -->
+
+
+
+
+    <!-- Side buttons -->
+    <div class="side-buttons">
+        <a href="welcome.html"><button>Home</button></a>
+        <a href="accountSettings.html"><button>Account</button></a>
+
+        <!-- Date range selection -->
+        <div class="date-container">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate"><br>
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate">
+            <button onclick="getDates()">Select Time Range</button>
+
+            <div id="selected-dates"></div>
         </div>
-        <!-- Map section -->
-        <div id="map" style="width:80%; height: 600px;"></div>
-        <!-- Search, Save, and Dropdown for Saved Locations -->
+        <button class="dropdown-trigger">Filters</button>
+        <div class="dropdown-content">
+            <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
+            <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
+            <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
+            <button class="apply-filters">Apply Filters</button>
+        </div>
+        <div id="selected-filters"></div>
 
+    </div>
 
-
-        
-        <!-- Side buttons -->
-            <div class="side-buttons">
-                <a href="welcome.html"><button>Home</button></a>
-                <a href="accountSettings.html"><button>Account</button></a>
-               
-            <!-- Date range selection -->
-                <div class="date-container">
-                    <label for="startDate">Start Date:</label>
-                    <input type="date" id="startDate"><br>
-                    
-                    <label for="endDate">End Date:</label>
-                    <input type="date" id="endDate">
-                    <button onclick="getDates()">Select Time Range</button>
-                    
-                    <div id="selected-dates"></div>
-                </div>
-                <button class="dropdown-trigger">Filters</button>
-                <div class="dropdown-content">
-                    <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
-                    <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
-                    <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
-                    <button class="apply-filters">Apply Filters</button>
-                </div>
-                <div id="selected-filters"></div>
-
-            </div>
-
-        <script> 
+    <script>
         //filters logic
-            const dropdown = document.querySelector('.dropdown');
-            const dropdownTrigger = document.querySelector('.dropdown-trigger');
-            const dropdownContent = document.querySelector('.dropdown-content');
-            dropdownContent.style.display = 'none';
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownTrigger = document.querySelector('.dropdown-trigger');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        dropdownContent.style.display = 'none';
 
-            dropdownTrigger.addEventListener('click', function() {
-                if (dropdownContent.style.display === 'block') {
-                    dropdownContent.style.display = 'none';
-                } else {
-                    dropdownContent.style.display = 'block';
-                    dropdownContent.style.textAlign = "left";
-                }
-            });
-
-            // Close dropdown if clicked outside
-            document.addEventListener('click', function(event) {
-                if (!dropdownTrigger.contains(event.target) && !dropdownContent.contains(event.target)) {
-                    dropdownContent.style.display = 'none';
-                }
-            });
-        
-            // Get selected filters
-            function getFilters() {
-                const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
-                const selectedFilters = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-                console.log(selectedFilters);
+        dropdownTrigger.addEventListener('click', function () {
+            if (dropdownContent.style.display === 'block') {
+                dropdownContent.style.display = 'none';
+            } else {
+                dropdownContent.style.display = 'block';
+                dropdownContent.style.textAlign = "left";
             }
+        });
 
-            // Apply filters button
-            const applyButton = dropdownContent.querySelector('button');
-            applyButton.addEventListener('click', function() {
-                getFilters();
-                dropdownContent.style.display = 'none'; // Close dropdown after applying filters
-                //implement filter on map logic
-            });
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function (event) {
+            if (!dropdownTrigger.contains(event.target) && !dropdownContent.contains(event.target)) {
+                dropdownContent.style.display = 'none';
+            }
+        });
 
-            // Initialize map
-            var map = L.map('map').setView([39.8283, -98.5795], 4);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
+        // Get selected filters
+        function getFilters() {
+            const checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+            const selectedFilters = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+            console.log(selectedFilters);
+        }
 
-            var currentMarker; // To store the current marker
-            var savedLocations = []; // Array to store saved locations
-            var lastSearchedLocation; // To store the last searched location temporarily
+        // Apply filters button
+        const applyButton = dropdownContent.querySelector('button');
+        applyButton.addEventListener('click', function () {
+            getFilters();
+            dropdownContent.style.display = 'none'; // Close dropdown after applying filters
+            //implement filter on map logic
+        });
 
-            // Function to search for a location
-            function searchLocation() {
-                var location = document.getElementById('locationInput').value;
+        // Initialize map
+        var map = L.map('map').setView([39.8283, -98.5795], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
 
-                // Use Nominatim API to geocode the location
-                var geocodeURL = 'https://nominatim.openstreetmap.org/search?format=json&q=' + location;
+        var currentMarker; // To store the current marker
+        var savedLocations = []; // Array to store saved locations
+        var lastSearchedLocation; // To store the last searched location temporarily
 
-                fetch(geocodeURL)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length > 0) {
-                            var lat = data[0].lat;
-                            var lon = data[0].lon;
-                            var displayName = data[0].display_name;
+        // Function to search for a location
+        function searchLocation() {
+            var location = document.getElementById('locationInput').value;
 
-                            // Zoom the map to the searched location
-                            map.setView([lat, lon], 13);
+            // Use Nominatim API to geocode the location
+            var geocodeURL = 'https://nominatim.openstreetmap.org/search?format=json&q=' + location;
 
-                            // Clear the previous marker if it exists
-                            if (currentMarker) {
-                                map.removeLayer(currentMarker);
-                            }
+            fetch(geocodeURL)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        var lat = data[0].lat;
+                        var lon = data[0].lon;
+                        var displayName = data[0].display_name;
 
-                            // Add a new marker at the searched location
-                            currentMarker = L.marker([lat, lon]).addTo(map)
-                                .bindPopup(displayName)
-                                .openPopup();
+                        // Zoom the map to the searched location
+                        map.setView([lat, lon], 13);
 
-                            // Store the searched location temporarily
-                            lastSearchedLocation = {
-                                name: displayName,
-                                lat: lat,
-                                lon: lon
-                            };
-
-                            // Show the "Save Location" button
-                            document.getElementById('saveLocationBtn').style.display = 'inline';
-                        } else {
-                            alert("Location not found. Please try again.");
+                        // Clear the previous marker if it exists
+                        if (currentMarker) {
+                            map.removeLayer(currentMarker);
                         }
-                    })
-                    .catch(error => {
-                        console.error("Error fetching location data:", error);
-                    });
-            }
-            document.getElementById('locationInput').addEventListener('keydown', function(event) {
-                if (event.key === 'Enter') {
-                    searchLocation(); // Call the search function
-                }
-            });
 
-            // Function to save the searched location to the dropdown
-            function saveLocation() {
-                if (lastSearchedLocation) {
-                    var name = lastSearchedLocation.name;
-                    var lat = lastSearchedLocation.lat;
-                    var lon = lastSearchedLocation.lon;
+                        // Add a new marker at the searched location
+                        currentMarker = L.marker([lat, lon]).addTo(map)
+                            .bindPopup(displayName)
+                            .openPopup();
 
-                    // Check if the location is already saved (to avoid duplicates)
-                    if (!savedLocations.some(loc => loc.name === name)) {
-                        // Save location to array
-                        savedLocations.push({ name: name, lat: lat, lon: lon });
+                        // Store the searched location temporarily
+                        lastSearchedLocation = {
+                            name: displayName,
+                            lat: lat,
+                            lon: lon
+                        };
 
-                        // Add the location to the dropdown
-                        var dropdown = document.getElementById('savedLocations');
-                        var option = document.createElement('option');
-                        option.text = name;
-                        option.value = JSON.stringify({ lat: lat, lon: lon }); // Store lat and lon in value
-                        dropdown.add(option);
-
-                        // Hide the "Save Location" button after saving
-                        document.getElementById('saveLocationBtn').style.display = 'none';
+                        // Show the "Save Location" button
+                        document.getElementById('saveLocationBtn').style.display = 'inline';
                     } else {
-                        alert("Location is already saved.");
+                        alert("Location not found. Please try again.");
                     }
-                }
+                })
+                .catch(error => {
+                    console.error("Error fetching location data:", error);
+                });
+        }
+        document.getElementById('locationInput').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                searchLocation(); // Call the search function
             }
+        });
 
-            // Function to jump to a previously saved location from the dropdown
-            function jumpToSavedLocation() {
-                var dropdown = document.getElementById('savedLocations');
-                var selectedValue = dropdown.value;
+        // Function to save the searched location to the dropdown
+        function saveLocation() {
+            if (lastSearchedLocation) {
+                var name = lastSearchedLocation.name;
+                var lat = lastSearchedLocation.lat;
+                var lon = lastSearchedLocation.lon;
 
-                if (selectedValue) {
-                    var location = JSON.parse(selectedValue);
-                    var lat = location.lat;
-                    var lon = location.lon;
+                // Check if the location is already saved (to avoid duplicates)
+                if (!savedLocations.some(loc => loc.name === name)) {
+                    // Save location to array
+                    savedLocations.push({ name: name, lat: lat, lon: lon });
 
-                    // Zoom the map to the selected location
-                    map.setView([lat, lon], 13);
+                    // Add the location to the dropdown
+                    var dropdown = document.getElementById('savedLocations');
+                    var option = document.createElement('option');
+                    option.text = name;
+                    option.value = JSON.stringify({ lat: lat, lon: lon }); // Store lat and lon in value
+                    dropdown.add(option);
 
-                    // Clear the previous marker if it exists
-                    if (currentMarker) {
-                        map.removeLayer(currentMarker);
-                    }
-
-                    // Add a marker at the selected location
-                    currentMarker = L.marker([lat, lon]).addTo(map)
-                        .bindPopup(dropdown.options[dropdown.selectedIndex].text)
-                        .openPopup();
+                    // Hide the "Save Location" button after saving
+                    document.getElementById('saveLocationBtn').style.display = 'none';
+                } else {
+                    alert("Location is already saved.");
+                }
             }
         }
 
-            //function for gathering date data
-            function getDates(){
-                const startDate = document.getElementById('startDate').value;
-                const endDate = document.getElementById('endDate').value;
+        // Function to jump to a previously saved location from the dropdown
+        function jumpToSavedLocation() {
+            var dropdown = document.getElementById('savedLocations');
+            var selectedValue = dropdown.value;
 
-                return {
-                    start: startDate,
-                    end: endDate
-                };
+            if (selectedValue) {
+                var location = JSON.parse(selectedValue);
+                var lat = location.lat;
+                var lon = location.lon;
+
+                // Zoom the map to the selected location
+                map.setView([lat, lon], 13);
+
+                // Clear the previous marker if it exists
+                if (currentMarker) {
+                    map.removeLayer(currentMarker);
+                }
+
+                // Add a marker at the selected location
+                currentMarker = L.marker([lat, lon]).addTo(map)
+                    .bindPopup(dropdown.options[dropdown.selectedIndex].text)
+                    .openPopup();
             }
-            //this sends back an object with the date data, this can be modified into start date and end date function if needed
+        }
 
-            //function to return searched data
-            function locationData(){
-                if(lastSearchedLocation != null){
-                    return lastSearchedLocation;
-                }
-                else{
-                    console.log("ERROR in finding searched location");
-                }
-              
+        //function for gathering date data
+        function getDates() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            return {
+                start: startDate,
+                end: endDate
+            };
+        }
+        //this sends back an object with the date data, this can be modified into start date and end date function if needed
+
+        //function to return searched data
+        function locationData() {
+            if (lastSearchedLocation != null) {
+                return lastSearchedLocation;
+            }
+            else {
+                console.log("ERROR in finding searched location");
             }
 
-            //function to return selected date
-            function dateData(){
-                if(selectedDate != null){
-                    return selectedTime;
-                }
-                else{
-                    console.log("ERROR in finding selected date");
-                }
-              
+        }
+
+        //function to return selected date
+        function dateData() {
+            if (selectedDate != null) {
+                return selectedTime;
+            }
+            else {
+                console.log("ERROR in finding selected date");
             }
 
-        </script>
+        }
 
-        <script src="dark_mode.js"></script> 
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
+    </script>
 
-        <script>
-            const colors = ["#006633", "#E5FFCC", "#662A00", "#D8D8D8", "#F5F5F5"];
-const vmin = 0;
-const vmax = 4000;
-const colorScale = chroma.scale(colors).domain([vmin, vmax]);
+    <script src="dark_mode.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
 
-// Add the DEM layer (this example assumes you're using a WMS source)
-const demLayer = L.tileLayer.wms("https://example.com/wms", {
-    layers: "dem_layer_name", // Replace with your DEM layer name
-    format: "image/png",
-    transparent: true,
-    opacity: 0.7
-}).addTo(map);
+    <script>
+        const colors = ["#006633", "#E5FFCC", "#662A00", "#D8D8D8", "#F5F5F5"];
+        const vmin = 0;
+        const vmax = 4000;
+        const colorScale = chroma.scale(colors).domain([vmin, vmax]);
 
-// Create the color bar legend
-const legend = L.control({ position: 'bottomleft' });
+        // Add the DEM layer (this example assumes you're using a WMS source)
+        const demLayer = L.tileLayer.wms("https://example.com/wms", {
+            layers: "dem_layer_name", // Replace with your DEM layer name
+            format: "image/png",
+            transparent: true,
+            opacity: 0.7
+        }).addTo(map);
 
-legend.onAdd = function (map) {
-    const div = L.DomUtil.create('div', 'info legend');
-    div.innerHTML = `
+        // Create the color bar legend
+        const legend = L.control({ position: 'bottomleft' });
+
+        legend.onAdd = function (map) {
+            const div = L.DomUtil.create('div', 'info legend');
+            div.innerHTML = `
         <div style="
             background: linear-gradient(to right, ${colors.join(", ")});
             width: 200px;
@@ -302,25 +304,26 @@ legend.onAdd = function (map) {
             <span>${vmax}</span>
         </div>
     `;
-    const demLayer = L.tileLayer.wms("https://elevation.nationalmap.gov/arcgis/services/3DEPElevation/ImageServer/WMSServer?", {
-    layers: "3DEPElevation:Hillshade Elevation Tinted",
-    format: "image/png",
-    transparent: true,
-    opacity: 0.7
-}).addTo(map);
+            const demLayer = L.tileLayer.wms("https://elevation.nationalmap.gov/arcgis/services/3DEPElevation/ImageServer/WMSServer?", {
+                layers: "3DEPElevation:Hillshade Elevation Tinted",
+                format: "image/png",
+                transparent: true,
+                opacity: 0.7
+            }).addTo(map);
 
-    return div;
-};
+            return div;
+        };
 
-legend.addTo(map);
-const nlcdLayer = L.tileLayer.wms("https://example.com/wms", {
-    layers: "nlcd_layer_name", // Replace with the NLCD layer name
-    format: "image/png",
-    transparent: true,
-    opacity: 0.5
-}).addTo(map);
-      
+        legend.addTo(map);
+        const nlcdLayer = L.tileLayer.wms("https://example.com/wms", {
+            layers: "nlcd_layer_name", // Replace with the NLCD layer name
+            format: "image/png",
+            transparent: true,
+            opacity: 0.5
+        }).addTo(map);
 
-        </script>
-    </body>
+
+    </script>
+</body>
+
 </html>
