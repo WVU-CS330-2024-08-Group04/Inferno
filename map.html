@@ -65,7 +65,10 @@
         <input type="checkbox" id="toggleDEM" checked>
         <label for="toggleDEM">Legend Layer</label>
     </div>
-
+    <div>
+        <input type="checkbox" id="mapLegend" checked>
+        <label for="mapLegend">Map Legend</label>
+    </div>
     <!-- Side buttons -->
     <div class="side-buttons">
         <a href="welcome.html"><button>Home</button></a>
@@ -186,21 +189,21 @@
             }
         });
       
-        var legend = L.control({position: 'bottomleft'});
+         var legend = L.control({position: 'bottomleft'});
 
-legend.onAdd = function (map) {
+    legend.onAdd = function (map) {
 
-var div = L.DomUtil.create('div', 'info legend');
+    var div = L.DomUtil.create('div', 'info legend');
 
-div.innerHTML += '<strong>Chance of Fire<strong><br>'
-    div.innerHTML += '<i style = "background:#E30808;"></i>High Chance<strong><br>'
-    div.innerHTML += '<i style = "background:#FAA064;"></i>Moderate Chance<strong><br>'
-    div.innerHTML += '<i style = "background:#F0E300;"></i>Low Chance<strong><br>'
-    div.innerHTML += '<i style = "background:#26C454;"></i>No Chance<strong><br>'
-return div;
+    div.innerHTML += '<strong>Chance of Fire<strong><br>'
+        div.innerHTML += '<i style = "background:#E30808;"></i>High Chance<strong><br>'
+        div.innerHTML += '<i style = "background:#FAA064;"></i>Moderate Chance<strong><br>'
+        div.innerHTML += '<i style = "background:#F0E300;"></i>Low Chance<strong><br>'
+        div.innerHTML += '<i style = "background:#26C454;"></i>No Chance<strong><br>'
+    return div;
 };
 
-legend.addTo(map);
+    legend.addTo(map);
 
 
         // Other functionalities: Search location, save location, etc.
