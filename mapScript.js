@@ -50,6 +50,7 @@ var southWest = L.latLng(24.396308, -125.0); // Approximate southwest corner of 
 var northEast = L.latLng(49.384358, -66.93457); // Approximate northeast corner of the US 
 var bounds = L.latLngBounds(southWest, northEast);
 map.setMaxBounds(bounds);
+map.setMinZoom( map.getBoundsZoom( map.options.maxBounds ) );
 
 //ensure drag doesn't go past bounds
 map.on('drag', function(){
