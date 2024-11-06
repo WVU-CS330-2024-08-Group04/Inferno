@@ -96,6 +96,7 @@
             <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
             <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
             <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
+            <label><input type="checkbox" name="Elevation" value="Elevation">Elevation</label><br>
             <button class="apply-filters">Apply Filters</button>
         </div>
         <div id="selected-filters"></div>
@@ -166,32 +167,38 @@
             }
         }
 
-        // Initialize map (only one instance)
+        // Initialize map 
         var map = L.map('map').setView([39.8283, -98.5795], 4);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
-        // Add the DEM layer
+        //add stac layer
+        var stacLayer = L.tileLayer('planetary_computer_NClimGrid.html', { // Use the correct URL
+            maxZoom: 19,
+            attribution: '© Your Data Source'
+        }).addTo(map);
+
+        // Add DEM layer
         const demLayer = L.tileLayer.wms("https://elevation.nationalmap.gov/arcgis/services/3DEPElevation/ImageServer/WMSServer?", {
             layers: "3DEPElevation:Hillshade Elevation Tinted",
             format: "image/png",
             transparent: true,
-            opacity: 0.7
+            opacity: 0.6
         });
 
-        // Add the DEM layer to the map initially if checked
+        // Add DEM layer to the map initially if checked
         if (document.getElementById('toggleDEM').checked) {
             demLayer.addTo(map);
         }
 
-        // Toggle the DEM layer on checkbox change
+        // Toggle DEM layer on checkbox change
         document.getElementById('toggleDEM').addEventListener('change', function () {
             if (this.checked) {
-                demLayer.addTo(map); // Add layer if checkbox is checked
+                demLayer.addTo(map); 
             } else {
-                map.removeLayer(demLayer); // Remove layer if checkbox is unchecked
+                map.removeLayer(demLayer); 
             }
         });
       
