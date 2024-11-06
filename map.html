@@ -72,7 +72,7 @@
     <!-- Toggle for DEM Layer -->
     <div>
         <input type="checkbox" id="toggleDEM" checked>
-        <label for="toggleDEM">Legend Layer</label>
+        <label for="toggleDEM">Elevation</label>
     </div>
 
     <!-- Side buttons -->
@@ -175,12 +175,12 @@
         }).addTo(map);
 
         //add stac layer
-        var stacLayer = L.tileLayer('planetary_computer_NClimGrid.html', { // Use the correct URL
+        var stacLayer = L.tileLayer('planetary_computer_NClimGrid.html', { 
             maxZoom: 19,
-            attribution: '© Your Data Source'
+            
         }).addTo(map);
 
-        // Add DEM layer
+        // Add elevation layer
         const demLayer = L.tileLayer.wms("https://elevation.nationalmap.gov/arcgis/services/3DEPElevation/ImageServer/WMSServer?", {
             layers: "3DEPElevation:Hillshade Elevation Tinted",
             format: "image/png",
@@ -188,12 +188,12 @@
             opacity: 0.6
         });
 
-        // Add DEM layer to the map initially if checked
+        // Add elevation layer to the map initially if checked
         if (document.getElementById('toggleDEM').checked) {
-            demLayer.addTo(map);
-        }
+           demLayer.addTo(map);
+       }
 
-        // Toggle DEM layer on checkbox change
+        // Toggle elevation layer on checkbox change
         document.getElementById('toggleDEM').addEventListener('change', function () {
             if (this.checked) {
                 demLayer.addTo(map); 
