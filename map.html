@@ -9,27 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="mapStyles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <style>
-        body {
-            color: black;
-            background-color: white;
-            transition: background-color 0.5s, color 0.5s;
-        }
-        .dark-mode {
-            background-color: black;
-            color: white;
-            transition: background-color 0.5s, color 0.5s;
-        }
-        .center {
-            text-align: center;
-            margin-top: 50px;
-        }
-        button{
-            cursor: pointer;
-            color: black; 
-            transition: background-color 0.5s, color 0.5s;
-        }
-    </style>
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <!-- Esri Leaflet JavaScript -->
@@ -149,6 +128,17 @@
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
+        //setting max bounds
+        var southWest = L.latLng(24.396308, -125.0); // Approximate southwest corner of the US 
+        var northEast = L.latLng(49.384358, -66.93457); // Approximate northeast corner of the US 
+        var bounds = L.latLngBounds(southWest, northEast);
+        map.setMaxBounds(bounds);
+
+        //ensure drag doesn't go past bounds
+        map.on('drag', function(){
+            map.panInsideBounds(bounds, {animate:false});
+        });
+
         //add stac layer
         var stacLayer = L.tileLayer('planetary_computer_NClimGrid.html', { 
             maxZoom: 19,
@@ -207,9 +197,17 @@ legend.addTo(map);
                 .then(response => response.json())
                 .then(data => {
                     if (data.length > 0) {
-                        var lat = data[0].lat;
-                        var lon = data[0].lon;
+                        var lat = parseFloat(data[0].lat);
+                        var lon = parseFloat(data[0].lon);
                         var displayName = data[0].display_name;
+                    
+                    if(!bounds.contains([lat,lon])){
+                        L.popup()
+                            .setLatLng([lat,lon])
+                            alert("Location is out of bounds.")
+                            .openOn(map);
+                    }
+                    else{
 
                         map.setView([lat, lon], 13);
 
@@ -228,7 +226,8 @@ legend.addTo(map);
                         };
 
                         document.getElementById('saveLocationBtn').style.display = 'inline';
-                    } else {
+                    }
+                 } else {
                         alert("Location not found. Please try again.");
                     }
                 })
