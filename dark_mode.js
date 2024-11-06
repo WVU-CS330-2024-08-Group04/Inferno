@@ -24,8 +24,9 @@ function darkMode() {
         document.body.classList.add('dark-mode');
         document.getElementById("clickMeText").textContent = "Light Mode";
         document.querySelector(".button_icon ion-icon").setAttribute("name", "sunny");
+        document.getElementById('image').src ='Dark Mode Inferno Full Logo cropped.png';
         }
     }
     
-    window.onload(setInitialTheme());
+    window.onload = setInitialTheme;
 

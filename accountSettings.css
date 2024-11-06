@@ -147,6 +147,8 @@ font-size: 16px;
     padding: 20px;
     width: 400px;
     border-radius: 5px;
+    border: 3px solid orange;
+    border-radius: 20px;
 }
 
 .popUp-content input {

@@ -20,6 +20,15 @@
             color: white;
             transition: background-color 0.5s, color 0.5s;
         }
+        .center {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button{
+            cursor: pointer;
+            color: black; 
+            transition: background-color 0.5s, color 0.5s;
+        }
     </style>
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -63,7 +72,7 @@
     <!-- Toggle for DEM Layer -->
     <div>
         <input type="checkbox" id="toggleDEM" checked>
-        <label for="toggleDEM">Legend Layer</label>
+        <label for="toggleDEM">Elevation</label>
     </div>
     <div>
         <input type="checkbox" id="mapLegend" checked>
@@ -90,6 +99,7 @@
             <label><input type="checkbox" name="Smoke" value="Smoke"> Smoke</label><br>
             <label><input type="checkbox" name="Active Fires" value="Active Fires"> Active Fires</label><br>
             <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction"> Fire Prediction</label><br>
+            <label><input type="checkbox" name="Elevation" value="Elevation">Elevation</label><br>
             <button class="apply-filters">Apply Filters</button>
         </div>
         <div id="selected-filters"></div>
@@ -134,58 +144,39 @@
             }
         });
 
-        function darkMode() {
-            var element = document.body;
-            element.classList.toggle("dark-mode");
 
-            const darkModeEnabled = element.classList.contains("dark-mode");
-            setDarkModeUI(darkModeEnabled);
-
-            localStorage.setItem("darkMode", darkModeEnabled ? "enabled" : "disabled");
-        }
-
-        function setDarkModeUI(isDarkMode) {
-            var img = document.getElementById("image");
-            var clickMeText = document.getElementById("clickMeText");
-            var buttonIcon = document.querySelector(".button_icon ion-icon");
-
-            if (isDarkMode) {
-                img.src = "Dark Mode Inferno Full Logo cropped.png";
-                clickMeText.textContent = "Light Mode";
-                buttonIcon.setAttribute("name", "sunny");
-            } else {
-                img.src = "Inferno wildfire full logo cropped.png";
-                clickMeText.textContent = "Dark Mode";
-                buttonIcon.setAttribute("name", "moon");
-            }
-        }
-
-        // Initialize map (only one instance)
+        // Initialize map 
         var map = L.map('map').setView([39.8283, -98.5795], 4);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
-        // Add the DEM layer
+        //add stac layer
+        var stacLayer = L.tileLayer('planetary_computer_NClimGrid.html', { 
+            maxZoom: 19,
+            
+        }).addTo(map);
+
+        // Add elevation layer
         const demLayer = L.tileLayer.wms("https://elevation.nationalmap.gov/arcgis/services/3DEPElevation/ImageServer/WMSServer?", {
             layers: "3DEPElevation:Hillshade Elevation Tinted",
             format: "image/png",
             transparent: true,
-            opacity: 0.7
+            opacity: 0.6
         });
 
-        // Add the DEM layer to the map initially if checked
+        // Add elevation layer to the map initially if checked
         if (document.getElementById('toggleDEM').checked) {
-            demLayer.addTo(map);
-        }
+           demLayer.addTo(map);
+       }
 
-        // Toggle the DEM layer on checkbox change
+        // Toggle elevation layer on checkbox change
         document.getElementById('toggleDEM').addEventListener('change', function () {
             if (this.checked) {
-                demLayer.addTo(map); // Add layer if checkbox is checked
+                demLayer.addTo(map); 
             } else {
-                map.removeLayer(demLayer); // Remove layer if checkbox is unchecked
+                map.removeLayer(demLayer); 
             }
         });
       
@@ -313,6 +304,10 @@
         
 
     </script>
+
+     <script src="dark_mode.js"></script> 
+     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
