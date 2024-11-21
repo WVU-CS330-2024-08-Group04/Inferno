@@ -24,6 +24,7 @@ function MapPage() {
         <input
           type="image"
           src="Profile Icon.png"
+          alt="icon"
           className="user-icon"
           onClick={() => (window.location.href = 'accountSettings.html')}
         />

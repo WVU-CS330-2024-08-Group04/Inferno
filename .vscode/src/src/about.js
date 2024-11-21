@@ -1,14 +1,20 @@
-import React from "react"
-import MapPage from "./MapPage"
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Login from './Login';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './App.css';
-import Register from './Register';
 
 
 
-function about(){
 
+function About(){
+    const [darkMode, setDarkMode] = useState(false);
+
+    const toggleDarkMode = () => {
+      setDarkMode((prevMode) => !prevMode);
+    };
+  
+    useEffect(() => {
+      document.body.classList.toggle('dark-mode', darkMode);
+    }, [darkMode]);
 return (
         <body>
 
@@ -79,4 +85,4 @@ return (
     );
 }
 
-export default about;
+export default About;
