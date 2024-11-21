@@ -14,9 +14,10 @@ import { useNavigate, Link } from 'react-router-dom';
  * @param {Function} setAuthenticated - Function to update the app's authentication state.
  * @returns {JSX.Element} The login form.
  */
-const Login = ({ setAuthenticated }) => {
+function Login ({ setAuthenticated })  {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   /**
@@ -32,6 +33,11 @@ const Login = ({ setAuthenticated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(!username || !password){
+      setError('Both fields are required');
+      return;
+    }
+
     try {
       const response = await axios.post(
         'http://localhost:5000/auth/login',
@@ -41,20 +47,21 @@ const Login = ({ setAuthenticated }) => {
 
       if (response.data.message === 'Login successful') {
         setAuthenticated(true);
-        navigate('/'); // Redirect to main page
+        navigate('/map'); // Redirect to main page
       } else {
         alert('Login failed. Please check your credentials.');
       }
     } catch (error) {
       console.error('Login failed:', error);
-      alert('Invalid credentials');
+      setError('Invalid credentials');
     }
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '300px' }}>
+    <div className="login-form">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
+        <div>
         <input
           type="text"
           placeholder="Username"
@@ -67,10 +74,12 @@ const Login = ({ setAuthenticated }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        </div>
+        {error && <p className="error-message">{error}</p>}
         <button type="submit">Login</button>
       </form>
 
-      {/* Link to the Register page */}
+      
       <p style={{ marginTop: '10px' }}>
         Don’t have an account? <Link to="/register">Register here</Link>
       </p>

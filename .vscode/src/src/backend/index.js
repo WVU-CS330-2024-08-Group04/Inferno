@@ -6,6 +6,7 @@
  * and middleware.
  */
 
+
 require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
@@ -15,7 +16,7 @@ const authRoutes = require('./routes/auth'); // Import authentication routes
 const stacRoutes = require('./routes/stac'); // Import STAC routes including temperature data
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Establish connection to the database
 connectDB();
