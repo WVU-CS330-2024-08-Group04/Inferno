@@ -42,7 +42,7 @@ return (
     
         <div>
         
-        <img src="/Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo"></img>
+        <img id="image" src="/Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo"></img>
         <div className="content-container">
         <div className="container">
             <h1>Welcome to <strong className="orange-text">Inferno</strong></h1>
