@@ -8,7 +8,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import logo from './logo.svg';
 
 /**
  * Login component allows users to enter credentials to access the app.
@@ -61,7 +60,6 @@ function Login ({ setAuthenticated })  {
   return (
     <div className="login-form">
       <h2>Login</h2>
-      <img src={logo} alt="Logo" style={{ width: '100px', marginBottom: '20px' }} />
       <form onSubmit={handleSubmit}>
         <div>
         <input
