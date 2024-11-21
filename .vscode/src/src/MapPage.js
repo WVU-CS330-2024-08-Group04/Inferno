@@ -18,7 +18,7 @@ function MapPage() {
       <div className="banner">
         <div className="banner-back">
           <Link to="/welcome">
-            <img src="Inferno wildfire full logo cropped.png" alt="logo" />
+            <img src="/Inferno wildfire full logo cropped.png" alt="logo" />
           </Link>
         </div>
         <input

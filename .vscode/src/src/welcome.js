@@ -42,7 +42,7 @@ return (
     
         <div>
         
-        <img id="image" src="Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo"></img>
+        <img src="/Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo"></img>
         <div className="content-container">
         <div className="container">
             <h1>Welcome to <strong className="orange-text">Inferno</strong></h1>
@@ -62,7 +62,7 @@ return (
     
               <div className="video">
                 <video width="320" height="240" autoPlay muted loop>
-                  <source src="Untitled video - Made with Clipchamp.mp4" type="video/mp4"></source>
+                <source src="/welcomeVideo.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
