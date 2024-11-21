@@ -24,24 +24,24 @@ function AccountSettings() {
   };
 
   const getName = () => {
-    return 'User Name';  // Replace with logic to get actual user name
+    return 'User Name';  
   };
 
   const name = getName();
 
-  const navigate = useNavigate();  // For navigation
+  const navigate = useNavigate(); 
 
   const goBack = () => {
-    navigate(-1);  // Navigate back to the previous page
+    navigate(-1);  
   };
 
   return (
     <div>
-      {/* Banner */}
+     
       <div className="banner">
         <div className="banner-back">
           <a href="welcome.html">
-            <img src="logo.svg" alt="logo" /> {/* Use logo.svg */}
+          <img src="Inferno wildfire full logo cropped.png" alt="logo" />
           </a>
         </div>
         <input
