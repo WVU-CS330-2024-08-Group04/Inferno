@@ -40,42 +40,12 @@ function App() {
           path="/"
           element={<Navigate to="/welcome" replace />}
         />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/MapPage" element={<MapPage />} />
 
-        {/* Login Route */}
-        <Route
-          path="/login"
-          element={
-            authenticated ? (
-              <Navigate to="/mappage" replace />
-            ) : (
-              <Login setAuthenticated={setAuthenticated} />
-            )
-          }
-        />
-
-        {/* Register Route */}
-        <Route
-          path="/register"
-          element={
-            authenticated ? (
-              <Navigate to="/mappage" replace />
-            ) : (
-              <Register />
-            )
-          }
-        />
-
-        {/* Map Page Route */}
-        <Route
-          path="/mappage"
-          element={
-            authenticated ? (
-              <MapPage setAuthenticated={setAuthenticated} />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
+       
       </Routes>
     </Router>
   );

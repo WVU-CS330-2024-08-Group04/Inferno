@@ -1,10 +1,6 @@
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import React from 'react';
-import Login from './Login';
 import './App.css';
-import Register from './Register';
-import About from './about';
-import MapPage from './MapPage';
 
 function darkMode() {
     var element = document.body;
@@ -43,11 +39,7 @@ function Welcome(){
 return (
 
         <div>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/create-account" element={<Register />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
+    
         <div>
         
         <img id="image" src="Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo"></img>
@@ -63,7 +55,7 @@ return (
                   </div>
                   <div>
                     <h3>First Time User?</h3>
-                    <p><Link to="/create-account" className="button-link">Create an Account</Link></p>
+                    <p><Link to="/Register" className="button-link">Create an Account</Link></p>
                   </div>
                 </div>
               </div>
