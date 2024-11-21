@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate for navigation
 import './accountSettings.css'; // import styles 
 
 function AccountSettings() {
@@ -22,8 +23,17 @@ function AccountSettings() {
     localStorage.setItem("darkMode", !darkMode ? "enabled" : "disabled");
   };
 
-  //const getName = () => "Shannon"; 
+  const getName = () => {
+    return 'User Name';  // Replace with logic to get actual user name
+  };
+
   const name = getName();
+
+  const navigate = useNavigate();  // For navigation
+
+  const goBack = () => {
+    navigate(-1);  // Navigate back to the previous page
+  };
 
   return (
     <div>
@@ -31,7 +41,7 @@ function AccountSettings() {
       <div className="banner">
         <div className="banner-back">
           <a href="welcome.html">
-            <img src="Inferno wildfire full logo cropped.png" alt="logo" />
+            <img src="logo.svg" alt="logo" /> {/* Use logo.svg */}
           </a>
         </div>
         <input
@@ -39,6 +49,7 @@ function AccountSettings() {
           src="Profile Icon.png"
           onClick={() => window.location.href = 'accountSettings.html'}
           className="user-icon"
+          alt="Profile Icon"
         />
         <a href="about.html" className="about-link">About</a>
         <button onClick={toggleDarkMode} className="dark-button">
@@ -67,11 +78,11 @@ function AccountSettings() {
           <button onClick={() => setShowSignOutPopup(true)}>Sign Out</button>
           <button onClick={toggleDarkMode}>Dark Mode</button>
           <button onClick={() => setShowFirePreventionPopup(true)}>Fire Prevention Tips</button>
-          <button onClick={() => history.back()}>Back</button>
+          <button onClick={goBack}>Back</button> {/* Fix the back button */}
         </div>
       </div>
 
-      
+      {/* Popups */}
       {showUsernamePopup && (
         <div className="popUp">
           <div className="popUp-content">
