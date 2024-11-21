@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import logo from './logo.svg';
 import Login from './Login';
 import './App.css';
 import Register from './Register';
@@ -47,34 +46,14 @@ function darkMode() {
 
 function App() {
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Inferno is here
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
-    // <head>
-    // <meta charset="utf-8"></meta>
-    // <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-    // <title>Welcome To Inferno </title>
-    // <meta name="description" content="welcome page"></meta>
-    // <meta name="viewport" content="width=device-width, initial-scale=1">
-    // <link rel="stylesheet" href="WelcomeStyles.css">
 
 <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/create-account" element={<Register />} />
+      </Routes>
     <div>
     
-    <img src={logo} className="App-logo" alt="logo" />
     <img id="image" src="Inferno_wildfire_full_logo_cropped_upscaled.png" class="center" alt="logo"></img>
     <div className="content-container">
     <div className="container">
@@ -116,10 +95,7 @@ function App() {
       </div>
 
      
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/create-account" element={<Register />} />
-      </Routes>
+      
     </Router> 
   );
 } 
