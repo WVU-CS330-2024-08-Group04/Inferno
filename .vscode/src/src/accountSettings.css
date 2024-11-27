@@ -14,7 +14,7 @@ body {
     margin-top: 50px;
 }
 .dark-button{
-    float:right;
+   
     margin-right: 10px;
     margin-top: 37px;
     cursor: pointer;
@@ -34,7 +34,7 @@ background-color: black;
 color: White;
 text-align: center;
 z-index: 1; 
-position: relative;
+
 }
 
 .helloName{
@@ -92,14 +92,13 @@ font-size: 16px;
 }
 
 .content {
-    display: flex;
+    
     justify-content: space-between;
     padding: 10px;
 }
 
 .side-buttons {
-    display: flex;
-    flex-direction: column;
+    
     justify-content: center;
     align-items:center;
     width:20%;
@@ -143,7 +142,7 @@ font-size: 16px;
 
 .popUp-content {
     background-color: white;
-    margin: 15% auto;
+    margin: 15%;
     padding: 20px;
     width: 400px;
     border-radius: 5px;
@@ -176,7 +175,7 @@ font-size: 16px;
 
 .dark-mode .popUp-content {
     background-color: rgb(36, 44, 50);;
-    margin: 15% auto;
+    margin: 15%;
     padding: 20px;
     width: 400px;
     border-radius: 5px;
