@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate for navigation
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';  
 import './accountSettings.css'; // import styles 
+
 
 function AccountSettings() {
   const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode") === "enabled");
