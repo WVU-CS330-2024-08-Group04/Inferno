@@ -50,21 +50,23 @@ color: white;
 background-color: white;
 z-index: 2;
 position: absolute;
-float: left; 
+
 width: 28%;
 height: 70px; 
 margin-top: 10px;
 margin-left: 15px;
 border-radius: 5px;
 display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .banner img {
-float: left;
+
 width: 400px; 
 height: 60px;
 padding: 5px;
-z-index: 3;
+z-index: 2;
 max-width: 95%;
 }
 

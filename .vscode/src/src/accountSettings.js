@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate, Link } from 'react-router-dom';  
 import './accountSettings.css'; // import styles 
 
 
@@ -34,7 +33,12 @@ function AccountSettings() {
   const navigate = useNavigate(); 
 
   const goBack = () => {
-    navigate(-1);  
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else{
+      navigate('/welcome');
+    }
+        
   };
 
   return (
@@ -42,9 +46,9 @@ function AccountSettings() {
      <div className="account-settings">
       <div className="banner">
         <div className="banner-back">
-          <a href="/welcome">
+          <Link to="/welcome">
           <img src="Inferno wildfire full logo cropped.png" alt="logo" />
-          </a>
+          </Link>
         </div>
 
         <input
@@ -54,7 +58,8 @@ function AccountSettings() {
           className="user-icon"
           alt="Profile Icon"
         />
-        <a href="/about" className="about-link">About</a>
+        <Link to="/about" className="about-link">About</Link>
+
         <button onClick={toggleDarkMode} className="dark-button">
           <span id="clickMeText">Dark Mode</span>
           <span className="button_icon">
