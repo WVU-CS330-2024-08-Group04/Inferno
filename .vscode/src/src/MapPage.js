@@ -69,6 +69,7 @@ function MapPage() {
       alert('Location is already saved.');
     }
   };
+  const navigate = useNavigate();
 
   const jumpToSavedLocation = (event) => {
     const value = event.target.value;
