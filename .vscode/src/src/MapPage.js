@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './mapStyles.css';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 function MapPage() {
   const [savedLocations, setSavedLocations] = useState([]);
@@ -74,6 +76,7 @@ function MapPage() {
       }
     }
   };
+  const navigate = useNavigate();
 
   const jumpToSavedLocation = (event) => {
     const value = event.target.value;
@@ -93,29 +96,30 @@ function MapPage() {
 
   return (
     <div>
-      {/* Banner Section */}
-      <div className="banner">
-        <div className="banner-back">
-          <a href="welcome.html">
-            <img src="Inferno wildfire full logo cropped.png" alt="logo" />
-          </a>
-        </div>
-        <input
-          type="image"
-          src="Profile Icon.png"
-          onClick={() => (window.location.href = 'accountSettings.html')}
-          className="user-icon"
-        />
-        <a href="about.html" className="about-link">
-          About
-        </a>
-        <button id="clickMe" onClick={toggleDarkMode} className="dark-button">
-          <span id="clickMeText">{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
-          <span className="button_icon">
-            <ion-icon name="moon"></ion-icon>
-          </span>
-        </button>
-      </div>
+  {/* Banner Section */}
+  <div className="banner">
+    <div className="banner-back">
+      <a href="/welcome">
+        <img src="Inferno wildfire full logo cropped.png" alt="logo" />
+      </a>
+    </div>
+    <input
+      type="image"
+      src="Profile Icon.png"
+      alt="icon"
+      onClick={() => navigate('/accountSettings')}
+      className="user-icon"
+    />
+    <a href="/about" className="about-link">
+      About
+    </a>
+    <button id="clickMe" onClick={toggleDarkMode} className="dark-button">
+      <span id="clickMeText">{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
+      <span className="button_icon">
+        <ion-icon name="moon"></ion-icon>
+      </span>
+    </button>
+  </div>
 
       {/* Search Section */}
       <div className="search-container">
@@ -161,49 +165,46 @@ function MapPage() {
         <label htmlFor="mapLegend">Map Legend</label>
       </div>
 
-      {/* Side Buttons */}
-      <div className="side-buttons">
-        <a href="welcome.html">
-          <button>Home</button>
-        </a>
-        <a href="accountSettings.html">
-          <button>Account</button>
-        </a>
-
-        {/* Date Range Selection */}
-        <div className="date-container">
-          <label htmlFor="startDate">Start Date:</label>
-          <input type="date" id="startDate" onChange={handleDateChange} />
-          <br />
-          <label htmlFor="endDate">End Date:</label>
-          <input type="date" id="endDate" onChange={handleDateChange} />
-          <button onClick={handleDateChange}>Select Time Range</button>
-          <div id="selected-dates">{selectedDates}</div>
-        </div>
-
-        {/* Filters */}
-        <button className="dropdown-trigger">Filters</button>
-        <div className="dropdown-content">
-          <label>
-            <input type="checkbox" name="Smoke" value="Smoke" /> Smoke
-          </label>
-          <br />
-          <label>
-            <input type="checkbox" name="Active Fires" value="Active Fires" /> Active Fires
-          </label>
-          <br />
-          <label>
-            <input type="checkbox" name="Fire Prediction" value="Fire Prediction" /> Fire Prediction
-          </label>
-          <br />
-          <label>
-            <input type="checkbox" name="Elevation" value="Elevation" /> Elevation
-          </label>
-          <br />
-          <button className="apply-filters">Apply Filters</button>
-        </div>
-      </div>
+  {/* Side Buttons */}
+  <div className="side-buttons">
+    <a className = "welcome-button" href="/welcome">
+    <button>Home</button>
+    </a>
+    <Link to="/accountSettings" className="Account-button">
+    <button>Account</button>
+    </Link>
+    <div className="date-container">
+      <label htmlFor="startDate">Start Date:</label>
+      <input type="date" id="startDate" onChange={handleDateChange} />
+      <br />
+      <label htmlFor="endDate">End Date:</label>
+      <input type="date" id="endDate" onChange={handleDateChange} />
+      <button className = "Time-button" onClick={handleDateChange}>Select Time Range</button>
+      <div id="selected-dates">{selectedDates}</div>
     </div>
+    <button className="dropdown-trigger">Filters</button>
+    <div className="dropdown-content">
+      <label>
+        <input type="checkbox" name="Smoke" value="Smoke" /> Smoke
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="Active Fires" value="Active Fires" /> Active Fires
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="Fire Prediction" value="Fire Prediction" /> Fire Prediction
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="Elevation" value="Elevation" /> Elevation
+      </label>
+      <br />
+      <button className="apply-filters">Apply Filters</button>
+    </div>
+  </div>
+</div>
+
   );
 }
 
