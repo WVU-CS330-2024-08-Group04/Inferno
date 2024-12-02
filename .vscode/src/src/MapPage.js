@@ -10,16 +10,20 @@ function MapPage() {
   const [lastSearchedLocation, setLastSearchedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState('');
   const [darkMode, setDarkMode] = useState(false);
-
   const mapRef = useRef(null);
-  const mapContainerRef = useRef(null);
+  const mapContainerRef = useRef(null); // Reference to map container
 
   useEffect(() => {
-    if (mapRef.current) return;
+    // Check if map is already initialized
+    if (mapRef.current) {
+      return;
+    }
 
+    // Initialize the map only once
     const map = L.map(mapContainerRef.current).setView([39.8283, -98.5795], 4);
     mapRef.current = map;
 
+    // Add base layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '© OpenStreetMap',
@@ -43,15 +47,18 @@ function MapPage() {
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
-          const { lat, lon, display_name } = data[0];
-          mapRef.current.setView([parseFloat(lat), parseFloat(lon)], 13);
+          const lat = parseFloat(data[0].lat);
+          const lon = parseFloat(data[0].lon);
+          const displayName = data[0].display_name;
 
-          L.marker([parseFloat(lat), parseFloat(lon)])
+          mapRef.current.setView([lat, lon], 13);
+
+          L.marker([lat, lon])
             .addTo(mapRef.current)
-            .bindPopup(display_name)
+            .bindPopup(displayName)
             .openPopup();
 
-          setLastSearchedLocation({ name: display_name, lat: parseFloat(lat), lon: parseFloat(lon) });
+          setLastSearchedLocation({ name: displayName, lat, lon });
         } else {
           alert('Location not found. Please try again.');
         }
@@ -60,13 +67,13 @@ function MapPage() {
   };
 
   const saveLocation = () => {
-    if (!lastSearchedLocation) return;
-
-    const { name, lat, lon } = lastSearchedLocation;
-    if (!savedLocations.some((loc) => loc.name === name)) {
-      setSavedLocations((prev) => [...prev, { name, lat, lon }]);
-    } else {
-      alert('Location is already saved.');
+    if (lastSearchedLocation) {
+      const { name, lat, lon } = lastSearchedLocation;
+      if (!savedLocations.some((loc) => loc.name === name)) {
+        setSavedLocations((prev) => [...prev, { name, lat, lon }]);
+      } else {
+        alert('Location is already saved.');
+      }
     }
   };
   const navigate = useNavigate();
@@ -82,7 +89,9 @@ function MapPage() {
   const handleDateChange = () => {
     const start = document.getElementById('startDate').value;
     const end = document.getElementById('endDate').value;
-    if (start && end) setSelectedDates(`Selected Dates: ${start} to ${end}`);
+    if (start && end) {
+      setSelectedDates(`Selected Dates: ${start} to ${end}`);
+    }
   };
 
   return (
@@ -112,33 +121,49 @@ function MapPage() {
     </button>
   </div>
 
-  {/* Search Section */}
-  <div className="search-container">
-    <input
-      type="text"
-      className="search-bar"
-      id="locationInput"
-      placeholder="Search a location..."
-    />
-    <button className="search-button" onClick={searchLocation}>
-      Search
-    </button>
-    <button id="saveLocationBtn" style={{ display: 'none' }} onClick={saveLocation}>
-      Save Location
-    </button>
-    <label htmlFor="savedLocations">Saved Locations:</label>
-    <select id="savedLocations" onChange={jumpToSavedLocation}>
-      <option value="">--Select a saved location--</option>
-      {savedLocations.map((loc, index) => (
-        <option key={index} value={JSON.stringify(loc)}>
-          {loc.name}
-        </option>
-      ))}
-    </select>
-  </div>
+      {/* Search Section */}
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          id="locationInput"
+          placeholder="Search a location..."
+        />
+        <button className="search-button" onClick={searchLocation}>
+          Search
+        </button>
+        <button id="saveLocationBtn" style={{ display: 'none' }} onClick={saveLocation}>
+          Save Location
+        </button>
 
-  {/* Map Section */}
-  <div id="map" ref={mapContainerRef}></div>
+        {/* Saved Locations Dropdown */}
+        <label htmlFor="savedLocations">Saved Locations:</label>
+        <select id="savedLocations" onChange={jumpToSavedLocation}>
+          <option value="">--Select a saved location--</option>
+          {savedLocations.map((loc, index) => (
+            <option key={index} value={JSON.stringify(loc)}>
+              {loc.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Map Section */}
+      <div
+        id="map"
+        ref={mapContainerRef} // Attach the container to the ref
+        style={{ width: '80%', height: '600px' }}
+      ></div>
+
+      {/* Toggle Layers */}
+      <div>
+        <input type="checkbox" id="toggleDEM" defaultChecked />
+        <label htmlFor="toggleDEM">Elevation</label>
+      </div>
+      <div>
+        <input type="checkbox" id="mapLegend" defaultChecked />
+        <label htmlFor="mapLegend">Map Legend</label>
+      </div>
 
   {/* Side Buttons */}
   <div className="side-buttons">
