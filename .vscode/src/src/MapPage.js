@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './mapStyles.css';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 function MapPage() {
   const [savedLocations, setSavedLocations] = useState([]);
@@ -95,7 +97,7 @@ function MapPage() {
       type="image"
       src="Profile Icon.png"
       alt="icon"
-      onClick={() => (window.location.href = '/accountSettings')}
+      onClick={() => navigate('/accountSettings')}
       className="user-icon"
     />
     <a href="/about" className="about-link">
@@ -142,9 +144,9 @@ function MapPage() {
     <a className = "welcome-button" href="/welcome">
     <button>Home</button>
     </a>
-    <a className = "Account-button" href="accountSettings.html">
+    <Link to="/accountSettings" className="Account-button">
     <button>Account</button>
-    </a>
+    </Link>
     <div className="date-container">
       <label htmlFor="startDate">Start Date:</label>
       <input type="date" id="startDate" onChange={handleDateChange} />

@@ -9,7 +9,7 @@ function AccountSettings() {
   const [showDeleteAccountPopup, setShowDeleteAccountPopup] = useState(false);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
   const [showFirePreventionPopup, setShowFirePreventionPopup] = useState(false);
-
+  
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark-mode');
@@ -36,22 +36,23 @@ function AccountSettings() {
   };
 
   return (
-    <div>
-     
+    
+     <div className="account-settings">
       <div className="banner">
         <div className="banner-back">
-          <a href="welcome.html">
+          <a href="/welcome">
           <img src="Inferno wildfire full logo cropped.png" alt="logo" />
           </a>
         </div>
+
         <input
           type="image"
           src="Profile Icon.png"
-          onClick={() => window.location.href = 'accountSettings.html'}
+          onClick={() => navigate('/accountSettings')}
           className="user-icon"
           alt="Profile Icon"
         />
-        <a href="about.html" className="about-link">About</a>
+        <a href="/about" className="about-link">About</a>
         <button onClick={toggleDarkMode} className="dark-button">
           <span id="clickMeText">Dark Mode</span>
           <span className="button_icon">
