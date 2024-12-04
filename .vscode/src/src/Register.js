@@ -7,6 +7,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import PasswordChecklist from "react-password-checklist";
 
 /**
  * Register component allows new users to create an account.
@@ -51,7 +52,7 @@ const Register = () => {
   };
 
   return (
-    <div className="register-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '100vh'}}>
+    <div className="register-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '55vh'}}>
       <form
         onSubmit={handleRegister}
         style={{
@@ -103,6 +104,18 @@ const Register = () => {
             border: '1px solid #ccc',
           }}
         />
+        <PasswordChecklist
+              rules={[
+                "minlength",
+                "specialChar",
+                "number",
+                "capital",
+                "match",
+              ]}
+              minlength={5}
+              value={password}
+              valueAgain={confirmPassword}
+          />
         <button
           type="submit"
           style={{
@@ -117,8 +130,7 @@ const Register = () => {
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = '#E64A19')}
           onMouseOut={(e) => (e.target.style.backgroundColor = '#FF5722')}
-        ></button>
-      <button type="submit">Register</button>
+        >Register</button>
     </form>
     </div>
   );
