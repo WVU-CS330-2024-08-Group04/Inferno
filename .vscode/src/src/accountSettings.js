@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';  
+import { useNavigate, Link } from 'react-router-dom';
 import './accountSettings.css'; // import styles 
 
 function AccountSettings() {
@@ -9,7 +9,7 @@ function AccountSettings() {
   const [showDeleteAccountPopup, setShowDeleteAccountPopup] = useState(false);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
   const [showFirePreventionPopup, setShowFirePreventionPopup] = useState(false);
-  
+
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark-mode');
@@ -24,16 +24,16 @@ function AccountSettings() {
   };
 
   const getName = () => {
-    return 'User Name';  
+    return 'User Name';
   };
 
   const name = getName();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const goBack = () => {
     if (window.history.state && window.history.state.idx > 0) {
       navigate(-1);
-    } else{
+    } else {
       navigate('/welcome');
     }
   };
@@ -86,7 +86,7 @@ function AccountSettings() {
 
       {/* Popups */}
       {showUsernamePopup && (
-        <div className="popUp" style={{display: 'block'}}>
+        <div className="popUp" style={{ display: 'block' }}>
           <div className="popUp-content">
             <h2>Change Username</h2>
             <input type="text" placeholder="Enter old username" />
