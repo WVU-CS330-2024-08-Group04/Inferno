@@ -1,156 +1,57 @@
-body{
+/* General Body Styling */
+body {
+    display : fixed; 
+    font-family : "Helvetica";
     color: black;
-    background-color: whitesmoke;
-    font-family: Helvetica, sans-serif;
-    text-align: center;
-    width:100%;
-    font-size:14px;
+    background-color: white;
     transition: background-color 0.5s, color 0.5s;
-    overflow-x: hidden; 
-    margin: 0; 
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.side-buttons {
-    height:100%-90px;
-    width:18%;
-    position: absolute;
-    align-items:center;
-    right: 8px;
-    top: 100px;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.5s, color 0.5s;
-    
-}
-
-.side-buttons a{
-    width:100%;
-    flex:1;
-}
-
-.side-buttons button ,
-.side-buttons button .dropdown-trigger{
-    flex: 1;
-    height:100px;;
-    width: 100%;
-    padding: 10px;
-    align-items:center;
-    margin-bottom: 9px;
-    font-size: 16px;
-    font-weight:bold;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: rgba(244, 144, 12, 1);
-    border: none;
-    transition: background-color 0.5s, color 0.5s;
-}
-
-.side-buttons .search-container .search-bar{
-    width:70%;
-    justify-items: left;
-} 
-
-.side-buttons .search-button,
-.side-buttons .apply-filters{
-    width:fit-content;
-    height:fit-content;
-    padding:5px;
-}
-.side-buttons button:hover {
-    background-color: rgb(204, 121, 12);
-}
-
-.description{
-    clear:both;
-    padding-top: 5px;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px; 
-    flex-direction: column;
-}
-
-.descriptionText{
-    margin-top: 20px; 
-    margin-right: 250px;
-    margin-left: 250px;
-    font-size: 16px;
-    color:black; 
-    display: block;
-    text-align:center;
-}
-
-.dropdown-content{
-    display:none;
-    float: left;
-    margin-right: 15px;
-}
-
-.time-container {
-    margin: 20px;
-}
-#selected-time {
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-.dark-mode{
+  }
+  
+  /* Dark Mode */
+  body.dark-mode {
     background-color: rgb(36, 44, 50);
     color: whitesmoke;
+    font-family: Helvetica, sans-serif;
     transition: background-color 0.5s, color 0.5s;
-}
-.dark-mode h1 {
-    color: whitesmoke; 
-}
+  }
 
-.dark-mode .side-buttons button{
-    background-color: rgb(204, 121, 12);
-    color: white;
-    box-shadow:0 0 5px rgb(138, 138, 138);
-}
-
-.dark-mode .side-buttons button:hover {
-    background-color: rgba(244, 144, 12, 1);
-}
-
-.dark-mode .sidebar{
-    background-color: #0f0f0f;
-}
-.dark-mode .dark-button {
-    background-color: #333;
-    color: white;
-}
-
-.dark-mode .dark-button:hover {
-    background-color: #444444;
-}
-.dark-button{
-    float:right;
-    margin-right: 10px;
-    margin-top: 37px;
-    cursor: pointer;
-    color: white; 
-    transition: background-color 0.5s, color 0.5s;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 12px;
-    width:fit-content;
-    color: black;
-}
-
-.dark-button:hover {
-    background-color: #ddd;
-}
-
-.center {
+  
+  
+  /* Banner Section */
+  .banner {
+    width: 100%;
+    height : 90px; 
+    background-color: black;
+    color: White;
     text-align: center;
-    margin-top: 50px;
-}
-.dark-button{
-    float:right;
+    z-index: 0; 
+    
+  }
+  
+  .banner img {
+    margin-top: 0px;
     margin-right: 10px;
-    margin-top: 37px;
+   
+  }
+  
+  .user-icon {
+    float: right;
+    margin-top: 20px;
+    margin-right: 10px;
+    width: 50px; 
+    height: 50px;
+  }
+  
+  .about-link {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .dark-button {
+    clear: both;
+    margin-right: 100px !important;
+    margin-top: 20px !important;
     cursor: pointer;
     color: white; 
     transition: background-color 0.5s, color 0.5s;
@@ -159,111 +60,93 @@ body{
     font-size: 12px;
     width:fit-content;
     color: black;
-}
-
-.banner{
-width: 100%;
-height : 90px; 
-background-color: black;
-color: White;
-text-align: center;
-z-index: 1; 
-position: relative;
-}
-
-.helloName{
-position: absolute; 
-margin-top: 35px; 
-right: 80px; 
-font-size: 20px; 
-color: white;
-
-}
-
-.banner-back{
-background-color: white;
-z-index: 2;
-position: absolute;
-float: left; 
-width: 28%;
-height: 70px; 
-margin-top: 10px;
-margin-left: 15px;
-border-radius: 5px;
-display: flex;
-}
-
-.banner img {
-float: left;
-width: 400px; 
-height: 60px;
-padding: 5px;
-z-index: 3;
-max-width: 95%;
-}
-
-.user-icon {
-float: right;
-margin-top: 20px;
-margin-right: 10px;
-width: 50px; 
-height: 50px;
-}
-
-.about-link {
-float: right;
-margin-right: 180px;
-margin-top: 37px;
-color: white;
-border: none;
-font-weight: bold;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.5s, color 0.5s;
-font-size: 12px;
-width: fit-content;
-font-size: 16px; 
-}
-
-.search-container{
-    float: left;
-    font-size: 16px;
-    height: max-content;
-    z-index: 1000;
-    position: absolute;
-    margin-top: 5px;
-    margin-left: 50px;
-    color: black;
-}
-
-.date-container button{
-    height: 40px;
+  }
+  
+  /* Search Section */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+  .search-bar {
+    width: 300px;
+    padding: 5px;
+    margin-right: 5px;
+  }
+  
+  
+  .search-button,
+  .save-location-button {
+    margin-top: 80px;
+    margin-right: 22%;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* Map Container */
+  #map {
+    height: 500px;
+    margin-left: 20%;
+    width: 60%;
     margin-top: 10px;
-}
+    border: 1px solid #ddd;
+  }
+  
+  /* Controls */
+  .controls {
+    margin: 10px;
+  }
+  
+  .date-container {
+    position: absolute; 
+    top: 150px;
+    left: 50px;
+  }
+  
+  label {
+    margin-right: 5px;
+  }
+  .side-buttons .welcome-button button {
+    display: inline-block;
+    margin-top: 135px;
+    height: 40px;
+    width: 15% !important;
+    margin-right: 1%;
+  }
+  .side-buttons .Account-button button {
+    display: inline-block;
+    margin-top: 180px;
+    height: 40px;
+    width: 15% !important;
+    margin-right: 1%;
+  }
+  .date-container .Time-button {
+    display: inline-block;
+    margin-top: 225px;
+    height: 40px;
+    width: 15% !important;
+    margin-right: 1%;
+  }
+  .dropdown-trigger{
+    display: inline-block;
+    margin-top: 270px;
+    height: 40px !important;
+    width: 15% !important;
+    margin-right: 1%;
+  }
 
-.date-container label{
-    color: black;
-    font-weight:bold;
-    transition: background-color 0.5s, color 0.5s;
-}
+  .apply-filters {
+    display: inline-block;
+    margin-top: 315px;
+    height: 40px !important;
+    width: 15% !important;
+    margin-right: 1%;
+  }
+  .dropdown-content{
+    position: absolute; 
+    top: 200px;
+    left: 90px;
+  }
 
-.dark-mode .date-container label{
-    color: whitesmoke;
-    transition: background-color 0.5s, color 0.5s;
-}
-
-.legend {
-    line-height: 25px;
-    color: black;
-    background-color: lightgray;
-    padding: 8px;
-    border-radius: 20px;
-
-}
-.legend i {
-    width: 25px;
-    height: 18px;
-    float: left;
-    margin-right: 10px;
-    opacity: 0.7;
-}
+  
