@@ -69,30 +69,28 @@ function AccountSettings() {
         <div className="helloName">Hello, {name}</div>
       </div>
 
-      {/* Content */}
-      <div className="content">
-        <div className="side-buttons">
-          <button onClick={() => setShowUsernamePopup(true)}>Change Username</button>
-          <button onClick={() => setShowPasswordPopup(true)}>Change Password</button>
-          <button onClick={() => setShowDeleteAccountPopup(true)}>Delete Account</button>
-          <button>Time Zone</button>
-        </div>
+  <div className="content">
+    <div className="side-buttons left">
+      <button onClick={() => setShowUsernamePopup(true)}>Change Username</button>
+      <button onClick={() => setShowPasswordPopup(true)}>Change Password</button>
+     <button onClick={() => setShowDeleteAccountPopup(true)}>Delete Account</button>
+   </div>
 
-        <div className="account-info">
-          <p>Current Account Information</p>
-        </div>
+  <div className="account-info">
+    <p>Current Account Information</p>
+  </div>
 
-        <div className="side-buttons">
-          <button onClick={() => setShowSignOutPopup(true)}>Sign Out</button>
-          <button onClick={toggleDarkMode}>Dark Mode</button>
-          <button onClick={() => setShowFirePreventionPopup(true)}>Fire Prevention Tips</button>
-          <button onClick={goBack}>Back</button> {/* Fix the back button */}
-        </div>
-      </div>
+  <div className="side-buttons right">
+    <button onClick={() => setShowSignOutPopup(true)}>Sign Out</button>
+    <button onClick={toggleDarkMode}>Dark Mode</button>
+    <button onClick={() => setShowFirePreventionPopup(true)}>Fire Prevention Tips</button>
+    <button onClick={goBack}>Back</button>
+  </div>
+</div>
 
       {/* Popups */}
       {showUsernamePopup && (
-        <div className="popUp">
+        <div className="popUp" style={{display: 'block'}}>
           <div className="popUp-content">
             <h2>Change Username</h2>
             <input type="text" placeholder="Enter old username" />
