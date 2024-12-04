@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';  
 import './accountSettings.css'; // import styles 
 
-
 function AccountSettings() {
   const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode") === "enabled");
   const [showUsernamePopup, setShowUsernamePopup] = useState(false);
@@ -29,7 +28,6 @@ function AccountSettings() {
   };
 
   const name = getName();
-
   const navigate = useNavigate(); 
 
   const goBack = () => {
@@ -38,16 +36,14 @@ function AccountSettings() {
     } else{
       navigate('/welcome');
     }
-        
   };
 
   return (
-    
-     <div className="account-settings">
+    <div className="account-settings">
       <div className="banner">
         <div className="banner-back">
           <Link to="/welcome">
-          <img src="Inferno wildfire full logo cropped.png" alt="logo" />
+            <img src="Inferno wildfire full logo cropped.png" alt="logo" />
           </Link>
         </div>
 
@@ -69,24 +65,24 @@ function AccountSettings() {
         <div className="helloName">Hello, {name}</div>
       </div>
 
-  <div className="content">
-    <div className="side-buttons left">
-      <button onClick={() => setShowUsernamePopup(true)}>Change Username</button>
-      <button onClick={() => setShowPasswordPopup(true)}>Change Password</button>
-     <button onClick={() => setShowDeleteAccountPopup(true)}>Delete Account</button>
-   </div>
+      <div className="content">
+        <div className="side-buttons left">
+          <button onClick={() => setShowUsernamePopup(true)}>Change Username</button>
+          <button onClick={() => setShowPasswordPopup(true)}>Change Password</button>
+          <button onClick={() => setShowDeleteAccountPopup(true)}>Delete Account</button>
+        </div>
 
-  <div className="account-info">
-    <p>Current Account Information</p>
-  </div>
+        <div className="account-info">
+          <p>Current Account Information</p>
+        </div>
 
-  <div className="side-buttons right">
-    <button onClick={() => setShowSignOutPopup(true)}>Sign Out</button>
-    <button onClick={toggleDarkMode}>Dark Mode</button>
-    <button onClick={() => setShowFirePreventionPopup(true)}>Fire Prevention Tips</button>
-    <button onClick={goBack}>Back</button>
-  </div>
-</div>
+        <div className="side-buttons right">
+          <button onClick={() => setShowSignOutPopup(true)}>Sign Out</button>
+          <button onClick={toggleDarkMode}>Dark Mode</button>
+          <button onClick={() => setShowFirePreventionPopup(true)}>Fire Prevention Tips</button>
+          <button onClick={goBack}>Back</button>
+        </div>
+      </div>
 
       {/* Popups */}
       {showUsernamePopup && (
