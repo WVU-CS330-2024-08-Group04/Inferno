@@ -196,6 +196,7 @@ function MapPage() {
               <label htmlFor="endDate">End Date:</label>
               <input type="date" id="endDate" onChange={handleDateChange} />
               <div id="selected-dates">{selectedDates}</div>
+              <button className="apply-time">Apply Time Range</button>
           </div>
           )}
         </div>
