@@ -9,7 +9,15 @@ function MapPage() {
   const [savedLocations, setSavedLocations] = useState([]);
   const [lastSearchedLocation, setLastSearchedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState('');
+  const [showDateFields, setShowDateFields] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [showFilters, setShowFilters] = useState(false); // State for showing filters
+  const [selectedFilters, setSelectedFilters] = useState({
+    'Smoke': false,
+    'Active Fires': false,
+    'Fire Prediction': false,
+    'Elevation': false,
+  });
 
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
@@ -79,11 +87,30 @@ function MapPage() {
     }
   };
 
-  const handleDateChange = () => {
-    const start = document.getElementById('startDate').value;
-    const end = document.getElementById('endDate').value;
-    if (start && end) setSelectedDates(`Selected Dates: ${start} to ${end}`);
+  const handleDateChange = (e) => {
+    // Check if the event target exists and has a value
+    if (e.target && e.target.value) {
+      setSelectedDates(`Start Date: ${e.target.value}`);
+    }
   };
+
+  const toggleDateFields = () => {
+    setShowDateFields(!showDateFields); // Toggle the state
+  };
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+  };
+
+  // Handles the change in checkbox values
+  const handleFilterChange = (e) => {
+    const { name, checked } = e.target;
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: checked,
+    }));
+  };
+
 
   return (
     <div>
@@ -145,15 +172,11 @@ function MapPage() {
   
         {/* Side Container */}
         <div className="side-container">
-          {/* Navigation Buttons */}
-          <div className="map-side-buttons">
-            <button onClick={() => navigate('/welcome')}>Home</button>
-            <button onClick={() => navigate('/accountSettings')}>Account</button>
-          </div>
   
           {/* Filters */}
           <div className="filters-container">
-            <button className="filter-dropdown-trigger">Filters</button>
+            <button className="filter-dropdown-trigger" onClick={toggleFilters}>Filters</button>
+            {showFilters && (
             <div className="dropdown-content">
               <label><input type="checkbox" name="Smoke" value="Smoke" /> Smoke</label>
               <label><input type="checkbox" name="Active Fires" value="Active Fires" /> Active Fires</label>
@@ -161,17 +184,21 @@ function MapPage() {
               <label><input type="checkbox" name="Elevation" value="Elevation" /> Elevation</label>
               <button className="apply-filters">Apply Filters</button>
             </div>
+            )}
           </div>
   
           {/* Date Selection */}
+          <button className = "Time-button" onClick={toggleDateFields}>Select Time Range</button>
+          {showDateFields && (
           <div className="date-container">
-            <label htmlFor="startDate">Start Date:</label>
-            <input type="date" id="startDate" onChange={handleDateChange} />
-            <label htmlFor="endDate">End Date:</label>
-            <input type="date" id="endDate" onChange={handleDateChange} />
-            <button onClick={handleDateChange}>Select Time Range</button>
-            <div id="selected-dates">{selectedDates}</div>
+              <label htmlFor="startDate">Start Date:</label>
+              <input type="date" id="startDate" onChange={handleDateChange} />
+              <label htmlFor="endDate">End Date:</label>
+              <input type="date" id="endDate" onChange={handleDateChange} />
+              <div id="selected-dates">{selectedDates}</div>
+              <button className="apply-time">Apply Time Range</button>
           </div>
+          )}
         </div>
       </div>
     </div>
