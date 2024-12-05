@@ -87,99 +87,94 @@ function MapPage() {
 
   return (
     <div>
-  {/* Banner Section */}
-  <div className="banner">
-    <div className="banner-back">
-      <a href="/welcome">
-        <img src="Inferno wildfire full logo cropped.png" alt="logo" />
-      </a>
+      {/* Banner Section */}
+      <div className="banner">
+        <div className="banner-back">
+          
+          <input
+            type="image"
+            src="Inferno wildfire full logo cropped.png"
+            onClick={() => navigate('/welcome')}
+            alt="Logo Image"
+          />
+        </div>
+        <div className="banner-content">
+          <div className="left-banner-content">
+            <Link to="/about" className="about-link">About</Link>
+          </div>
+          <div className="helloName">Hello, {name}</div>
+          <input
+            type="image"
+            src="Profile Icon.png"
+            onClick={() => navigate('/accountSettings')}
+            className="user-icon"
+            alt="Profile Icon"
+          />
+        </div>
+      </div>
+  
+      {/* Search Section */}
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          id="locationInput"
+          placeholder="Search a location..."
+        />
+        <button className="search-button" onClick={searchLocation}>
+          Search
+        </button>
+        <button id="saveLocationBtn" style={{ display: 'none' }} onClick={saveLocation}>
+          Save Location
+        </button>
+        <label htmlFor="savedLocations">Saved Locations:</label>
+        <select id="savedLocations" onChange={jumpToSavedLocation}>
+          <option value="">--Select a saved location--</option>
+          {savedLocations.map((loc, index) => (
+            <option key={index} value={JSON.stringify(loc)}>
+              {loc.name}
+            </option>
+          ))}
+        </select>
+      </div>
+  
+      {/* Main Container */}
+      <div className="main-container">
+        {/* Map Section */}
+        <div id="map" ref={mapContainerRef}></div>
+  
+        {/* Side Container */}
+        <div className="side-container">
+          {/* Navigation Buttons */}
+          <div className="map-side-buttons">
+            <button onClick={() => navigate('/welcome')}>Home</button>
+            <button onClick={() => navigate('/accountSettings')}>Account</button>
+          </div>
+  
+          {/* Filters */}
+          <div className="filters-container">
+            <button className="filter-dropdown-trigger">Filters</button>
+            <div className="dropdown-content">
+              <label><input type="checkbox" name="Smoke" value="Smoke" /> Smoke</label>
+              <label><input type="checkbox" name="Active Fires" value="Active Fires" /> Active Fires</label>
+              <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction" /> Fire Prediction</label>
+              <label><input type="checkbox" name="Elevation" value="Elevation" /> Elevation</label>
+              <button className="apply-filters">Apply Filters</button>
+            </div>
+          </div>
+  
+          {/* Date Selection */}
+          <div className="date-container">
+            <label htmlFor="startDate">Start Date:</label>
+            <input type="date" id="startDate" onChange={handleDateChange} />
+            <label htmlFor="endDate">End Date:</label>
+            <input type="date" id="endDate" onChange={handleDateChange} />
+            <button onClick={handleDateChange}>Select Time Range</button>
+            <div id="selected-dates">{selectedDates}</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <input
-      type="image"
-      src="Profile Icon.png"
-      alt="icon"
-      onClick={() => navigate('/accountSettings')}
-      className="user-icon"
-    />
-    <a href="/about" className="about-link">
-      About
-    </a>
-    <button id="clickMe" onClick={toggleDarkMode} className="dark-button">
-      <span id="clickMeText">{darkMode ? 'Light Mode' : 'Dark Mode'}</span>
-      <span className="button_icon">
-        <ion-icon name="moon"></ion-icon>
-      </span>
-    </button>
-  </div>
-
-  {/* Search Section */}
-  <div className="search-container">
-    <input
-      type="text"
-      className="search-bar"
-      id="locationInput"
-      placeholder="Search a location..."
-    />
-    <button className="search-button" onClick={searchLocation}>
-      Search
-    </button>
-    <button id="saveLocationBtn" style={{ display: 'none' }} onClick={saveLocation}>
-      Save Location
-    </button>
-    <label htmlFor="savedLocations">Saved Locations:</label>
-    <select id="savedLocations" onChange={jumpToSavedLocation}>
-      <option value="">--Select a saved location--</option>
-      {savedLocations.map((loc, index) => (
-        <option key={index} value={JSON.stringify(loc)}>
-          {loc.name}
-        </option>
-      ))}
-    </select>
-  </div>
-
-  {/* Map Section */}
-  <div id="map" ref={mapContainerRef}></div>
-
-  {/* Side Buttons */}
-  <div className="side-buttons">
-    <a className = "welcome-button" href="/welcome">
-    <button>Home</button>
-    </a>
-    <Link to="/accountSettings" className="Account-button">
-    <button>Account</button>
-    </Link>
-    <div className="date-container">
-      <label htmlFor="startDate">Start Date:</label>
-      <input type="date" id="startDate" onChange={handleDateChange} />
-      <br />
-      <label htmlFor="endDate">End Date:</label>
-      <input type="date" id="endDate" onChange={handleDateChange} />
-      <button className = "Time-button" onClick={handleDateChange}>Select Time Range</button>
-      <div id="selected-dates">{selectedDates}</div>
-    </div>
-    <button className="dropdown-trigger">Filters</button>
-    <div className="dropdown-content">
-      <label>
-        <input type="checkbox" name="Smoke" value="Smoke" /> Smoke
-      </label>
-      <br />
-      <label>
-        <input type="checkbox" name="Active Fires" value="Active Fires" /> Active Fires
-      </label>
-      <br />
-      <label>
-        <input type="checkbox" name="Fire Prediction" value="Fire Prediction" /> Fire Prediction
-      </label>
-      <br />
-      <label>
-        <input type="checkbox" name="Elevation" value="Elevation" /> Elevation
-      </label>
-      <br />
-      <button className="apply-filters">Apply Filters</button>
-    </div>
-  </div>
-</div>
-
   );
 }
 

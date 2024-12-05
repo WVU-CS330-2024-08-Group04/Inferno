@@ -46,7 +46,14 @@ function AccountSettings() {
             <img src="Inferno wildfire full logo cropped.png" alt="logo" />
           </Link>
         </div>
+<div className = "banner-content">
+  <div className = "left-banner-content">
 
+  <Link to="/about" className="about-link">About</Link>
+        </div>
+        
+        <div className="helloName">Hello, {name}</div>
+        
         <input
           type="image"
           src="Profile Icon.png"
@@ -54,16 +61,10 @@ function AccountSettings() {
           className="user-icon"
           alt="Profile Icon"
         />
-        <Link to="/about" className="about-link">About</Link>
-
-        <button onClick={toggleDarkMode} className="dark-button">
-          <span id="clickMeText">Dark Mode</span>
-          <span className="button_icon">
-            <ion-icon name="moon"></ion-icon>
-          </span>
-        </button>
-        <div className="helloName">Hello, {name}</div>
       </div>
+      </div>
+
+      
 
       <div className="content">
         <div className="side-buttons left">
