@@ -130,7 +130,7 @@ h2 {
   gap: 10px;
 }
 
-button {
+.welcome-button {
   position: fixed;
   top: 20px;
   right: 20px;
