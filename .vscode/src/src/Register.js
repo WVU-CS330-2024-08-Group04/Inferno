@@ -52,7 +52,7 @@ const Register = () => {
   };
 
   return (
-    <div className="register-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '58vh'}}>
+    <div className="register-form" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '65vh'}}>
       <form
         onSubmit={handleRegister}
         style={{
@@ -120,18 +120,37 @@ const Register = () => {
           type="submit"
           style={{
             padding: '10px 20px',
-            backgroundColor: '#FF5722',
-            color: 'white',
+            backgroundColor: 'rgba(244, 144, 12, 1)',
+            color: 'black',
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
             fontWeight: 'bold',
             transition: 'background-color 0.3s',
           }}
-          onMouseOver={(e) => (e.target.style.backgroundColor = '#E64A19')}
-          onMouseOut={(e) => (e.target.style.backgroundColor = '#FF5722')}
-        >Register</button>
-    </form>
+          onMouseOver={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
+          onMouseOut={(e) => (e.target.style.backgroundColor = 'rgba(244, 144, 12, 1)')}
+        >Register
+        </button>
+        <button
+          type="button"
+          onClick={() => navigate('/')}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: 'rgba(244, 144, 12, 1)',
+            color: 'black',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
+          onMouseOut={(e) => (e.target.style.backgroundColor = 'rgba(244, 144, 12, 1)')}
+        >
+          Back to Home
+        </button>
+      </form>
     </div>
   );
 };
