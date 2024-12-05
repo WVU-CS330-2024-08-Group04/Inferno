@@ -33,8 +33,8 @@ function Login ({ setAuthenticated })  {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!username || !password){
-      setError('Both fields are required');
+    if (username.trim() === '' || password.trim() === '') {
+      alert('Username and/or Password are incorrect or empty');
       return;
     }
 
@@ -58,31 +58,62 @@ function Login ({ setAuthenticated })  {
   };
 
   return (
-    <div className="login-form">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        </div>
-        {error && <p className="error-message">{error}</p>}
-        <button type="submit">Login</button>
-      </form>
-
-      
-      <p style={{ marginTop: '10px' }}>
-        Don’t have an account? <Link to="/register">Register here</Link>
-      </p>
+    <div className="login-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '36vh'}}>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          maxWidth: '400px',
+          width: '100%',
+          padding: '20px',
+          border: '1px solid #ddd',
+          borderRadius: '8px',
+          backgroundColor: 'white',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+      <h2 style={{ textAlign: 'center' }}>Login</h2>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        style={{
+          marginBottom: '10px',
+          padding: '10px',
+          borderRadius: '5px',
+          border: '1px solid #ccc',
+        }}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        style={{
+          marginBottom: '10px',
+          padding: '10px',
+          borderRadius: '5px',
+          border: '1px solid #ccc',
+        }}
+      />
+        <button
+          type="submit"
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#FF5722',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            transition: 'background-color 0.3s',
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = '#E64A19')}
+          onMouseOut={(e) => (e.target.style.backgroundColor = '#FF5722')}
+        >Login</button>
+    </form>
     </div>
   );
 };

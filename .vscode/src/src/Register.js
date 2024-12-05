@@ -52,7 +52,7 @@ const Register = () => {
   };
 
   return (
-    <div className="register-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '55vh'}}>
+    <div className="register-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '58vh'}}>
       <form
         onSubmit={handleRegister}
         style={{

@@ -341,7 +341,7 @@ button.dark-mode-toggle {
   margin-top: 10px;
   border-radius: 25px;
   background-color: rgba(244, 144, 12, 1);
-  color: white;
+  color: black;
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s;
