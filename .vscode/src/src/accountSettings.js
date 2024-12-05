@@ -9,6 +9,7 @@ function AccountSettings() {
   const [showDeleteAccountPopup, setShowDeleteAccountPopup] = useState(false);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
   const [showFirePreventionPopup, setShowFirePreventionPopup] = useState(false);
+  const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
     if (darkMode) {
@@ -18,15 +19,23 @@ function AccountSettings() {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    setCurrentDate(formattedDate);
+  }, []);
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     localStorage.setItem("darkMode", !darkMode ? "enabled" : "disabled");
   };
 
-  const getName = () => {
-    return 'User Name';
-  };
-
+  const getName = () => 'User Name';
   const name = getName();
   const navigate = useNavigate();
 
@@ -46,25 +55,20 @@ function AccountSettings() {
             <img src="Inferno wildfire full logo cropped.png" alt="logo" />
           </Link>
         </div>
-<div className = "banner-content">
-  <div className = "left-banner-content">
-
-  <Link to="/about" className="about-link">About</Link>
+        <div className="banner-content">
+          <div className="left-banner-content">
+            <Link to="/about" className="about-link">About</Link>
+          </div>
+          <div className="helloName">Hello, {name}</div>
+          <input
+            type="image"
+            src="Profile Icon.png"
+            onClick={() => navigate('/accountSettings')}
+            className="user-icon"
+            alt="Profile Icon"
+          />
         </div>
-        
-        <div className="helloName">Hello, {name}</div>
-        
-        <input
-          type="image"
-          src="Profile Icon.png"
-          onClick={() => navigate('/accountSettings')}
-          className="user-icon"
-          alt="Profile Icon"
-        />
       </div>
-      </div>
-
-      
 
       <div className="content">
         <div className="side-buttons left">
@@ -75,6 +79,7 @@ function AccountSettings() {
 
         <div className="account-info">
           <p>Current Account Information</p>
+          <p>Date: {currentDate}</p>
         </div>
 
         <div className="side-buttons right">
@@ -87,7 +92,7 @@ function AccountSettings() {
 
       {/* Popups */}
       {showUsernamePopup && (
-        <div className="popUp" style={{ display: 'block' }}>
+        <div className="popUp">
           <div className="popUp-content">
             <h2>Change Username</h2>
             <input type="text" placeholder="Enter old username" />
@@ -128,7 +133,7 @@ function AccountSettings() {
         <div className="popUp">
           <div className="popUp-content">
             <h2>Sign Out</h2>
-            <h3>Are You Sure you want to Sign Out?</h3>
+            <h3>Are you sure you want to sign out?</h3>
             <button onClick={() => setShowSignOutPopup(false)}>Cancel</button>
             <button>Sign Out</button>
           </div>
