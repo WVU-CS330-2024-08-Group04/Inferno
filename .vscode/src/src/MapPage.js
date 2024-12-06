@@ -188,15 +188,13 @@ function MapPage() {
           </div>
   
           {/* Date Selection */}
-          <button className = "Time-button" onClick={toggleDateFields}>Select Time Range</button>
+          <button className = "Time-button" onClick={toggleDateFields}>Select Date</button>
           {showDateFields && (
           <div className="date-container">
-              <label htmlFor="startDate">Start Date:</label>
+              <label htmlFor="startDate">Date:</label>
               <input type="date" id="startDate" onChange={handleDateChange} />
-              <label htmlFor="endDate">End Date:</label>
-              <input type="date" id="endDate" onChange={handleDateChange} />
               <div id="selected-dates">{selectedDates}</div>
-              <button className="apply-time">Apply Time Range</button>
+              <button className="apply-time">Display Date Data</button>
           </div>
           )}
         </div>

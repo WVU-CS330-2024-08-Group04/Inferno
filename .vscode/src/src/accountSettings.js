@@ -153,7 +153,7 @@ function AccountSettings() {
                 NIFC
               </a>
             </h4>
-            <button onClick={() => setShowFirePreventionPopup(false)}>Cancel</button>
+            <button onClick={() => setShowFirePreventionPopup(false)}>Exit</button>
           </div>
         </div>
       )}

@@ -207,7 +207,7 @@ body {
    /* margin-top: 20px;*/
     position: relative;
     text-align: center;
-    
+    top: 30px;
 }
 
 .popUp-content .warning {
