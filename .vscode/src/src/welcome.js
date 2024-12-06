@@ -67,7 +67,7 @@ return (
               </div>
             </div>
     
-            <button className="welcome-button" id="clickMe" onClick={() => darkMode()} className="dark-mode-toggle">
+            <button className="dark-mode-toggle" id="clickMe" onClick={() => darkMode()}>
               <span id="clickMeText">Dark Mode</span>
               <span className="button_icon">
                 <ion-icon name="moon"></ion-icon>
