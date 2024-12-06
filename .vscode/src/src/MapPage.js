@@ -4,11 +4,10 @@ import 'leaflet/dist/leaflet.css';
 import './mapStyles.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-
 function MapPage() {
   const [savedLocations, setSavedLocations] = useState([]);
   const [lastSearchedLocation, setLastSearchedLocation] = useState(null);
-  const [selectedDates, setSelectedDates] = useState('');
+  const [selectedDates, setSelectedDates] = useState(''); 
   const [darkMode, setDarkMode] = useState(false);
 
   const mapRef = useRef(null);
@@ -17,11 +16,22 @@ function MapPage() {
   useEffect(() => {
     if (mapRef.current) return;
 
-    const map = L.map(mapContainerRef.current).setView([39.8283, -98.5795], 4);
+    const map = L.map(mapContainerRef.current).setView([39.8283, -98.5795], 4); // Center on US
     mapRef.current = map;
+
+    // US Bounding box: [north, south, east, west]
+    const US_BOUNDS = [
+      [24.396308, -125.0], // southwest corner
+      [49.3457868, -66.93457] // northeast corner
+    ];
+
+    // Set bounds for map (restrict zooming and panning to US)
+    map.setMaxBounds(US_BOUNDS);
+    map.on('drag', function () { map.panInsideBounds(US_BOUNDS); });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
+      minZoom: 4,
       attribution: '© OpenStreetMap',
     }).addTo(map);
   }, []);
@@ -36,22 +46,57 @@ function MapPage() {
   };
 
   const searchLocation = () => {
-    const location = document.getElementById('locationInput').value;
-    const geocodeURL = `https://nominatim.openstreetmap.org/search?format=json&q=${location}`;
-
+    const location = document.getElementById('locationInput').value.trim();
+    if (!location) {
+      alert('Please enter a location.');
+      return;
+    }
+  
+    const geocodeURL = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
+  
     fetch(geocodeURL)
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
           const { lat, lon, display_name } = data[0];
-          mapRef.current.setView([parseFloat(lat), parseFloat(lon)], 13);
-
-          L.marker([parseFloat(lat), parseFloat(lon)])
-            .addTo(mapRef.current)
-            .bindPopup(display_name)
-            .openPopup();
-
-          setLastSearchedLocation({ name: display_name, lat: parseFloat(lat), lon: parseFloat(lon) });
+          const latitude = parseFloat(lat);
+          const longitude = parseFloat(lon);
+  
+          // Define US bounding box
+          const US_BOUNDS = {
+            north: 49.3457868,
+            south: 24.396308,
+            west: -125.0,
+            east: -66.93457
+          };
+  
+          // Check if the location is within the US
+          if (
+            latitude >= US_BOUNDS.south &&
+            latitude <= US_BOUNDS.north &&
+            longitude >= US_BOUNDS.west &&
+            longitude <= US_BOUNDS.east
+          ) {
+            // First, add the marker
+            const marker = L.marker([latitude, longitude])
+              .addTo(mapRef.current)
+              .bindPopup(display_name)
+              .openPopup();
+  
+            // Set the view but with a locked zoom level
+            mapRef.current.setView([latitude, longitude], 13); // Ensure zoom is set at 13 (or higher if needed)
+  
+            // Optionally, restrict zoom level after setting the view
+            mapRef.current.setMaxZoom(13);
+  
+            // Save the last searched location
+            setLastSearchedLocation({ name: display_name, lat: latitude, lon: longitude });
+  
+            const saveButton = document.getElementById('saveLocationBtn');
+            if (saveButton) saveButton.style.display = 'inline-block';
+          } else {
+            alert('Location is out of bounds.');
+          }
         } else {
           alert('Location not found. Please try again.');
         }
@@ -69,6 +114,7 @@ function MapPage() {
       alert('Location is already saved.');
     }
   };
+
   const navigate = useNavigate();
 
   const jumpToSavedLocation = (event) => {
@@ -85,12 +131,17 @@ function MapPage() {
     if (start && end) setSelectedDates(`Selected Dates: ${start} to ${end}`);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      searchLocation();
+    }
+  };
+
   return (
     <div>
       {/* Banner Section */}
       <div className="banner">
         <div className="banner-back">
-          
           <input
             type="image"
             src="Inferno wildfire full logo cropped.png"
@@ -102,7 +153,7 @@ function MapPage() {
           <div className="left-banner-content">
             <Link to="/about" className="about-link">About</Link>
           </div>
-          <div className="helloName">Hello, {name}</div>
+          <div className="helloName">Hello, </div>
           <input
             type="image"
             src="Profile Icon.png"
@@ -120,6 +171,7 @@ function MapPage() {
           className="search-bar"
           id="locationInput"
           placeholder="Search a location..."
+          onKeyDown={handleKeyDown}
         />
         <button className="search-button" onClick={searchLocation}>
           Search
