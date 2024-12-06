@@ -7,10 +7,6 @@ function About(){
     const [darkMode, setDarkMode] = useState(false);
     const navigate = useNavigate();
 
-    const toggleDarkMode = () => {
-      setDarkMode((prevMode) => !prevMode);
-    };
-  
     useEffect(() => {
         if (darkMode) {
           document.body.classList.add('dark-mode');
@@ -68,7 +64,7 @@ return (
                 </div>
                 <h2>CONTRIBUTORS</h2>
                 <div class="contributors">
-                    <span>Contributors information</span>
+                    <span>we should put our names here ok ill start: Shannon Seiler</span>
                 </div>
             </div>
         </div>
