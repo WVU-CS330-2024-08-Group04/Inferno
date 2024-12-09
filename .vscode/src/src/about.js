@@ -40,12 +40,12 @@ return (
         
         <div class="about-content">
             
-            <div class="sidebar">
-                <button onclick="location.href='map';">Home</button>
-                <button onclick="location.href='...Wildfire...';">Wildfire Afflicted Area</button>
-                <button onclick="location.href='accountSettings.html';">Settings</button>
-                <button onclick="location.href='donationTab.html';">Donation Tab</button>
-            </div>
+        <div className="sidebar">
+          <button onClick={() => navigate('/mapPage')}>Home</button>
+          <button onClick={() => navigate('/wildfire')}>Wildfire Afflicted Area</button>
+          <button onClick={() => navigate('/accountSettings')}>Settings</button>
+          <button onClick={() => navigate('/donationTab')}>Donation Tab</button>
+        </div>
             <div class="content-area">
                 <h2>ABOUT</h2>
             
