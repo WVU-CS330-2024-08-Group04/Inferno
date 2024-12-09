@@ -129,14 +129,12 @@ body {
 
 
 .side-buttons.right {
-    display: block;
+    display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: flex-end;
     width: 20%; 
     height: 700px;
     padding: 10px;
-    
 }
 
 .side-buttons.right button {
