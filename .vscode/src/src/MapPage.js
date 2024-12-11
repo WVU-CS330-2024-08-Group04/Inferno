@@ -3,13 +3,13 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './mapStyles.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { calculateRisk } from './mapComponents.js';
 
 function MapPage() {
   const [savedLocations, setSavedLocations] = useState([]);
   const [lastSearchedLocation, setLastSearchedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState('');
   const [showDateFields, setShowDateFields] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [showFilters, setShowFilters] = useState(false); // State for showing filters
   const [selectedFilters, setSelectedFilters] = useState({
     'Smoke': false,
@@ -22,6 +22,14 @@ function MapPage() {
   const mapContainerRef = useRef(null);
 
   useEffect(() => {
+    // Check localStorage for saved theme on component mount
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+
     if (mapRef.current) return;
 
     const map = L.map(mapContainerRef.current).setView([39.8283, -98.5795], 4); // Center on US
@@ -42,16 +50,7 @@ function MapPage() {
       minZoom: 4,
       attribution: '© OpenStreetMap',
     }).addTo(map);
-  }, []);
-
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const newMode = !prev;
-      document.body.classList.toggle('dark-mode', newMode);
-      localStorage.setItem('darkMode', newMode ? 'enabled' : 'disabled');
-      return newMode;
-    });
-  };
+  }, []); // Empty dependency array to run only once when the component mounts
 
   const searchLocation = () => {
     const location = document.getElementById('locationInput').value.trim();
@@ -59,9 +58,9 @@ function MapPage() {
       alert('Please enter a location.');
       return;
     }
-  
+
     const geocodeURL = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
-  
+
     fetch(geocodeURL)
       .then((response) => response.json())
       .then((data) => {
@@ -69,7 +68,7 @@ function MapPage() {
           const { lat, lon, display_name } = data[0];
           const latitude = parseFloat(lat);
           const longitude = parseFloat(lon);
-  
+
           // Define US bounding box
           const US_BOUNDS = {
             north: 49.3457868,
@@ -77,7 +76,7 @@ function MapPage() {
             west: -125.0,
             east: -66.93457
           };
-  
+
           // Check if the location is within the US
           if (
             latitude >= US_BOUNDS.south &&
@@ -85,21 +84,45 @@ function MapPage() {
             longitude >= US_BOUNDS.west &&
             longitude <= US_BOUNDS.east
           ) {
+
+            const inputData = {
+              temperature: 90,
+              relativeHumidity: 0.30/100,
+              windSpeed: 15,
+              soilMoisture: 0.05/100,
+              activeFires: false,
+            };
+
+
+            const prediction = calculateRisk(inputData);
+
+            const customIcon = L.icon({
+              iconUrl: 'your-photo-url-here.png', // Replace with your photo URL
+              iconSize: [40, 40], // Size of the icon
+              iconAnchor: [20, 40], // Point of the icon which will correspond to marker's location
+              popupAnchor: [0, -40] // Point from which the popup should open relative to the iconAnchor
+            });
+
             // First, add the marker
             const marker = L.marker([latitude, longitude])
               .addTo(mapRef.current)
-              .bindPopup(display_name)
+              .bindPopup(`
+                <strong>Location:</strong> ${display_name}<br>
+                <strong>Temperature:</strong> ${inputData.temperature}°F<br>
+                <strong>Wind Speed:</strong> ${inputData.windSpeed} mph<br>
+                <strong>Humidity:</strong> ${(inputData.relativeHumidity * 100).toFixed(1)}%<br>
+                <strong>Soil Moisture:</strong> ${(inputData.soilMoisture * 100).toFixed(1)}%<br>
+                <strong>Active Fires:</strong> ${inputData.activeFires ? 'Yes' : 'No'}<br>
+                <strong>Prediction:</strong> ${prediction.risk} (${prediction.color.toUpperCase()})
+              `)
               .openPopup();
-  
+
             // Set the view but with a locked zoom level
             mapRef.current.setView([latitude, longitude], 13); // Ensure zoom is set at 13 (or higher if needed)
-  
-            // Optionally, restrict zoom level after setting the view
-            mapRef.current.setMaxZoom(13);
-  
+
             // Save the last searched location
             setLastSearchedLocation({ name: display_name, lat: latitude, lon: longitude });
-  
+
             const saveButton = document.getElementById('saveLocationBtn');
             if (saveButton) saveButton.style.display = 'inline-block';
           } else {
@@ -157,7 +180,6 @@ function MapPage() {
     }));
   };
 
-
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       searchLocation();
@@ -190,7 +212,7 @@ function MapPage() {
           />
         </div>
       </div>
-  
+
       {/* Search Section */}
       <div className="search-container">
         <input
@@ -216,15 +238,15 @@ function MapPage() {
           ))}
         </select>
       </div>
-  
+
       {/* Main Container */}
       <div className="main-container">
         {/* Map Section */}
         <div id="map" ref={mapContainerRef}></div>
-  
+
         {/* Side Container */}
         <div className="side-container">
-  
+
           {/* Filters */}
           <div className="filters-container">
             <button className="filter-dropdown-trigger" onClick={toggleFilters}>Filters</button>
@@ -238,7 +260,7 @@ function MapPage() {
             </div>
             )}
           </div>
-  
+
           {/* Date Selection */}
           <button className = "Time-button" onClick={toggleDateFields}>Select Date</button>
           {showDateFields && (
