@@ -373,7 +373,7 @@ button.dark-mode-toggle {
   align-items: center;
   position: relative;
   top: 60px;
-  background-color: white;
+  background-color: transparent;
 }
 
 .sidebar button {
