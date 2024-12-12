@@ -373,21 +373,21 @@ button.dark-mode-toggle {
   transition: background-color 0.5s, color 0.5s;
   margin: 0; 
   box-sizing: border-box;    
-  align-items: center;
+  align-items: left;
   justify-self: center;
 }
 
 .main-content{
   font-family: "Helvetica", sans-serif;
   font-size:14px;
-  text-align: center;
+  text-align: left;
 }
 
 .content-area h2{
     font-weight: bold;
     margin-bottom: 5px;
     text-decoration: underline;
-    text-align: center;
+    text-align: left;
 }
 
 ion-icon {

@@ -53,7 +53,7 @@ function About() {
           <h2>ABOUT</h2>
           <div className="main-content">
             <p>
-              &nbsp;&nbsp;&nbsp;&nbsp;Inferno: Wildfire Control & Tracking is an application that predicts the possibility of 
+              Inferno: Wildfire Control & Tracking is an application that predicts the possibility of 
               wildfires in the user selected area. It uses a location's temperature, wind speeds, relative humidity, and soil 
               moisture and then tests it against medium and high risk thresholds. The results are then displayed back to the 
               user as a color overlay. The data utilized in this application is from National Oceanic and Atmospheric Administration (NOAA).
@@ -68,7 +68,16 @@ function About() {
 
           <h2>CONTRIBUTORS</h2>
           <div className="contributors">
-            <span>we should put our names here ok ill start: Shannon Seiler</span>
+            <span>
+          SHANNON SEILER<br></br>
+          JULIA VAN ALBERT<br></br>
+          SETH WEESE<br></br>
+          TANNER FORBES<br></br>
+          JEREMY DAVIS<br></br>
+          ALEXIS DEPUE<br></br>
+          AUSTIN BROWN<br></br>
+          MATTHEW WELCH<br></br>
+            </span>
           </div>
         </div>
       </div>
