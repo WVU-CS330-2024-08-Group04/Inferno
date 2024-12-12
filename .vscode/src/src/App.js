@@ -6,6 +6,7 @@ import Register from './Register';
 import MapPage from './MapPage';
 import Welcome from './welcome';
 import About from './about';
+import AccountSettings from './accountSettings';
 
 // import sheet from './style.css' with { type: 'css' };
 // document.adoptedStyleSheets = [sheet];
@@ -46,6 +47,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/MapPage" element={<MapPage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/accountSettings" element={<AccountSettings />} />
 
        
       </Routes>
