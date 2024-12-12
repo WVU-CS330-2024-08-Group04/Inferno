@@ -46,8 +46,8 @@ function Login ({ setAuthenticated })  {
       );
 
       if (response.data.message === 'Login successful') {
-        setAuthenticated(true);
-        navigate('/map'); // Redirect to main page
+        // setAuthenticated(true);
+        navigate('/MapPage'); // Redirect to main page
       } else {
         alert('Login failed. Please check your credentials.');
       }
