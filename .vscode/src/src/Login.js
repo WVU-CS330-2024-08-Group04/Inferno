@@ -5,6 +5,7 @@
  * Upon successful login, it updates the authentication state and navigates to the map page.
  */
 
+//import statements, react and axios
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
@@ -57,6 +58,7 @@ function Login ({ setAuthenticated })  {
     }
   };
 
+  //contains inline css
   return (
     <div className="login-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '42vh'}}>
       <form
@@ -113,7 +115,7 @@ function Login ({ setAuthenticated })  {
           onMouseOver={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
           onMouseOut={(e) => (e.target.style.backgroundColor = 'rgba(244, 144, 12, 1)')}
         >Login</button>
-    <button
+        <button
           type="button"
           onClick={() => navigate('/')}
           style={{
