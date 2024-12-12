@@ -1,3 +1,5 @@
+
+
 export function calculateRisk(inputData) {
     const highRisk = { 
         temperature: 85, 
