@@ -85,5 +85,16 @@ Example of rendering a map and centering it on the US
 - NOAA
 - Leaflet.js
 
+## Contributors
+- AUSTIN BROWN
+- JEREMY DAVIS
+- ALEXIS DEPUE
+- TANNER FORBES
+- SHANNON SEILER
+- JULIA VAN ALBERT
+- SETH WEESE
+- MATTHEW WELCH
+
+
   
 
