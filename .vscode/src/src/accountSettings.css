@@ -16,6 +16,7 @@ body {
     box-sizing: border-box;
 }
 
+/*Makes sure that the body is aligned in the center of the page*/
 .center {
     text-align: center;
     margin-top: 50px;

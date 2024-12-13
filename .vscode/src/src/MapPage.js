@@ -31,10 +31,10 @@ function MapPage() {
   const [showDateFields, setShowDateFields] = useState(false);
   const [showFilters, setShowFilters] = useState(false); // State for showing filters
   const [selectedFilters, setSelectedFilters] = useState({
-    'Smoke': false,
+    //'Smoke': false,
     'Active Fires': false,
     'Fire Prediction': false,
-    'Elevation': false,
+    //'Elevation': false,
   });
 
   const mapRef = useRef(null);
@@ -284,10 +284,10 @@ function MapPage() {
             <button className="filter-dropdown-trigger" onClick={toggleFilters}>Filters</button>
             {showFilters && (
             <div className="dropdown-content">
-              <label><input type="checkbox" name="Smoke" value="Smoke" /> Smoke</label>
+              {/*<label><input type="checkbox" name="Smoke" value="Smoke" /> Smoke</label>*/}
               <label><input type="checkbox" name="Active Fires" value="Active Fires" /> Active Fires</label>
               <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction" /> Fire Prediction</label>
-              <label><input type="checkbox" name="Elevation" value="Elevation" /> Elevation</label>
+              {/*<label><input type="checkbox" name="Elevation" value="Elevation" /> Elevation</label>*/}
               <button className="apply-filters">Apply Filters</button>
             </div>
             )}
