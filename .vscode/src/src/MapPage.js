@@ -1,11 +1,28 @@
+/**
+ * MapPage.js
+ * 
+ * This file handles the map page functionality of the application. 
+ * 
+ * Responsibilities:
+ * -access to Welcome page, reload About page, go to user settings, and display user name in banner of page
+ * -interactive leaflet map
+ * -search bar to find locations in bounds, save location and access saved locations
+ * -filters and select date drop down/options to assist in fire/prediciton search
+ * 
+ * Group 4
+ */
+
+//import statements, react and leaflet
 import React, { useState, useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import './mapStyles.css';
+import './mapStyles.css'; //import styles
 import { Link, useNavigate } from 'react-router-dom';
-import { calculateRisk } from './mapComponents.js';
+import { calculateRisk } from './mapComponents.js'; //import risk calculation function from mapComponents.js
 
 function MapPage() {
+
+  //set const variables for locations, dates, and filters functions
   const [savedLocations, setSavedLocations] = useState([]);
   const [lastSearchedLocation, setLastSearchedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState('');
@@ -21,6 +38,7 @@ function MapPage() {
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
 
+  //dark mode/light mode, handle use state change
   useEffect(() => {
     // Check localStorage for saved theme on component mount
     const savedTheme = localStorage.getItem('theme');
@@ -52,6 +70,7 @@ function MapPage() {
     }).addTo(map);
   }, []); // Empty dependency array to run only once when the component mounts
 
+  //popup for when a user presses enter/search and the search bar is empty
   const searchLocation = () => {
     const location = document.getElementById('locationInput').value.trim();
     if (!location) {
@@ -61,6 +80,7 @@ function MapPage() {
 
     const geocodeURL = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
 
+    //map functionality
     fetch(geocodeURL)
       .then((response) => response.json())
       .then((data) => {
@@ -85,6 +105,7 @@ function MapPage() {
             longitude <= US_BOUNDS.east
           ) {
 
+            //hard coded data until we're able to pull data from server
             const inputData = {
               temperature: 90,
               relativeHumidity: 0.30/100,
@@ -97,7 +118,7 @@ function MapPage() {
             const prediction = calculateRisk(inputData);
 
             const customIcon = L.icon({
-              iconUrl: 'your-photo-url-here.png', // Replace with your photo URL
+              iconUrl: 'map-icon', // Replace with your photo URL
               iconSize: [40, 40], // Size of the icon
               iconAnchor: [20, 40], // Point of the icon which will correspond to marker's location
               popupAnchor: [0, -40] // Point from which the popup should open relative to the iconAnchor
@@ -123,6 +144,7 @@ function MapPage() {
             // Save the last searched location
             setLastSearchedLocation({ name: display_name, lat: latitude, lon: longitude });
 
+            //save location button and popups for location that is not found or out of the set bounds
             const saveButton = document.getElementById('saveLocationBtn');
             if (saveButton) saveButton.style.display = 'inline-block';
           } else {
@@ -135,6 +157,7 @@ function MapPage() {
       .catch((error) => console.error('Error fetching location data:', error));
   };
 
+  //save locatoin and last searched location
   const saveLocation = () => {
     if (!lastSearchedLocation) return;
 
@@ -148,6 +171,7 @@ function MapPage() {
 
   const navigate = useNavigate();
 
+  //allows you to access your saved locations
   const jumpToSavedLocation = (event) => {
     const value = event.target.value;
     if (value) {
@@ -163,10 +187,12 @@ function MapPage() {
     }
   };
 
+  //function to toggle state of dates
   const toggleDateFields = () => {
     setShowDateFields(!showDateFields); // Toggle the state
   };
 
+  //function to toggle the filters button
   const toggleFilters = () => {
     setShowFilters(!showFilters);
   };
@@ -180,6 +206,7 @@ function MapPage() {
     }));
   };
 
+  //allows you to press enter and that does the same funciton as pressing the search button
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       searchLocation();
@@ -190,6 +217,8 @@ function MapPage() {
     <div>
       {/* Banner Section */}
       <div className="banner">
+
+        {/* logo */}
         <div className="banner-back">
           <input
             type="image"
@@ -199,6 +228,8 @@ function MapPage() {
           />
         </div>
         <div className="banner-content">
+
+          {/* About page link using user icon as button */}
           <div className="left-banner-content">
             <Link to="/about" className="about-link">About</Link>
           </div>

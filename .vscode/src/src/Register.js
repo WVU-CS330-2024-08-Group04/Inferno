@@ -4,6 +4,8 @@
  * This component provides a registration form for new users. It sends 
  * the registration details to the backend, and if successful, redirects to the login page.
  */
+
+//import statments, react and axios
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -25,15 +27,19 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    //popup alerts for if confimr password isn't the same as password
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
+
+    //popup alerts for if confimr password isn't the same as password
     if (username.trim() === '' || password.trim() === '') {
       alert('Username and password cannot be empty.');
       return;
     }
 
+    //resgistration script
     try {
       const response = await axios.post(
         'http://localhost:5001/auth/register',
@@ -51,6 +57,7 @@ const Register = () => {
     }
   };
 
+  //contains inline style
   return (
     <div className="register-form" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '65vh'}}>
       <form
@@ -104,6 +111,8 @@ const Register = () => {
             border: '1px solid #ccc',
           }}
         />
+        
+        {/* requirements to create a password */}
         <PasswordChecklist
               rules={[
                 "minlength",

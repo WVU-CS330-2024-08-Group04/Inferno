@@ -330,11 +330,11 @@ button.dark-mode-toggle {
 }
 
 .sidebar {
-  padding: 0;
-  width: 80%;
   display: flex;
+  justify-content: center;
+  padding: 0;
+  width: 50%;
   flex-direction: row;
-  justify-content: space-evenly;
   justify-self: center;
   align-items: center;
   position: relative;
@@ -387,7 +387,11 @@ button.dark-mode-toggle {
     font-weight: bold;
     margin-bottom: 5px;
     text-decoration: underline;
-    text-align: left;
+    text-align: center;
+}
+
+.contributors{
+  text-align: center;
 }
 
 ion-icon {

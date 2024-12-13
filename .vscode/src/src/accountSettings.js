@@ -1,9 +1,27 @@
+/**
+ * accountSettings.js
+ * 
+ * This file handles the user settings page functionality of the application, 
+ * always accessible by clicking the user icon in the top right of all pages excluding the welcome page.
+ * 
+ * Responsibilities:
+ * -display the date and current account information
+ * -access to Welcome page, About page, and display user name in banner of page
+ * -button options to change username, passwords, and delete account
+ * 
+ * Group 4
+ */
+
+//import statements, react
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './accountSettings.css'; // import styles
 
+
 function AccountSettings() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+  //set const variables, popups
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light'); // sets light mode use state
   const [showUsernamePopup, setShowUsernamePopup] = useState(false);
   const [showPasswordPopup, setShowPasswordPopup] = useState(false);
   const [showDeleteAccountPopup, setShowDeleteAccountPopup] = useState(false);
@@ -11,7 +29,9 @@ function AccountSettings() {
   const [showFirePreventionPopup, setShowFirePreventionPopup] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
 
+  //dark mode/light mode, handle use state change
   useEffect(() => {
+    // Update theme and UI elements based on the current theme
     if (theme === 'dark') {
       document.body.classList.add('dark-mode');
     } else {
@@ -19,6 +39,7 @@ function AccountSettings() {
     }
   }, [theme]);
 
+  //current date use state updates to local date
   useEffect(() => {
     const date = new Date();
     const formattedDate = date.toLocaleDateString(undefined, {
@@ -30,6 +51,7 @@ function AccountSettings() {
     setCurrentDate(formattedDate);
   }, []);
 
+  //dark mode, local storage set theme
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
@@ -40,7 +62,10 @@ function AccountSettings() {
 
   return (
     <div className="account-settings">
+      {/* banner content */}
       <div className="banner">
+
+        {/* logo */}
         <div className="banner-back">
           <input
             type="image"
@@ -50,6 +75,8 @@ function AccountSettings() {
           />
         </div>
         <div className="banner-content">
+
+          {/* About page link using user icon as button */}
           <Link to="/about" className="about-link">About</Link>
           <input
             type="image"
@@ -62,25 +89,28 @@ function AccountSettings() {
       </div>
 
       <div className="content">
+        {/* Contains change username, password, and delete account button options, all popups */}
         <div className="side-buttons left">
           <button onClick={() => setShowUsernamePopup(true)}>Change Username</button>
           <button onClick={() => setShowPasswordPopup(true)}>Change Password</button>
           <button onClick={() => setShowDeleteAccountPopup(true)}>Delete Account</button>
         </div>
 
+        {/* Displays current date and current account infomration */}
         <div className="account-info">
           <p>Current Account Information</p>
           <p>Date: {currentDate}</p>
         </div>
 
+        {/* Contains sign out popup button, dark mode toggle button, and fire prevention tips popup button */}
         <div className="side-buttons right">
           <button onClick={() => setShowSignOutPopup(true)}>Sign Out</button>
           <button onClick={toggleTheme}>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</button>
           <button onClick={() => setShowFirePreventionPopup(true)}>Fire Prevention Tips</button>
-          <button onClick={() => navigate(-1)}>Back</button>
         </div>
       </div>
 
+      {/* popup for changing username, triggered by Change Username button  */}
       {showUsernamePopup && (
         <div className="popUp">
           <div className="popUp-content">
@@ -94,6 +124,7 @@ function AccountSettings() {
         </div>
       )}
 
+      {/* popup for changing password, triggered by Change Password button */}
       {showPasswordPopup && (
         <div className="popUp">
           <div className="popUp-content">
@@ -107,6 +138,7 @@ function AccountSettings() {
         </div>
       )}
 
+      {/* popup for deleting account, triggered by Delete Account button */}
       {showDeleteAccountPopup && (
         <div className="popUp">
           <div className="popUp-content">
@@ -119,6 +151,7 @@ function AccountSettings() {
         </div>
       )}
 
+      {/* popup for signing out of account, triggered by Sign Out button */}
       {showSignOutPopup && (
         <div className="popUp">
           <div className="popUp-content">
@@ -130,6 +163,7 @@ function AccountSettings() {
         </div>
       )}
 
+      {/* popup for fire prevention tips, triggered by Fire Prevention Tips button */}
       {showFirePreventionPopup && (
         <div className="popUp">
           <div className="popUp-content">

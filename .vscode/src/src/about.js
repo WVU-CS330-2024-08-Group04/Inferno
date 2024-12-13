@@ -1,12 +1,32 @@
+/**
+ * about.js
+ * 
+ * This file handles the about page functionality of the application. 
+ * Accesible from the "About" button on banner on all pages excluding the welcome page.
+ * 
+ * Responsibilities:
+ * -access to Welcome page, reload About page, go to user settings, and display user name in banner of page
+ * -contains information about our app and links for NOAA data
+ * -lists all contributors on the application
+ * -button across bottom to go back to map
+ * 
+ * Group 4
+ */
+
+//import statements, react
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import './App.css'; // Import your styles
+import './App.css'; // Imported styles
 
 function About() {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  //set const variables
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light'); // sets light mode use state
   const navigate = useNavigate();
 
+  //dark mode/light mode, handle use state change
   useEffect(() => {
+    // Update theme and UI elements based on the current theme
     if (theme === 'dark') {
       document.body.classList.add('dark-mode');
     } else {
@@ -18,6 +38,8 @@ function About() {
     <div className="account-settings">
       {/* Banner Section */}
       <div className="banner">
+
+        {/* logo */}
         <div className="banner-back">
           <input
             type="image"
@@ -27,6 +49,8 @@ function About() {
           />
         </div>
         <div className="banner-content">
+
+          {/* About page link using user icon as button */}
           <div className="left-banner-content">
             <Link to="/about" className="about-link">About</Link>
           </div>
@@ -42,13 +66,8 @@ function About() {
       </div>
 
       <div className="about-content">
-        <div className="sidebar">
-          <button onClick={() => navigate('/mapPage')}>Home</button>
-          <button onClick={() => navigate('/wildfire')}>Wildfire Afflicted Area</button>
-          <button onClick={() => navigate('/accountSettings')}>Settings</button>
-          <button onClick={() => navigate('/donationTab')}>Donation Tab</button>
-        </div>
 
+        {/*About section*/}
         <div className="content-area">
           <h2>ABOUT</h2>
           <div className="main-content">
@@ -66,6 +85,7 @@ function About() {
             <button onClick={() => window.location.href = 'https://www.nesdis.noaa.gov/our-satellites/currently-flying/joint-polar-satellite-system'}>NOAA JPSS</button>
           </div>
 
+        {/* Contributors section */}
           <h2>CONTRIBUTORS</h2>
           <div className="contributors">
             <span>
@@ -81,6 +101,13 @@ function About() {
           </div>
         </div>
       </div>
+
+      {/* Options for continuing to map and visiting about page */}
+      <nav className="navbar">
+      <ul>
+        <li><Link to="/mappage" className="button-link">Continue to Map</Link></li>
+      </ul>
+    </nav>
     </div>
   );
 }
