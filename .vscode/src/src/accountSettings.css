@@ -1,4 +1,21 @@
+/**
+* accountSettings.css
+* 
+* This file handles the stylist choices of the account settings page.
+* 
+* Responsiblites 
+* -Controling how the account settings page appears to the user.
+* -Controls how the buttons and links appear on the page.
+* -Determines how the banner 
+*
+*
+*
+* Group 4
+**/
 
+
+
+/*Controls the font, margin and padding of the body while also controling the transition of the background when dark mode is switched*/
 body {
     font-family: 'Helvetica', sans-serif;
     margin: 0;
@@ -7,10 +24,13 @@ body {
     box-sizing: border-box;
 }
 
+/*Makes sure that the body is aligned in the center of the page*/
 .center {
     text-align: center;
     margin-top: 50px;
 }
+
+/*Controls the look of the dark mode button specificly on the settings page*/
 .dark-button{
     position:relative;
     cursor: pointer;
