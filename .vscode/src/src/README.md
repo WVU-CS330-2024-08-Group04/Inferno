@@ -30,3 +30,23 @@ Wildfires pose a significant threat to lives, property, and the environment. The
 
 ### Welcome.js
 - The welcome page component, displayed to new or unauthenticated users and prompst them to login, create an account, or go to the map page
+
+## Components
+### mapComponentt.js
+- Contains components/helper logic related to the map's functionality
+
+### accountSetting.js
+- Component for user account settings
+
+### reportWebVitals.js
+- Tool for measuring and reporting performance metrics
+
+## Styles
+### App.css
+- Defines the visual styling for the application, including layout, colors, fonts, and responsive design
+
+### Map.css
+- Styles specific to the map view
+
+### accountSettings.css
+- Styles specific to the account settings component
