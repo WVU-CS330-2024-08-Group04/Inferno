@@ -37,6 +37,22 @@ function MapPage() {
 
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
+  const [showLegend, setShowLegend] = useState(true); // State to control legend visibility
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (mapRef.current) {
+        mapRef.current.invalidateSize();  // Forces the map to recalculate its size
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  
 
   //dark mode/light mode, handle use state change
   useEffect(() => {
@@ -65,10 +81,56 @@ function MapPage() {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      minZoom: 4,
+      minZoom:4,
       attribution: '© OpenStreetMap',
     }).addTo(map);
-  }, []); // Empty dependency array to run only once when the component mounts
+
+     // Create the Legend
+     const legend = L.control({ position: 'bottomleft' });
+
+     legend.onAdd = function () {
+       const div = L.DomUtil.create('div', 'info legend');
+       const labels = ['No Risk','Low Risk', 'Medium Risk', 'High Risk'];
+       const colors = ['#26c454','#f0e300', '#faa064', '#e30808']; // Color codes for different risk levels
+ 
+  // Add each label with a color circle
+  labels.forEach((label, index) => {
+    div.innerHTML += `
+      <div class="legend-item">
+        <span class="legend-color" style="background:${colors[index]}"></span>
+        ${label}
+      </div>
+    `;
+  });
+ 
+       return div;
+      };
+      // Add legend to map if showLegend is true
+      if (showLegend) {
+        legend.addTo(map);
+      }
+  
+      // Function to toggle the legend visibility
+      const toggleLegend = () => {
+        if (showLegend) {
+          map.removeControl(legend);
+        } else {
+          legend.addTo(map);
+        }
+        setShowLegend(!showLegend);
+      };
+  
+      // Create a button to toggle the legend
+      const legendButton = L.DomUtil.create('button', 'legend-toggle-button');
+      legendButton.innerHTML = showLegend ? 'Hide Legend' : 'Show Legend';
+      legendButton.onclick = toggleLegend;
+  
+      // Add the button to the map (it will appear on top-right of the map)
+      L.DomUtil.addClass(legendButton, 'leaflet-bar');
+      L.DomUtil.create('div').appendChild(legendButton);
+  
+    }, [showLegend]);
+   
 
   //popup for when a user presses enter/search and the search bar is empty
   const searchLocation = () => {
@@ -137,6 +199,15 @@ function MapPage() {
                 <strong>Prediction:</strong> ${prediction.risk} (${prediction.color.toUpperCase()})
               `)
               .openPopup();
+
+            // Add a 10-mile radius circle around the marker
+            const radius = 10 * 1609.34; // 10 miles in meters
+            L.circle([latitude, longitude], {
+              color: prediction.color, // Use the color based on the risk level
+              fillColor: prediction.color,
+              fillOpacity: 0.7,
+              radius: radius
+            }).addTo(mapRef.current);
 
             // Set the view but with a locked zoom level
             mapRef.current.setView([latitude, longitude], 13); // Ensure zoom is set at 13 (or higher if needed)

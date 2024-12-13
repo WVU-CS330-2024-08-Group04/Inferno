@@ -65,12 +65,12 @@ export function calculateRisk(inputData) {
 
     //returns risk level based on count
     if (count >= 6 || activeFires) {
-        return { risk: "High Risk", color: "red", message: "Wildfire Likely" };
+        return { risk: "High Risk", color: "#e30808", message: "Wildfire Likely" };
     } else if (count >= 4) {
-        return { risk: "Medium Risk", color: "orange", message: "Elevated Wildfire Risk" };
+        return { risk: "Medium Risk", color: "#faa064", message: "Elevated Wildfire Risk" };
     } else if (count >= 2) {
-        return { risk: "Low Risk", color: "yellow", message: "Minimal Wildfire Risk" };
+        return { risk: "Low Risk", color: "#f0e300", message: "Minimal Wildfire Risk" };
     } else {
-        return { risk: "Safe", color: "green", message: "Low Wildfire Risk" };
+        return { risk: "Safe", color: "#26c454", message: "Low Wildfire Risk" };
     }
 }

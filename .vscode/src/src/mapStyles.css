@@ -25,6 +25,35 @@ body.dark-mode {
   border: 1px solid #ddd;
 }
 
+/* Styles for the legend */
+.info.legend {
+  background-color: white; /* Solid white background */
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Style for each legend item (circle and label) */
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+/* Circle style next to the text */
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Optional: Styling for the legend text */
+.info.legend span {
+  font-size: 14px;
+  color: #333;
+}
+
 /* Side Container */
 .side-container {
   flex: 1;
