@@ -183,9 +183,9 @@ function MapPage() {
             const marker = L.marker([latitude, longitude], {
               icon: new L.Icon({
                 iconUrl: markerIconPng,  // Path to your custom icon
-                iconSize: [40, 40],      // Size of the icon
+                iconSize: [30, 40],      // Size of the icon
                 iconAnchor: [20, 40],    // Anchor point where the icon will align with the marker's position
-                popupAnchor: [0, -40]    // Point where the popup will open relative to the icon
+                popupAnchor: [-5, -30]    // Point where the popup will open relative to the icon
               })
             })
               .addTo(mapRef.current) // Add marker to map
