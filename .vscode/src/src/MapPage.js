@@ -14,6 +14,8 @@
 
 //import statements, react and leaflet
 import React, { useState, useEffect, useRef } from 'react';
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
+import {Icon} from 'leaflet'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './mapStyles.css'; //import styles
@@ -29,10 +31,10 @@ function MapPage() {
   const [showDateFields, setShowDateFields] = useState(false);
   const [showFilters, setShowFilters] = useState(false); // State for showing filters
   const [selectedFilters, setSelectedFilters] = useState({
-    'Smoke': false,
+    //'Smoke': false,
     'Active Fires': false,
     'Fire Prediction': false,
-    'Elevation': false,
+    //'Elevation': false,
   });
 
   const mapRef = useRef(null);
@@ -176,19 +178,17 @@ function MapPage() {
               activeFires: false,
             };
 
-
             const prediction = calculateRisk(inputData);
 
-            const customIcon = L.icon({
-              iconUrl: 'map-icon', // Replace with your photo URL
-              iconSize: [40, 40], // Size of the icon
-              iconAnchor: [20, 40], // Point of the icon which will correspond to marker's location
-              popupAnchor: [0, -40] // Point from which the popup should open relative to the iconAnchor
-            });
-
-            // First, add the marker
-            const marker = L.marker([latitude, longitude])
-              .addTo(mapRef.current)
+            const marker = L.marker([latitude, longitude], {
+              icon: new L.Icon({
+                iconUrl: markerIconPng,  // Path to your custom icon
+                iconSize: [40, 40],      // Size of the icon
+                iconAnchor: [20, 40],    // Anchor point where the icon will align with the marker's position
+                popupAnchor: [0, -40]    // Point where the popup will open relative to the icon
+              })
+            })
+              .addTo(mapRef.current) // Add marker to map
               .bindPopup(`
                 <strong>Location:</strong> ${display_name}<br>
                 <strong>Temperature:</strong> ${inputData.temperature}°F<br>
@@ -198,7 +198,7 @@ function MapPage() {
                 <strong>Active Fires:</strong> ${inputData.activeFires ? 'Yes' : 'No'}<br>
                 <strong>Prediction:</strong> ${prediction.risk} (${prediction.color.toUpperCase()})
               `)
-              .openPopup();
+              .openPopup();  
 
             // Add a 10-mile radius circle around the marker
             const radius = 10 * 1609.34; // 10 miles in meters
@@ -354,10 +354,10 @@ function MapPage() {
             <button className="filter-dropdown-trigger" onClick={toggleFilters}>Filters</button>
             {showFilters && (
             <div className="dropdown-content">
-              <label><input type="checkbox" name="Smoke" value="Smoke" /> Smoke</label>
+              {/*<label><input type="checkbox" name="Smoke" value="Smoke" /> Smoke</label>*/}
               <label><input type="checkbox" name="Active Fires" value="Active Fires" /> Active Fires</label>
               <label><input type="checkbox" name="Fire Prediction" value="Fire Prediction" /> Fire Prediction</label>
-              <label><input type="checkbox" name="Elevation" value="Elevation" /> Elevation</label>
+              {/*<label><input type="checkbox" name="Elevation" value="Elevation" /> Elevation</label>*/}
               <button className="apply-filters">Apply Filters</button>
             </div>
             )}
