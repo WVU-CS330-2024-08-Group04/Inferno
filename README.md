@@ -4,6 +4,13 @@ The Wildfire Control & Tracking System is platform designed to provide tools for
 This project integrates geographic visualization, user account management, information about the creators and the platforms purpose, and informational resources to aid in wildfire prevention and response.
 ## Motivation
 Wildfires pose a significant threat to lives, property, and the environment. The motivation behind this project is to provide an accessible tool for individuals, communities, and organizations to better monitor wildfire activity and respond effectively.
+## Screenshots
+### Logo
+<img width="535" alt="Screenshot 2024-12-13 at 9 52 34 AM" src="https://github.com/user-attachments/assets/1577373c-fed1-4808-9277-eb2071633077" />]
+### Demo
+<img width="1470" alt="Screenshot 2024-12-13 at 9 54 05 AM" src="https://github.com/user-attachments/assets/5653859e-1019-48b4-aa2e-5e3da78b1f58" />
+
+
 
 ## Code Style
 This project adheres to JavaScript Standard Style
