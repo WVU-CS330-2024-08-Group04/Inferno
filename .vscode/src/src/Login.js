@@ -8,7 +8,7 @@
 //import statements, react and axios
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Removed Link from the list
 
 /**
  * Login component allows users to enter credentials to access the app.
@@ -18,7 +18,7 @@ import { useNavigate, Link } from 'react-router-dom';
 function Login ({ setAuthenticated })  {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  //const [error, setError] = useState('');
   const navigate = useNavigate();
 
   /**
