@@ -60,7 +60,7 @@ function Login ({ setAuthenticated })  {
 
   //contains inline css
   return (
-    <div className="login-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '42vh'}}>
+    <div className="login-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '44vh'}}>
       <form
         onSubmit={handleSubmit}
         style={{

@@ -397,3 +397,7 @@ button.dark-mode-toggle {
 ion-icon {
   font-size: 24px;  /* Adjust the size of the icon */
 }
+
+.dark-mode .register-form h2, .login-form h2{
+  color: black;
+}
