@@ -121,3 +121,7 @@ body.dark-mode {
 .dark-mode .legend-item{
   color:black;
 }
+
+.dark-mode .search-button{
+  background-color: rgba(244, 144, 12, 1);
+}
