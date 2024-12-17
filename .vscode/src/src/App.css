@@ -68,17 +68,6 @@ button{
   color: rgba(244, 144, 12, 1);
   font-size: smaller;
 }
-/*
-.button-link {
-  text-decoration: none;
-  padding: 10px 20px;
-  background-color: #FF5722; 
-  color: black;
-  border-radius: 5px;
-  
-  text-align: center;
-}
-  */
 
 .button-link {
   display: inline-block;

@@ -8,16 +8,6 @@ import Welcome from './welcome';
 import About from './about';
 import AccountSettings from './accountSettings';
 
-// import sheet from './style.css' with { type: 'css' };
-// document.adoptedStyleSheets = [sheet];
-
-// const link = document.createElement('link');
-// link.rel = 'stylesheet';
-// link.href = 'style.css';
-// document.head.appendChild(link);
-
-
-
 /**
  * Main application component that manages routes and authentication state.
  * @returns {JSX.Element} The rendered application with routes.

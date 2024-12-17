@@ -264,7 +264,7 @@ body {
 .dark-mode .sidebar{
     background-color: transparent;
 }
-
+/* Removed the second color: black; from the list */
 .dark-button{
     position:relative;
     cursor: pointer;
@@ -274,6 +274,5 @@ body {
     border-radius: 5px;
     font-size: 12px;
     width:max-content;
-    color: black;
     margin-top: 0;
 }
