@@ -15,7 +15,8 @@ import { useNavigate } from 'react-router-dom'; // Removed Link from the list
  * @param {Function} setAuthenticated - Function to update the app's authentication state.
  * @returns {JSX.Element} The login form.
  */
-function Login ({ setAuthenticated })  {
+// Removed { setAuthenticated } from the fuction 
+function Login ()  {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   //const [error, setError] = useState('');

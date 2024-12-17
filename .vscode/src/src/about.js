@@ -19,9 +19,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import './App.css'; // Imported styles
 
 function About() {
-
   //set const variables
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light'); // sets light mode use state
+  // Removed setTheme from the theme below
+  const [theme] = useState(localStorage.getItem('theme') || 'light'); // sets light mode use state
   const navigate = useNavigate();
 
   //dark mode/light mode, handle use state change
