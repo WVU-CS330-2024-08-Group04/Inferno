@@ -138,3 +138,7 @@ body.dark-mode {
 .dark-mode #saveLocationBtn:hover , .dark-mode .search-button:hover{
   background-color: rgb(204, 121, 12);
 }
+
+#saveLocationBtn:hover , .search-button:hover{
+  background-color: rgb(204, 121, 12);
+}
