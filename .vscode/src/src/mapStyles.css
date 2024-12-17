@@ -99,6 +99,7 @@ body.dark-mode {
 
 /* Search Section */
 .search-container {
+  font-size: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -124,4 +125,16 @@ body.dark-mode {
 
 .dark-mode .search-button{
   background-color: rgba(244, 144, 12, 1);
+}
+
+#saveLocationBtn{
+  font-size: 16px;
+  padding: 5px 10px;
+  background-color: rgba(244, 144, 12, 1);
+  border: none;
+  border-radius: 5px;
+}
+
+.dark-mode #saveLocationBtn:hover , .dark-mode .search-button:hover{
+  background-color: rgb(204, 121, 12);
 }
