@@ -140,7 +140,9 @@ const Register = () => {
             transition: 'background-color 0.3s',
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
+          onFocus={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
           onMouseOut={(e) => (e.target.style.backgroundColor = 'rgba(244, 144, 12, 1)')}
+          onBlur={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
         >Register
         </button>
         <button
@@ -157,7 +159,10 @@ const Register = () => {
             transition: 'background-color 0.3s',
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
+          onFocus={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
           onMouseOut={(e) => (e.target.style.backgroundColor = 'rgba(244, 144, 12, 1)')}
+          onBlur={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
+
         >
           Back to Home
         </button>

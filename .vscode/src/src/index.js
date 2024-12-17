@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+//import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AccountSettings from './accountSettings';
-import Welcome from './welcome';
+//import AccountSettings from './accountSettings';
+//import Welcome from './welcome';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

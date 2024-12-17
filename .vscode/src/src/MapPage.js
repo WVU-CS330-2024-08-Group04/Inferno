@@ -15,7 +15,7 @@
 //import statements, react and leaflet
 import React, { useState, useEffect, useRef } from 'react';
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
-import {Icon} from 'leaflet'
+//import {Icon} from 'leaflet'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './mapStyles.css'; //import styles
@@ -30,7 +30,8 @@ function MapPage() {
   const [selectedDates, setSelectedDates] = useState('');
   const [showDateFields, setShowDateFields] = useState(false);
   const [showFilters, setShowFilters] = useState(false); // State for showing filters
-  const [selectedFilters, setSelectedFilters] = useState({
+  // Removed selectedFilters from the list
+  const [setSelectedFilters] = useState({
     //'Smoke': false,
     'Active Fires': false,
     'Fire Prediction': false,
@@ -180,7 +181,8 @@ function MapPage() {
 
             const prediction = calculateRisk(inputData);
 
-            const marker = L.marker([latitude, longitude], {
+            //Removed const marker = from below
+            L.marker([latitude, longitude], {
               icon: new L.Icon({
                 iconUrl: markerIconPng,  // Path to your custom icon
                 iconSize: [30, 40],      // Size of the icon
