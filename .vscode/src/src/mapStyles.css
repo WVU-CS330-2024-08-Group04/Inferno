@@ -117,3 +117,7 @@ body.dark-mode {
   border: none;
   border-radius: 5px;
 }
+
+.dark-mode .legend-item{
+  color:black;
+}
