@@ -176,6 +176,13 @@ function AccountSettings() {
           </div>
         </div>
       )}
+
+      {/* Options for continuing to map and visiting about page */}
+      <nav className="navbar">
+      <ul>
+        <li><Link to="/mappage" className="button-link">Continue to Map</Link></li>
+      </ul>
+    </nav>
     </div>
   );
 }
