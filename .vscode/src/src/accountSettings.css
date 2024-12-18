@@ -105,6 +105,8 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    overflow-y: hidden;
+    height: 80vh;
 }
 
 
@@ -117,7 +119,6 @@ body {
     width: 20%;
     height: 700px;
     padding: 10px;
-    
 }
 
 .side-buttons.left button {
