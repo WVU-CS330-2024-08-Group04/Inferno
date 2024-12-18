@@ -1,18 +1,20 @@
-import sys
+# from flask import Flask, request, jsonify
+# from flask_cors import CORS
 import json
+import sys
 from pystac_client import Client
 from planetary_computer import sign
 import rioxarray
 import math
 
+
 STAC_API_URL = "https://planetarycomputer.microsoft.com/api/stac/v1"
-COLLECTION_ID = "noaa-nclimgrid-monthly"
+COLLECTION_ID = "nasa-nex-gddp-cmip6"
 BBOX = [-82.644739, 37.201483, -77.719519, 40.638801]  # Bounding box for West Virginia
 """BBOX = [-85.0, 35.0, -75.0, 42.0]  # Bounding box for West Virginia and surrounding area"""
 """BBOX = [-125.0, 24.396308, -66.93457, 49.384358]  # Approximate bounding box for the contiguous USA"""
 """BBOX = [-125.0, 47.0, -123.0, 49.0] # NW tip of continental US"""
 MAX_POINTS = 50000
-
 
 def celsius_to_fahrenheit(celsius):
     return (celsius * 9 / 5) + 32
@@ -29,8 +31,10 @@ def get_tavg_data(da, x, y):
 
 def get_temperature_data(date):
     
+    print("Initializing STAC client...", file=sys.stderr)  # Log to stderr
     client = Client.open(STAC_API_URL)
 
+    print(f"Searching for data in collection '{COLLECTION_ID}' for date {date} within BBOX {BBOX}...", file=sys.stderr)
     search = client.search(
         collections=[COLLECTION_ID],
         bbox = BBOX,
@@ -40,11 +44,12 @@ def get_temperature_data(date):
 
     items = list(search.items())
     if not items:
+        print(f"Nothing there bro", file=sys.stderr)
         return []
 
     item = items[0]
     asset_key = list(item.assets.keys())[1]
-    signed_href = sign(item.assests[asset_key].href)
+    signed_href = sign(item.assets[asset_key].href)
 
     da = rioxarray.open_rasterio(signed_href)
     print("Dataset loaded. Processing grid data...", file=sys.stderr)
@@ -83,14 +88,18 @@ def get_temperature_data(date):
 
 def main(date):
 
+    print(f"Starting data retrieval for date: {date}", file=sys.stderr)
     data = get_temperature_data(date)
     print(json.dumps(data))
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python get_temperature_data.py <date>", file=sys.stderr)
+        print("Usage: python grab.py <date>", file=sys.stderr)
         sys.exit(1)
-
+    
     input_date = sys.argv[1]
     main(input_date)
+
+
+
 

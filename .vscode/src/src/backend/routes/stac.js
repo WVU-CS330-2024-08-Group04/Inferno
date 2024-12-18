@@ -10,7 +10,7 @@ const { exec } = require('child_process');
  * @param {string} req.query.date - The date (YYYY-MM-DD) for data retrieval.
  * @returns {JSON} JSON response containing temperature data (latitude, longitude, tavg).
  */
-router.get('/temperature-data', (req, res) => {
+router.get('/data', (req, res) => {
     const date = req.query.date;
 
     // Validate date parameter format (YYYY-MM-DD)

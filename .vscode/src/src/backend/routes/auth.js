@@ -25,6 +25,14 @@ router.post('/register', async (req, res) => {
   try {
     const pool = await sql.connect();
     await pool.request()
+    .input('username', sql.NVarChar, username)
+    .query('SELECT * FROM Users WHERE username = @username');
+    const userex = result.recordset[0];
+  } catch (userex){
+    res.json({ message: 'Username already Exists'});
+  }
+  try{
+    await pool.request()
       .input('username', sql.NVarChar, username)
       .input('password', sql.NVarChar, hashedPassword)
       .query('INSERT INTO Users (username, password) VALUES (@username, @password)');

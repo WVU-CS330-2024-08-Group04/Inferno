@@ -124,6 +124,9 @@ const Register = () => {
               minlength={5}
               value={password}
               valueAgain={confirmPassword}
+              validTextColor='black'
+              invalidTextColor='black'
+              
           />
         <button
           type="submit"
