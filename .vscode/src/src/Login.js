@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom'; // Removed Link from the list
 function Login ()  {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  //const [error, setError] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   /**
