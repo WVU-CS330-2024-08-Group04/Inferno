@@ -32,15 +32,16 @@ function MapPage() {
   const [showFilters, setShowFilters] = useState(false); // State for showing filters
   // Removed selectedFilters from the list
   const [setSelectedFilters] = useState({
-    //'Smoke': false,
     'Active Fires': false,
     'Fire Prediction': false,
-    //'Elevation': false,
   });
 
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
-  const [showLegend, setShowLegend] = useState(true); // State to control legend visibility
+  const [locationInfo, setLocationInfo] = useState(null); // For displaying weather and prediction info
+
+
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -108,31 +109,9 @@ function MapPage() {
  
        return div;
       };
-      // Add legend to map if showLegend is true
-      if (showLegend) {
+      // Add legend to map
         legend.addTo(map);
-      }
-  
-      // Function to toggle the legend visibility
-      const toggleLegend = () => {
-        if (showLegend) {
-          map.removeControl(legend);
-        } else {
-          legend.addTo(map);
-        }
-        setShowLegend(!showLegend);
-      };
-  
-      // Create a button to toggle the legend
-      const legendButton = L.DomUtil.create('button', 'legend-toggle-button');
-      legendButton.innerHTML = showLegend ? 'Hide Legend' : 'Show Legend';
-      legendButton.onclick = toggleLegend;
-  
-      // Add the button to the map (it will appear on top-right of the map)
-      L.DomUtil.addClass(legendButton, 'leaflet-bar');
-      L.DomUtil.create('div').appendChild(legendButton);
-  
-    }, [showLegend]);
+      },[]);
    
 
   //popup for when a user presses enter/search and the search bar is empty
@@ -181,6 +160,16 @@ function MapPage() {
 
             const prediction = calculateRisk(inputData);
 
+            setLocationInfo({
+              temperature: inputData.temperature,
+              windSpeed: inputData.windSpeed,
+              humidity: (inputData.relativeHumidity * 100).toFixed(1),
+              soilMoisture: (inputData.soilMoisture * 100).toFixed(1),
+              activeFires: inputData.activeFires ? 'Yes' : 'No',
+              risk: prediction.risk,
+              color: prediction.color.toUpperCase(),
+            });
+
             //Removed const marker = from below
             L.marker([latitude, longitude], {
               icon: new L.Icon({
@@ -190,17 +179,11 @@ function MapPage() {
                 popupAnchor: [-5, -30]    // Point where the popup will open relative to the icon
               })
             })
-              .addTo(mapRef.current) // Add marker to map
-              .bindPopup(`
-                <strong>Location:</strong> ${display_name}<br>
-                <strong>Temperature:</strong> ${inputData.temperature}°F<br>
-                <strong>Wind Speed:</strong> ${inputData.windSpeed} mph<br>
-                <strong>Humidity:</strong> ${(inputData.relativeHumidity * 100).toFixed(1)}%<br>
-                <strong>Soil Moisture:</strong> ${(inputData.soilMoisture * 100).toFixed(1)}%<br>
-                <strong>Active Fires:</strong> ${inputData.activeFires ? 'Yes' : 'No'}<br>
-                <strong>Prediction:</strong> ${prediction.risk} (${prediction.color.toUpperCase()})
-              `)
-              .openPopup();  
+            .addTo(mapRef.current)
+            .bindPopup(`
+              <strong>Location:</strong> ${display_name}<br>
+            `)
+            .openPopup();
 
             // Add a 10-mile radius circle around the marker
             const radius = 10 * 1609.34; // 10 miles in meters
@@ -375,6 +358,19 @@ function MapPage() {
               <button className="apply-time">Display Date Data</button>
           </div>
           )}
+
+          {/*Information Section*/}
+          {locationInfo && (
+  <div className="info-block">
+    <strong>Temperature:</strong> {locationInfo.temperature}°F<br />
+    <strong>Wind Speed:</strong> {locationInfo.windSpeed} mph<br />
+    <strong>Humidity:</strong> {locationInfo.humidity}%<br />
+    <strong>Soil Moisture:</strong> {locationInfo.soilMoisture}%<br />
+    <strong>Active Fires:</strong> {locationInfo.activeFires}<br />
+    <strong>Prediction:</strong> {locationInfo.risk}
+  </div>
+)}
+          
         </div>
       </div>
     </div>

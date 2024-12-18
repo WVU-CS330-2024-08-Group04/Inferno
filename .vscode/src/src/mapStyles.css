@@ -54,6 +54,16 @@ body.dark-mode {
   color: #333;
 }
 
+/*Styling for the retrieved information*/
+.info-block {
+  margin-left:10px;
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  
+}
+
 /* Side Container */
 .side-container {
   flex: 1;
