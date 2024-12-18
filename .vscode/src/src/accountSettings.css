@@ -1,4 +1,13 @@
+/**
+ * accountSettings.css
+ * 
+ * This file is the user settings page stylessheet, which is imported into the accountSettings.js file.
+ * 
+ * Group 4
+ */
 
+
+/* General body styling */
 body {
     font-family: 'Helvetica', sans-serif;
     margin: 0;
@@ -7,23 +16,14 @@ body {
     box-sizing: border-box;
 }
 
+/*Makes sure that the body is aligned in the center of the page*/
 .center {
     text-align: center;
     margin-top: 50px;
 }
-.dark-button{
-    position:relative;
-    cursor: pointer;
-    color: white; 
-    transition: background-color 0.5s, color 0.5s;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 12px;
-    width:max-content;
-    color: black;
-    margin-top: 0;
-}
 
+
+/* banner styles */
 .banner {
     width: 100%;
     height: 90px;
@@ -35,54 +35,55 @@ body {
     position: relative;
     padding: 0 20px;
     box-sizing: border-box;
-  }
+}
 
-  .helloName {
+.helloName {
     font-size: 18px;
     color: white;
-  }
+}
 
-  .banner-back {
+.banner-back {
     background-color: white;
-    border-radius: 10px; /* Rounded corners */
-    padding: 10px; /* Space inside the rectangle */
+    border-radius: 10px; 
+    padding: 10px; 
     display: flex;
     align-items: center;
-    height: 70%; /* Adjust the height relative to the banner */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for effect */
-  }
+    height: 70%; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+}
 
 .banner-back img {
     height: 60px;
     max-width: 100%;
     object-fit: contain;
     z-index:2;
-  }
+}
 
-  .user-icon {
+.user-icon {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
     object-fit: cover;
-  }
+}
 
 .banner-content {
     display: flex;
     align-items: center;
     gap: 20px;
-  }
-
-  .left-banner-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
-    gap: 0px; /* Reduce space between elements */
-    margin: 0; /* Ensure no extra margin */
-    padding: 0; /* Ensure no extra padding */
 }
 
-  .about-link {
+.left-banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 0px; 
+    margin: 0;
+    padding: 0; 
+}
+
+/* About button styles */
+.about-link {
     color: white;
     text-decoration: none;
     font-weight: bold;
@@ -92,17 +93,24 @@ body {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-bottom: 0;
-  }
+}
 
-  .about-link:hover {
+.about-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
-  }
+}
 
+
+/* content is the whole area below the banner, including the side buttons and main middle content */
 .content {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    overflow-y: hidden;
+    height: 80vh;
 }
+
+
+/* left button styles */
 .side-buttons.left {
     display: flex;
     flex-direction: column;
@@ -111,7 +119,6 @@ body {
     width: 20%;
     height: 700px;
     padding: 10px;
-    
 }
 
 .side-buttons.left button {
@@ -128,6 +135,7 @@ body {
 }
 
 
+/* right button styles */
 .side-buttons.right {
     display: flex;
     flex-direction: column;
@@ -150,6 +158,8 @@ body {
     position: static;
 }
 
+
+/* account-info is the information in the middle of the screen, the date and account info */
 .account-info {
     width: 60%;
     padding: 20px;
@@ -159,10 +169,11 @@ body {
     border: 1px solid whitesmoke;
     border-radius:5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    height: 72vh;
+    height: 65vh;
 }
 
 
+/* popup content styles */
 .popUp {
     display: flex;
     position: fixed;
@@ -181,7 +192,6 @@ body {
     margin: 15% auto;
     padding: 20px;
     width: 400px;
-    border-radius: 5px;
     border: 3px solid orange;
     border-radius: 20px;
     text-align: center;
@@ -202,7 +212,6 @@ body {
     cursor: pointer;
     font-size: 16px;
     align-self: center;
-   /* margin-top: 20px;*/
     position: relative;
     text-align: center;
     top: 30px;
@@ -213,6 +222,8 @@ body {
     font-weight: bold;
 }
 
+
+/* Dark mode styles, buttons and popup content */
 .dark-mode{
     background-color: rgb(36, 44, 50);
     color: whitesmoke;
@@ -220,12 +231,13 @@ body {
 }
 
 .dark-mode .popUp-content {
-    background-color: rgb(36, 44, 50);;
+    background-color: rgb(36, 44, 50);
     margin: 15% auto;
     padding: 20px;
     width: 400px;
     border-radius: 5px;
 }
+
 .dark-mode h1 {
     color: whitesmoke; 
 }
@@ -233,6 +245,7 @@ body {
 .dark-button:hover {
     background-color: #ddd;
 }
+
 .dark-mode .dark-button {
     background-color: #333;
     color: white;
@@ -251,4 +264,16 @@ body {
 
 .dark-mode .sidebar{
     background-color: transparent;
+}
+/* Removed the second color: black; from the list */
+.dark-button{
+    position:relative;
+    cursor: pointer;
+    color: white; 
+    transition: background-color 0.5s, color 0.5s;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 12px;
+    width:max-content;
+    margin-top: 0;
 }

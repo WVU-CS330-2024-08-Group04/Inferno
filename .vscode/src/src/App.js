@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'; //Removed Link from the list
 import Login from './Login';
 import './App.css';
 import Register from './Register';
@@ -8,23 +8,14 @@ import Welcome from './welcome';
 import About from './about';
 import AccountSettings from './accountSettings';
 
-// import sheet from './style.css' with { type: 'css' };
-// document.adoptedStyleSheets = [sheet];
-
-// const link = document.createElement('link');
-// link.rel = 'stylesheet';
-// link.href = 'style.css';
-// document.head.appendChild(link);
-
-
-
 /**
  * Main application component that manages routes and authentication state.
  * @returns {JSX.Element} The rendered application with routes.
  */
 function App() {
   // Initialize authenticated state from local storage
-  const [authenticated, setAuthenticated] = useState(
+  // Removed setAuthenticated from the below line
+  const [authenticated] = useState(
     () => JSON.parse(localStorage.getItem('authenticated')) || false
   );
 

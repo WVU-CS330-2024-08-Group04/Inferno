@@ -8,14 +8,15 @@
 //import statements, react and axios
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Removed Link from the list
 
 /**
  * Login component allows users to enter credentials to access the app.
  * @param {Function} setAuthenticated - Function to update the app's authentication state.
  * @returns {JSX.Element} The login form.
  */
-function Login ({ setAuthenticated })  {
+// Removed { setAuthenticated } from the fuction 
+function Login ()  {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -60,7 +61,7 @@ function Login ({ setAuthenticated })  {
 
   //contains inline css
   return (
-    <div className="login-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '42vh'}}>
+    <div className="login-form" style={{display: 'flex', justifyContent: 'center', alighnItems: 'center', height: '44vh'}}>
       <form
         onSubmit={handleSubmit}
         style={{
@@ -113,7 +114,10 @@ function Login ({ setAuthenticated })  {
             transition: 'background-color 0.3s',
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
+          onFocus={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
           onMouseOut={(e) => (e.target.style.backgroundColor = 'rgba(244, 144, 12, 1)')}
+          onBlur={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
+
         >Login</button>
         <button
           type="button"
@@ -129,7 +133,9 @@ function Login ({ setAuthenticated })  {
             transition: 'background-color 0.3s',
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
+          onFocus={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
           onMouseOut={(e) => (e.target.style.backgroundColor = 'rgba(244, 144, 12, 1)')}
+          onBlur={(e) => (e.target.style.backgroundColor = 'rgb(204, 121, 12)')}
         >
           Back to Home
         </button>

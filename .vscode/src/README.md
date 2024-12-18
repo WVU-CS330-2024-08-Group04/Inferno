@@ -1,3 +1,49 @@
+# Inferno: Wildfire Control & Tracking
+## Overview
+The Wildfire Control & Tracking System is platform designed to provide tools for tracking, monitoring, and managing wildfire events. 
+This project integrates geographic visualization, user account management, information about the creators and the platforms purpose, and informational resources to aid in wildfire prevention and response.
+## Motivation
+Wildfires pose a significant threat to lives, property, and the environment. The motivation behind this project is to provide an accessible tool for individuals, communities, and organizations to better monitor wildfire activity and respond effectively.
+## Features
+### Welcome Page
+- Handles the welcome page functionality of the application
+- Displays Inferno logo
+- Offers login and create account options
+- Continue to map and about page options on bottom
+### Map Page
+- Integrates NOAA data for accurate fire prediction and tracking
+- Interactive map for zooming, panning, and selecting specific areas of interest
+- Displays real-time wildfire data
+
+### Dark Mode
+- Toggle between light and dark mode
+- Saves preferences and carries over pages
+
+### Login
+- Secure user authentication with password encryption
+- Login and logout functionality
+
+### Account Settings
+- Allows users to update personal information
+- Option to change password
+- Access fire prevention tips
+
+### About Page
+- Provides information about the project’s goal and contributors
+- Shares data sources
+- Links to relevant wildfire safety and prevention resources
+
+## Data Incorporation
+- Source: NOAA data
+
+## Database
+- Storage: User account information, preferences, and activity logs
+
+## Technical 
+### Backend
+- Language: Node.js
+- Files: Found in the backend folder
+- Purpose: Handles API requests, user authentication, and data processing
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

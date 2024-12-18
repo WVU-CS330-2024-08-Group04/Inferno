@@ -10,15 +10,22 @@ Wildfires pose a significant threat to lives, property, and the environment. The
 ### Demo
 <img width="1470" alt="Screenshot 2024-12-13 at 9 54 05 AM" src="https://github.com/user-attachments/assets/5653859e-1019-48b4-aa2e-5e3da78b1f58" />
 
-
-
 ## Code Style
 This project adheres to JavaScript Standard Style
 ## Features
+### Welcome 
+- Handles the welcome page functionality of the application
+- Displays Inferno logo
+- Offers login and create account options
+- Continue to map and about page options on bottom
 ### Map Page
 - Integrates NOAA data for accurate fire prediction and tracking
 - Interactive map for zooming, panning, and selecting specific areas of interest
 - Displays real-time wildfire data
+
+### Dark Mode
+- Toggle between light and dark mode
+- Saves preferences and carries over pages
 
 ### Login
 - Secure user authentication with password encryption
@@ -77,6 +84,17 @@ Example of rendering a map and centering it on the US
 ## Acknowledgments
 - NOAA
 - Leaflet.js
+
+## Contributors
+- AUSTIN BROWN
+- JEREMY DAVIS
+- ALEXIS DEPUE
+- TANNER FORBES
+- SHANNON SEILER
+- JULIA VAN ALBERT
+- SETH WEESE
+- MATTHEW WELCH
+
 
   
 
