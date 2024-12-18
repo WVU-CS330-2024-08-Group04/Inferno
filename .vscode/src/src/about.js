@@ -81,22 +81,25 @@ function About() {
               The specific NOAA content utilized was the Global Forecast System and the Joint Polar Satellite System.
               To find more information about these tools, click the buttons below:
             </p>
-            <button onClick={() => window.location.href = 'https://www.emc.ncep.noaa.gov/emc/pages/numerical_forecast_systems/gfs.php'}>NOAA GFS</button>
-            <button onClick={() => window.location.href = 'https://www.nesdis.noaa.gov/our-satellites/currently-flying/joint-polar-satellite-system'}>NOAA JPSS</button>
+
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
+              <button style={{ flex: '1', backgroundColor: 'rgba(244, 144, 12, 1)', padding: '5px', border: 'none', borderRadius: '5px' }} onClick={() => window.location.href = 'https://www.emc.ncep.noaa.gov/emc/pages/numerical_forecast_systems/gfs.php'}>NOAA GFS</button>
+              <button style={{ flex: '1', backgroundColor: 'rgba(244, 144, 12, 1)', padding: '10px', border: 'none', borderRadius: '5px' }} onClick={() => window.location.href = 'https://www.nesdis.noaa.gov/our-satellites/currently-flying/joint-polar-satellite-system'}>NOAA JPSS</button>
+            </div>
           </div>
 
         {/* Contributors section */}
           <h2>CONTRIBUTORS</h2>
           <div className="contributors">
             <span>
-          SHANNON SEILER<br></br>
-          JULIA VAN ALBERT<br></br>
-          SETH WEESE<br></br>
-          TANNER FORBES<br></br>
-          JEREMY DAVIS<br></br>
-          ALEXIS DEPUE<br></br>
-          AUSTIN BROWN<br></br>
-          MATTHEW WELCH<br></br>
+          Austin Brown<br />
+          Jeremy Davis<br />
+          Alexis DePue<br />
+          Tanner Forbes<br />
+          Shannon Seiler<br />
+          Julia Van Albert<br />
+          Seth Weese<br />
+          Matthew Welch<br />
             </span>
           </div>
         </div>
