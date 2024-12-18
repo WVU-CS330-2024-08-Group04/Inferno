@@ -19,7 +19,7 @@ export function calculateRisk(inputData) {
         temperature: 85, 
         relativeHumidity: 0.30, 
         windSpeed: 15, 
-        soilMoisture: 0.10 
+        precipitation: 0.04 //inches or 1mm 
     };
 
     //median risk level
@@ -27,10 +27,10 @@ export function calculateRisk(inputData) {
         temperature: 77, 
         relativeHumidity: 0.40, 
         windSpeed: 12.5, 
-        soilMoisture: 0.15 
+        precipitation: 0.2 //inches or 5mm  
     };
 
-    const { temperature, relativeHumidity, windSpeed, soilMoisture, activeFires } = inputData;
+    const { temperature, relativeHumidity, windSpeed, precipitation, activeFires } = inputData;
 
     //count determines the risk level
     let count = 0;
@@ -43,9 +43,9 @@ export function calculateRisk(inputData) {
     }
         
     //compares humidity
-    if (relativeHumidity >= highRisk.relativeHumidity) {
+    if (relativeHumidity <= highRisk.relativeHumidity) {
         count += 2;
-    } else if (relativeHumidity >= medianRisk.relativeHumidity) {
+    } else if (relativeHumidity <= medianRisk.relativeHumidity) {
         count++;
     }
     
@@ -56,12 +56,17 @@ export function calculateRisk(inputData) {
         count++;
     }
     
-    //compares soil moisture
-    if (soilMoisture >= highRisk.soilMoisture) {
+    //compares precipitation
+    if (precipitation <= highRisk.precipitation) {
         count += 2;
-    } else if (soilMoisture >= medianRisk.soilMoisture) {
+    } else if (precipitation <= medianRisk.precipitation) {
         count++;
     }
+
+    console.log('Input Data:', inputData);
+    console.log('High Risk Thresholds:', highRisk);
+    console.log('Median Risk Thresholds:', medianRisk);
+    console.log('Count:', count);
 
     //returns risk level based on count
     if (count >= 6 || activeFires) {

@@ -152,10 +152,10 @@ function MapPage() {
             //hard coded data until we're able to pull data from server
             const inputData = {
               temperature: 90,
-              relativeHumidity: 0.30/100,
+              relativeHumidity: 50/100,
               windSpeed: 15,
-              soilMoisture: 0.05/100,
-              activeFires: false,
+              precipitation: 0.2,
+              //activeFires: false,
             };
 
             const prediction = calculateRisk(inputData);
@@ -163,9 +163,9 @@ function MapPage() {
             setLocationInfo({
               temperature: inputData.temperature,
               windSpeed: inputData.windSpeed,
-              humidity: (inputData.relativeHumidity * 100).toFixed(1),
-              soilMoisture: (inputData.soilMoisture * 100).toFixed(1),
-              activeFires: inputData.activeFires ? 'Yes' : 'No',
+              humidity: (inputData.relativeHumidity),
+              precipitation: (inputData.precipitation),
+              //activeFires: inputData.activeFires ? 'Yes' : 'No',
               risk: prediction.risk,
               color: prediction.color.toUpperCase(),
             });
@@ -365,8 +365,8 @@ function MapPage() {
     <strong>Temperature:</strong> {locationInfo.temperature}°F<br />
     <strong>Wind Speed:</strong> {locationInfo.windSpeed} mph<br />
     <strong>Humidity:</strong> {locationInfo.humidity}%<br />
-    <strong>Soil Moisture:</strong> {locationInfo.soilMoisture}%<br />
-    <strong>Active Fires:</strong> {locationInfo.activeFires}<br />
+    <strong>Precipitation:</strong> {locationInfo.precipitation}"<br />
+    {/*<strong>Active Fires:</strong> {locationInfo.activeFires}<br />*/}
     <strong>Prediction:</strong> {locationInfo.risk}
   </div>
 )}
