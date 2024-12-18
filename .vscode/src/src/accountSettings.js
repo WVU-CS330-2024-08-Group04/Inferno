@@ -145,7 +145,7 @@ function AccountSettings() {
             <h2>Delete Account</h2>
             <p className="warning">Warning: This action is irreversible!</p>
             <p>Are you sure you want to delete your account?</p>
-            <button>Yes, Delete</button>
+            <button onClick={() => navigate('/welcome')}>Yes, Delete</button>
             <button onClick={() => setShowDeleteAccountPopup(false)}>Cancel</button>
           </div>
         </div>
@@ -158,7 +158,7 @@ function AccountSettings() {
             <h2>Sign Out</h2>
             <h3>Are you sure you want to sign out?</h3>
             <button onClick={() => setShowSignOutPopup(false)}>Cancel</button>
-            <button>Sign Out</button>
+            <button onClick={() => navigate('/welcome')}>Sign Out</button>
           </div>
         </div>
       )}
