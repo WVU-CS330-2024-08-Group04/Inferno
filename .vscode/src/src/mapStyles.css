@@ -16,6 +16,7 @@ body.dark-mode {
   display: flex;
   gap: 20px;
   padding: 20px;
+  flex-direction: row;
 }
 
 /* Map Section */
@@ -25,34 +26,49 @@ body.dark-mode {
   border: 1px solid #ddd;
 }
 
-/* Styles for the legend */
-.info.legend {
-  background-color: white; /* Solid white background */
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+.map-container {
+  width: 80%; /* Set the map to take 80% of the container width */
+  margin: auto; /* Center the map within its container */
 }
 
-/* Style for each legend item (circle and label) */
-.legend-item {
+/*Legend Section*/
+.legend {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  background-color: rgb(255, 255, 255); /* Semi-transparent background */
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index:1000;
+  color:black;
+}
+
+.legend h4 {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend li {
   display: flex;
-  align-items: center;
+  align-items: center; /* Aligns the circle and text vertically */
   margin-bottom: 5px;
 }
 
-/* Circle style next to the text */
-.legend-color {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  margin-right: 10px;
+.legend-circle {
+  display: inline-block;
+  width: 15px; /* Adjust size for smaller or larger circles */
+  height: 15px; /* Adjust size for smaller or larger circles */
+  border-radius: 50%; /* Makes the shape circular */
+  margin-right: 8px; /* Spacing between circle and text */
 }
 
-/* Optional: Styling for the legend text */
-.info.legend span {
-  font-size: 14px;
-  color: #333;
-}
 
 /*Styling for the retrieved information*/
 .info-block {
@@ -66,7 +82,7 @@ body.dark-mode {
 
 /* Side Container */
 .side-container {
-  flex: 1;
+  width: 20%;
   display: flex;
   flex-direction: column;
   gap: 20px;
