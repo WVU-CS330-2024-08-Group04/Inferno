@@ -14,7 +14,7 @@
 
 //import statements, react and leaflet
 // import "leaflet/dist/leaflet.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
  import { useNavigate, Link } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
@@ -34,6 +34,16 @@ const MapPage = () => {
     }); 
   const navigate = useNavigate();
   //const locationInfo = getLocationInfo();
+
+  useEffect(() => {
+      // Check localStorage for saved theme on component mount
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+    });
 
 
   const handleDateChange = (selectedDate) => {

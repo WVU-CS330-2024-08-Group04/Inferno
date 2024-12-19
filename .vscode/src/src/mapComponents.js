@@ -208,6 +208,29 @@ function MapComponent() {
           )}
           <ResetMapView position={mapCenter} zoom={zoomLevel} />
         </MapContainer>
+
+        <div className="legend">
+  <h4>Wildfire Risk Levels</h4>
+  <ul>
+    <li>
+      <span className="legend-circle" style={{ backgroundColor: '#e30808' }}></span> 
+      High Risk
+    </li>
+    <li>
+      <span className="legend-circle" style={{ backgroundColor: '#faa064' }}></span> 
+      Medium Risk
+    </li>
+    <li>
+      <span className="legend-circle" style={{ backgroundColor: '#f0e300' }}></span> 
+      Low Risk
+    </li>
+    <li>
+      <span className="legend-circle" style={{ backgroundColor: '#26c454' }}></span> 
+      Safe
+    </li>
+  </ul>
+</div>
+
         
       </div>
     </div>
