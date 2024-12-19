@@ -1,157 +1,192 @@
-/**
- * mapComponents.js
- * 
- * This file handles the map page backend calculations of the application. 
- * 
- * Responsibilities:
- * -calculate risk of fire 
- * 
- * Group 4
- */
-
-//exports function to calculate the risk of a fire
-
-/**
- * MapComponent.js
- * 
- * React component that renders a map with color-coded markers for temperature data.
- * Each marker represents a location with latitude, longitude, and temperature (tavg),
- * and displays this information in a popup.
- */
-
-import React from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
+import React, { useState, useEffect, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import './mapStyles.css';
+import markerIconPng from 'leaflet/dist/images/marker-icon.png';
+import { calculateRisk } from './wildfirePredictor.js'; // Ensure this function is implemented correctly.
 
 /**
- * MapComponent
- * 
- * Renders a map with markers based on temperature data.
- * Each marker is color-coded based on the average temperature (tavg) and includes a popup
- * with details for latitude, longitude, and temperature.
- * 
- * @component
- * @param {Object[]} [temperatures=[]] - Array of objects with latitude, longitude, and tavg values.
- * @returns {JSX.Element} A map with temperature markers and popups.
+ * Component to reset the map view when bounds or center change.
+ * @param {Object} position - Map position to center.
+ * @param {number} zoom - Zoom level.
  */
-function MapComponent({ temperatures = [] }) {
-    const center = [38.5976, -80.4549]; // Center of WV
-    const marker_radius = 10;
-    const marker_fillOpacity = 0.4;
+function ResetMapView({ position, zoom }) {
+  const map = useMap();
+  useEffect(() => {
+    if (position) {
+      map.setView(position, zoom, { animate: true}); // Reset view without affecting the marker.
+    }
+  }, [position, zoom, map]);
+  return null;
+}
+
+/**
+ * Main MapComponent to render a map with wildfire risk markers.
+ */
+function MapComponent() {
+  const [locationInfo, setLocationInfo] = useState(null); // Info about the location.
+  const [markerPosition, setMarkerPosition] = useState(null); // Marker position.
+  const [mapCenter, setMapCenter] = useState([39.8283, -98.5795]); // Default US center.
+  const [zoomLevel, setZoomLevel] = useState(4); // Default zoom level.
+  const [savedLocations, setSavedLocations] = useState([]);
+  const [lastSearchedLocation, setLastSearchedLocation] = useState(null);
+  const [circleColor, setCircleColor] = useState(null);
+  const mapRef = useRef(null);
+
+  // Handle location search and marker placement.
+  const searchLocation = async () => {
+    const location = document.getElementById('locationInput').value.trim();
+    if (!location) {
+      alert('Please enter a location.');
+      return;
+    }
+
+    const geocodeURL = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+      location
+    )}`;
+
+    try {
+      const response = await fetch(geocodeURL);
+      const data = await response.json();
+
+      if (data.length > 0) {
+        const { lat, lon, display_name } = data[0];
+        const latitude = parseFloat(lat);
+        const longitude = parseFloat(lon);
+
+        // Simulate wildfire risk calculation input
+        const inputData = {
+          temperature: 90,
+          relativeHumidity: 0.5,
+          windSpeed: 15,
+          precipitation: 0.2,
+        };
+        const prediction = calculateRisk(inputData);
+
+        setLocationInfo({
+          name: display_name,
+          temperature: inputData.temperature,
+          windSpeed: inputData.windSpeed,
+          humidity: inputData.relativeHumidity,
+          precipitation: inputData.precipitation,
+          risk: prediction.risk,
+        });
+
+        setMarkerPosition([latitude, longitude]); // Update marker position
+        setMapCenter([latitude, longitude]); // Center the map on the new location
+        setZoomLevel(10); // Zoom closer to the marker
+        setCircleColor(prediction.color);
+
+        // Save the last searched location
+            setLastSearchedLocation({ name: display_name, lat: latitude, lon: longitude });
+
+            //save location button and popups for location that is not found or out of the set bounds
+            const saveButton = document.getElementById('saveLocationBtn');
+            if (saveButton) saveButton.style.display = 'inline-block';
+      } else {
+        alert('Location not found.');
+      }
+    } catch (error) {
+      console.error('Error fetching location data:', error);
+    }
+  };
+
+// Save location and last searched location 
+const saveLocation = () => { 
+  if (!lastSearchedLocation) return; 
+  
+  const { name, lat, lon } = lastSearchedLocation; 
+  if (!savedLocations.some((loc) => loc.name === name)) { 
+    setSavedLocations((prev) => [...prev, { name, lat, lon }]); 
+  } else { 
+    alert('Location is already saved.'); 
+  } 
+};
+
+  // Allows you to access your saved locations 
+  const jumpToSavedLocation = (event) => { 
+    const value = event.target.value; 
+    if (value) { 
+      const location = JSON.parse(value); 
+      if (mapRef.current) { 
+        mapRef.current.setView([location.lat, location.lon], 13); 
+      } 
+    } 
+  };
 
 
-    /**
-     * getColor
-     * 
-     * Determines the color for the marker based on temperature.
-     * Provides a gradient for better visualization.
-     * 
-     * @function
-     * @param {number} tavg - The average temperature value.
-     * @returns {string} Color code for the marker.
-     */
-    const getColor = (tavg) => {
-        if (tavg < 0) return "#002366";      // Very cold (dark blue)
-        if (tavg < 20) return "#4169E1";     // Cold (royal blue)
-        if (tavg < 40) return "#87CEEB";     // Cool (sky blue)
-        if (tavg < 60) return "#FFFF66";     // Mild (light yellow)
-        if (tavg < 80) return "#FFD700";     // Warm (gold)
-        if (tavg < 100) return "#FF4500";    // Hot (orange-red)
-        return "#B22222";                    // Very hot (firebrick red)
-    };
+  return (
+    <div>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          id="locationInput"
+          placeholder="Search a location..."
+        />
+        <button className="search-button" onClick={searchLocation}>
+          Search
+        </button>
+        <button id="saveLocationBtn" style={{ display: 'none' }} onClick={saveLocation}>
+          Save Location
+        </button>
+        <label htmlFor="savedLocations">Saved Locations:</label>
+        <select id="savedLocations" onChange={jumpToSavedLocation}>
+          <option value="">--Select a saved location--</option>
+          {savedLocations.map((loc, index) => (
+            <option key={index} value={JSON.stringify(loc)}>
+              {loc.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-    return (
-        <MapContainer center={center} zoom={7} style={{ height: '500px', width: '100%' }}>
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-             {Array.isArray(temperatures) && temperatures.map((point, index) => (
-                <CircleMarker
-                    key={index}
-                    center={[point.latitude, point.longitude]}
-                    radius={marker_radius}
-                    color={getColor(point.tavg)}
-                    fillOpacity={marker_fillOpacity}
-                    stroke={false} // Removes the marker border for cleaner look
-                >
-                    <Popup>
-                        <div>
-                            <p><strong>Latitude:</strong> {point.latitude.toFixed(4)}</p>
-                            <p><strong>Longitude:</strong> {point.longitude.toFixed(4)}</p>
-                            <p><strong>Avg Temp:</strong> {point.tavg.toFixed(2)} °F</p>
-                        </div>
-                    </Popup>
-                </CircleMarker>
-            ))}
+      
+        <MapContainer
+          id="map" // Apply the ID here
+          center={mapCenter}
+          zoom={zoomLevel}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; OpenStreetMap contributors"
+          />
+          {markerPosition && (
+            <Marker
+              position={markerPosition}
+              icon={new L.Icon({
+                iconUrl: markerIconPng,
+                iconSize: [30, 40],
+                iconAnchor: [15, 40],
+              })}
+            >
+              <Popup>
+                <strong>Location:</strong> {locationInfo?.name} <br />
+                <strong>Risk:</strong> {locationInfo?.risk}
+              </Popup>
+            </Marker>
+          )}
+          {markerPosition && circleColor && (
+            <Circle center={markerPosition} 
+            radius={16093.4} // 10 miles in meters 
+            color={circleColor} 
+            fillColor={circleColor} 
+            fillOpacity={0.4} 
+            /> 
+            )}
+          <ResetMapView position={mapCenter} zoom={zoomLevel} />
         </MapContainer>
-    );
+        {locationInfo && (
+          <div className="info-block">
+            <strong>Location:</strong> {locationInfo.name} <br />
+            <strong>Temperature:</strong> {locationInfo.temperature}°F <br />
+            <strong>Risk:</strong> {locationInfo.risk}
+          </div>
+        )}
+      </div>
+    
+  );
 }
 
 export default MapComponent;
-
-
-// export function calculateRisk(inputData) {
-
-//     //the risk level is compared to the data pulled by NOAA to assess the likelihood a fire could happen
-
-//     //high risk level 
-//     const highRisk = { 
-//         temperature: 85, 
-//         relativeHumidity: 0.30, 
-//         windSpeed: 15, 
-//         soilMoisture: 0.10 
-//     };
-
-//     //median risk level
-//     const medianRisk = {
-//         temperature: 77, 
-//         relativeHumidity: 0.40, 
-//         windSpeed: 12.5, 
-//         soilMoisture: 0.15 
-//     };
-
-//     const { temperature, relativeHumidity, windSpeed, soilMoisture, activeFires } = inputData;
-
-//     //count determines the risk level
-//     let count = 0;
-
-//     //compares temperature
-//     if (temperature >= highRisk.temperature) {
-//         count += 2;
-//     } else if (temperature >= medianRisk.temperature) {
-//         count++;
-//     }
-        
-//     //compares humidity
-//     if (relativeHumidity >= highRisk.relativeHumidity) {
-//         count += 2;
-//     } else if (relativeHumidity >= medianRisk.relativeHumidity) {
-//         count++;
-//     }
-    
-//     //compares wind speed
-//     if (windSpeed >= highRisk.windSpeed) {
-//         count += 2;
-//     } else if (windSpeed >= medianRisk.windSpeed) {
-//         count++;
-//     }
-    
-//     //compares soil moisture
-//     if (soilMoisture >= highRisk.soilMoisture) {
-//         count += 2;
-//     } else if (soilMoisture >= medianRisk.soilMoisture) {
-//         count++;
-//     }
-
-//     //returns risk level based on count
-//     if (count >= 6 || activeFires) {
-//         return { risk: "High Risk", color: "red", message: "Wildfire Likely" };
-//     } else if (count >= 4) {
-//         return { risk: "Medium Risk", color: "orange", message: "Elevated Wildfire Risk" };
-//     } else if (count >= 2) {
-//         return { risk: "Low Risk", color: "yellow", message: "Minimal Wildfire Risk" };
-//     } else {
-//         return { risk: "Safe", color: "green", message: "Low Wildfire Risk" };
-//     }
-// }

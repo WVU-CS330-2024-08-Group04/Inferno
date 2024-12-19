@@ -16,6 +16,7 @@ body.dark-mode {
   display: flex;
   gap: 20px;
   padding: 20px;
+  flex-direction: row;
 }
 
 /* Map Section */
@@ -23,6 +24,11 @@ body.dark-mode {
   flex: 3;
   height: 75vh;
   border: 1px solid #ddd;
+}
+
+.map-container {
+  width: 80%; /* Set the map to take 80% of the container width */
+  margin: auto; /* Center the map within its container */
 }
 
 /* Styles for the legend */
@@ -66,7 +72,7 @@ body.dark-mode {
 
 /* Side Container */
 .side-container {
-  flex: 1;
+  width: 20%;
   display: flex;
   flex-direction: column;
   gap: 20px;
