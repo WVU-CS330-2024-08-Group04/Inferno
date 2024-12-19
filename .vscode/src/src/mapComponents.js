@@ -15,7 +15,7 @@ function ResetMapView({ position, zoom }) {
   const map = useMap();
   useEffect(() => {
     if (position) {
-      map.setView(position, zoom, { animate: true}); // Reset view without affecting the marker.
+      map.setView(position, zoom, { animate: true }); // Reset view without affecting the marker.
     }
   }, [position, zoom, map]);
   return null;
@@ -79,11 +79,11 @@ function MapComponent() {
         setCircleColor(prediction.color);
 
         // Save the last searched location
-            setLastSearchedLocation({ name: display_name, lat: latitude, lon: longitude });
+        setLastSearchedLocation({ name: display_name, lat: latitude, lon: longitude });
 
-            //save location button and popups for location that is not found or out of the set bounds
-            const saveButton = document.getElementById('saveLocationBtn');
-            if (saveButton) saveButton.style.display = 'inline-block';
+        // Show the save button for the newly searched location
+        const saveButton = document.getElementById('saveLocationBtn');
+        if (saveButton) saveButton.style.display = 'inline-block';
       } else {
         alert('Location not found.');
       }
@@ -92,29 +92,57 @@ function MapComponent() {
     }
   };
 
-// Save location and last searched location 
-const saveLocation = () => { 
-  if (!lastSearchedLocation) return; 
-  
-  const { name, lat, lon } = lastSearchedLocation; 
-  if (!savedLocations.some((loc) => loc.name === name)) { 
-    setSavedLocations((prev) => [...prev, { name, lat, lon }]); 
-  } else { 
-    alert('Location is already saved.'); 
-  } 
-};
-
-  // Allows you to access your saved locations 
-  const jumpToSavedLocation = (event) => { 
-    const value = event.target.value; 
-    if (value) { 
-      const location = JSON.parse(value); 
-      if (mapRef.current) { 
-        mapRef.current.setView([location.lat, location.lon], 13); 
-      } 
+  // Save location and last searched location 
+  const saveLocation = () => { 
+    if (!lastSearchedLocation) return; 
+    const { name, lat, lon } = lastSearchedLocation; 
+    if (!savedLocations.some((loc) => loc.name === name)) { 
+      setSavedLocations((prev) => [...prev, { name, lat, lon }]); 
+    } else { 
+      alert('Location is already saved.'); 
     } 
   };
 
+  // Allows you to access your saved locations
+  const jumpToSavedLocation = (event) => {
+    const value = event.target.value;
+    if (value) {
+      const location = JSON.parse(value); // Parse the saved location object
+      if (mapRef.current) {
+        mapRef.current.setView([location.lat, location.lon], 10); // Set zoom level
+        setMapCenter([location.lat, location.lon]); // Update the map center
+  
+        // Update locationInfo based on the new location, similar to searchLocation logic
+        const inputData = {
+          temperature: 90, // Replace with actual data if needed
+          relativeHumidity: 0.5, // Replace with actual data if needed
+          windSpeed: 15, // Replace with actual data if needed
+          precipitation: 0.2, // Replace with actual data if needed
+        };
+        const prediction = calculateRisk(inputData);
+  
+        setLocationInfo({
+          name: location.name,
+          temperature: inputData.temperature,
+          windSpeed: inputData.windSpeed,
+          humidity: inputData.relativeHumidity,
+          precipitation: inputData.precipitation,
+          risk: prediction.risk,
+        });
+  
+        setMarkerPosition([location.lat, location.lon]); // Update marker position
+        setZoomLevel(10); // Set zoom level
+        setCircleColor(prediction.color); // Update circle color
+      }
+    }
+  };
+
+  // Allows you to press enter and that does the same function as pressing the search button
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      searchLocation();
+    }
+  };
 
   return (
     <div>
@@ -124,6 +152,7 @@ const saveLocation = () => {
           className="search-bar"
           id="locationInput"
           placeholder="Search a location..."
+          onKeyDown={handleKeyDown}
         />
         <button className="search-button" onClick={searchLocation}>
           Search
@@ -142,11 +171,12 @@ const saveLocation = () => {
         </select>
       </div>
 
-      
+      <div className="main-container">
         <MapContainer
-          id="map" // Apply the ID here
+          id="map"
           center={mapCenter}
           zoom={zoomLevel}
+          ref={mapRef}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -168,24 +198,19 @@ const saveLocation = () => {
             </Marker>
           )}
           {markerPosition && circleColor && (
-            <Circle center={markerPosition} 
-            radius={16093.4} // 10 miles in meters 
-            color={circleColor} 
-            fillColor={circleColor} 
-            fillOpacity={0.4} 
-            /> 
-            )}
+            <Circle
+              center={markerPosition}
+              radius={16093.4} // 10 miles in meters
+              color={circleColor}
+              fillColor={circleColor}
+              fillOpacity={0.4}
+            />
+          )}
           <ResetMapView position={mapCenter} zoom={zoomLevel} />
         </MapContainer>
-        {locationInfo && (
-          <div className="info-block">
-            <strong>Location:</strong> {locationInfo.name} <br />
-            <strong>Temperature:</strong> {locationInfo.temperature}°F <br />
-            <strong>Risk:</strong> {locationInfo.risk}
-          </div>
-        )}
+        
       </div>
-    
+    </div>
   );
 }
 
