@@ -107,7 +107,7 @@ const MapPage = () => {
                 <div className="left-banner-content">
                   <Link to="/about" className="about-link">About</Link>
                 </div>
-                <div className="helloName">Hello,</div>
+                <div className="helloName">Hello!</div>
                 <input
                   type="image"
                   src="Profile Icon.png"
