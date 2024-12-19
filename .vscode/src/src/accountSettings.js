@@ -78,6 +78,7 @@ function AccountSettings() {
 
           {/* About page link using user icon as button */}
           <Link to="/about" className="about-link">About</Link>
+          <div className="helloName">Hello!</div>
           <input
             type="image"
             src="Profile Icon.png"
