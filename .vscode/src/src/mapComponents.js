@@ -76,7 +76,7 @@ function MapComponent() {
         setMarkerPosition([latitude, longitude]); // Update marker position
         setMapCenter([latitude, longitude]); // Center the map on the new location
         setZoomLevel(10); // Zoom closer to the marker
-        setCircleColor(prediction.color);
+        setCircleColor('#26c454');
 
         // Save the last searched location
         setLastSearchedLocation({ name: display_name, lat: latitude, lon: longitude });
@@ -114,10 +114,10 @@ function MapComponent() {
   
         // Update locationInfo based on the new location, similar to searchLocation logic
         const inputData = {
-          temperature: 90, // Replace with actual data if needed
-          relativeHumidity: 0.5, // Replace with actual data if needed
-          windSpeed: 15, // Replace with actual data if needed
-          precipitation: 0.2, // Replace with actual data if needed
+          temperature: 60, // Replace with actual data if needed
+          relativeHumidity: 2, // Replace with actual data if needed
+          windSpeed: 9, // Replace with actual data if needed
+          precipitation: 0.5, // Replace with actual data if needed
         };
         const prediction = calculateRisk(inputData);
   
@@ -132,7 +132,7 @@ function MapComponent() {
   
         setMarkerPosition([location.lat, location.lon]); // Update marker position
         setZoomLevel(10); // Set zoom level
-        setCircleColor(prediction.color); // Update circle color
+        setCircleColor('#26c454'); // Update circle color
       }
     }
   };
