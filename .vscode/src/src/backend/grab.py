@@ -9,7 +9,7 @@ import math
 
 
 STAC_API_URL = "https://planetarycomputer.microsoft.com/api/stac/v1"
-COLLECTION_ID = "nasa-nex-gddp-cmip6"
+COLLECTION_ID = "noaa-nclimgrid-monthly"
 BBOX = [-82.644739, 37.201483, -77.719519, 40.638801]  # Bounding box for West Virginia
 """BBOX = [-85.0, 35.0, -75.0, 42.0]  # Bounding box for West Virginia and surrounding area"""
 """BBOX = [-125.0, 24.396308, -66.93457, 49.384358]  # Approximate bounding box for the contiguous USA"""
@@ -27,7 +27,13 @@ def get_tavg_data(da, x, y):
     except IndexError:
         return None
 
-
+# def get_prcp_data(da, x, y):
+#     try:
+#         prcp_value = da.isel(band=1, x=x, y=y).values.item()
+#         print(prcp_value)
+#         return prcp_value
+#     except IndexError:
+#         return None
 
 def get_temperature_data(date):
     
@@ -72,10 +78,15 @@ def get_temperature_data(date):
             if tavg_value is None:
                 continue
 
+            # prcp_value = get_prcp_data(da, i, j)
+            # if prcp_value is None:
+            #     continue
+                
             data_output.append({
                 "latitude": lat,
                 "longitude": lon,
                 "tavg": tavg_value
+                # "prcp": prcp_value
             })
             
             count += 1
